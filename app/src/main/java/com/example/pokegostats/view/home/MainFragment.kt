@@ -1,4 +1,4 @@
-package com.example.pokegostats.ui.main
+package com.example.pokegostats.view.home
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProviders
@@ -8,13 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pokegostats.PokemonAdapter
+import com.example.pokegostats.view.home.adapter.PokemonAdapter
 import com.example.pokegostats.R
-import com.example.pokegostats.model.PokemonGoStats
-import com.example.pokegostats.pokemon.Pokemon
 import com.example.pokegostats.service.PokemonGoApiService
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 

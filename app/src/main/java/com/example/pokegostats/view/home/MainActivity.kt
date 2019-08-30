@@ -1,8 +1,8 @@
-package com.example.pokegostats
+package com.example.pokegostats.view.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.pokegostats.ui.main.MainFragment
+import com.example.pokegostats.R
 
 class MainActivity : AppCompatActivity() {
 

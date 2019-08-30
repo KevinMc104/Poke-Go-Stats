@@ -1,4 +1,4 @@
-package com.example.pokegostats.ui.main
+package com.example.pokegostats.view.home
 
 import androidx.lifecycle.ViewModel
 

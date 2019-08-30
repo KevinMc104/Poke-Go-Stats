@@ -1,10 +1,11 @@
-package com.example.pokegostats
+package com.example.pokegostats.view.home.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokegostats.R
 import kotlinx.android.synthetic.main.pokemon_stats_row_menu.view.*
 
 class PokemonAdapter(val items : ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
@@ -16,7 +17,13 @@ class PokemonAdapter(val items : ArrayList<String>, val context: Context) : Recy
 
     // Inflates the item views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.pokemon_stats_row_menu, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(context).inflate(
+                R.layout.pokemon_stats_row_menu,
+                parent,
+                false
+            )
+        )
     }
 
     // Binds each pokemon in the ArrayList to a view

@@ -36,10 +36,10 @@ dependencies {
 
     // Added Dependencies
     // For API Calls
-    implementation 'com.google.dagger:dagger:2.21'
-    implementation 'com.google.dagger:dagger-android-support:2.21'
-    kapt 'com.google.dagger:dagger-compiler:2.21'
-    kapt 'com.google.dagger:dagger-android-processor:2.21'
+    implementation 'com.google.dagger:dagger:2.24'
+    implementation 'com.google.dagger:dagger-android-support:2.24'
+    kapt 'com.google.dagger:dagger-compiler:2.24'
+    kapt 'com.google.dagger:dagger-android-processor:2.24'
 
     // Consuming API calls and converting JSON
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
