@@ -1,5 +1,6 @@
 package com.example.pokegostats.ui.main
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,17 +13,25 @@ import com.example.pokegostats.R
 import com.example.pokegostats.model.PokemonGoStats
 import com.example.pokegostats.pokemon.Pokemon
 import com.example.pokegostats.service.PokemonGoApiService
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_activity.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import javax.inject.Inject
 
-class MainFragment @Inject constructor(val service: PokemonGoApiService): Fragment() {
+class MainFragment : Fragment() {
+
+    @Inject protected lateinit var service: PokemonGoApiService
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
     private lateinit var viewModel: MainViewModel
+
+    override fun onAttach(context: Context?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +44,17 @@ class MainFragment @Inject constructor(val service: PokemonGoApiService): Fragme
         super.onViewCreated(view, savedInstanceState)
 
         // add pokemon
-        var list: ArrayList<PokemonGoStats>
-        list = service.getPokemonGoStats()
-
+        var list: ArrayList<String> = ArrayList()
+        list.add("something")
+//        list = service.getPokemonGoStats()
+        service.getPokemonGoStats()
         var pokemonStatsList: ArrayList<String> = ArrayList()
 
         var iterator = 0
-        for(item in list) {
-            pokemonStatsList[iterator] = item.pokemon_name
-            iterator++
-        }
+//        for(item in list) {
+//            pokemonStatsList[iterator] = item.pokemon_name
+//            iterator++
+//        }
 
 
         // Creates vertical Layout Manager
