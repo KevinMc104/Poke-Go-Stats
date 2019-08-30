@@ -2,6 +2,7 @@ package com.example.pokegostats.injection
 
 import android.app.Application
 import com.example.pokegostats.service.PokemonGoApiService
+import com.example.pokegostats.service.RapidPokemonGoApiService
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -55,10 +56,10 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun providePokemonGoApiService(retrofit: Retrofit.Builder): PokemonGoApiService {
+    fun providePokemonGoApiService(retrofit: Retrofit.Builder): RapidPokemonGoApiService {
         return retrofit.baseUrl(RAPID_POKEMON_GO_API_URL)
             .build()
-            .create(PokemonGoApiService::class.java)
+            .create(RapidPokemonGoApiService::class.java)
     }
 
 //    @Provides

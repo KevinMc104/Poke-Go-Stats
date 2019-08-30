@@ -1,18 +1,18 @@
 package com.example.pokegostats
 
-import android.app.Activity
 import android.app.Application
 import com.example.pokegostats.injection.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class PokeGoStats: Application(), HasActivityInjector {
-    @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+class PokeGoStats: Application(), HasAndroidInjector {
 
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
+    @Inject
+    lateinit var activityInjector: DispatchingAndroidInjector<Any>
+
+    override fun androidInjector(): AndroidInjector<Any> = activityInjector
 
     override fun onCreate() {
         super.onCreate()
