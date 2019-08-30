@@ -6,5 +6,5 @@ import dagger.Module
 @Module
 abstract class MainFragmentModule {
     @Binds
-    abstract fun provideMainFragment(mainFragment: MainFragment)
+    abstract fun provideMainFragment(mainFragment: MainFragment): MainFragment
 }

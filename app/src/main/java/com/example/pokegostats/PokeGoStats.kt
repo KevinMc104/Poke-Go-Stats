@@ -2,6 +2,7 @@ package com.example.pokegostats
 
 import android.app.Activity
 import android.app.Application
+import com.example.pokegostats.injection.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

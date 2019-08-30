@@ -1,12 +1,8 @@
 package com.example.pokegostats.injection
 
-import android.app.Application
-import android.content.Context
 import com.example.pokegostats.PokeGoStats
-import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
 import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
