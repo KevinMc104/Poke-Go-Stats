@@ -8,10 +8,6 @@ A simple Android App that consumes off of Rapid's Pokemon Go API and organizes t
 * [Retrofit](https://square.github.io/retrofit/) - Framework code for Consuming API calls and converting JSON
 * Kotlin
 
-### Notes
-Dang dude, you should've really initialized this repo with a readme.
-Imagine if someone came in here and hijacked it all. 3:)
-
 # Goals
 Create a project that calls out to [RapidAPI] (https://rapidapi.com/brianiswu/api/pokemon-go1) 's Pokemon Go Endpoints to consume and organize the data for the end user
 
