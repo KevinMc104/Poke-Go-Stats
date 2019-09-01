@@ -42,6 +42,7 @@ class ApiModule {
             .cache(cache)
             .connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
+            .addInterceptor(AuthInterceptor())
             .build()
     }
 
@@ -60,12 +61,4 @@ class ApiModule {
             .build()
             .create(RapidPokemonGoApiService::class.java)
     }
-
-//    @Provides
-//    @Singleton
-//    fun providesEmbeddedApiService(retrofit: Retrofit.Builder): EmbeddedApiService {
-//        return retrofit.baseUrl(PI_API_URL)
-//            .build()
-//            .create(EmbeddedApiService::class.java)
-//    }
 }

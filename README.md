@@ -1,17 +1,24 @@
 # README
+# Poke Go Stats
+A simple Android App that consumes off of Rapid's Pokemon Go API and organizes the given data to display to the user
+
+# Built With
+* [Dagger2](https://dagger.dev/) - For Connecting helping to connect Activities to Services and Dependency Injections
+* [Gradle](https://gradle.org/) - Dependency Management
+* [Retrofit](https://square.github.io/retrofit/) - Framework code for Consuming API calls and converting JSON
+* Kotlin
 
 ### Notes
 Dang dude, you should've really initialized this repo with a readme.
 Imagine if someone came in here and hijacked it all. 3:)
 
+# Goals
+Create a project that calls out to [RapidAPI] (https://rapidapi.com/brianiswu/api/pokemon-go1) 's Pokemon Go Endpoints to consume and organize the data for the end user
 
-
-1. Dagger's not working, find out why and resolve:
-* Add Internet Permission to Manifest
-* Fix Retrofit Provider so it is given an interface
-* Change HasActivityInjector to HasAndroidInjector 2.24 update
-
-TODO: Fix crash due to `FATAL EXCEPTION: DefaultDispatcher-worker-1`
-most likely a coroutine crash of somesort
-
--MoonWolf
+# TODO
+* Every endpoint has data involving each pokemon, organize all data from endpoints into an easy to read format
+* Tab Layout for the following
+    * Pokemon
+    * Weather boost info
+    * Page for move data
+* Implement Search feature for different Pokemon
