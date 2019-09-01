@@ -9,7 +9,7 @@ A simple Android App that consumes off of Rapid's Pokemon Go API and organizes t
 * Kotlin
 
 # Goals
-Create a project that calls out to [RapidAPI] (https://rapidapi.com/brianiswu/api/pokemon-go1) 's Pokemon Go Endpoints to consume and organize the data for the end user
+Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1) 's Pokemon Go Endpoints to consume and organize the data for the end user
 
 # TODO
 * Every endpoint has data involving each pokemon, organize all data from endpoints into an easy to read format
