@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokegostats.R
+import com.example.pokegostats.model.PokemonGoStats
 import kotlinx.android.synthetic.main.pokemon_stats_row_menu.view.*
 
-class PokemonAdapter(val items : ArrayList<String>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class PokemonAdapter(val items : ArrayList<PokemonGoStats>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
     // Gets the number of pokemon in the list
     override fun getItemCount(): Int {
@@ -28,7 +29,7 @@ class PokemonAdapter(val items : ArrayList<String>, val context: Context) : Recy
 
     // Binds each pokemon in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvPokemonType?.text = items.get(position)
+        holder.tvPokemonType?.text = items[position].PokemonName
     }
 }
 

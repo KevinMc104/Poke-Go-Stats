@@ -1,6 +1,6 @@
 package com.example.pokegostats.service
 
-import com.example.pokegostats.model.PokemonGoStatsResult
+import com.example.pokegostats.model.PokemonGoStats
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -12,7 +12,8 @@ interface RapidPokemonGoApiService {
         "x-rapidapi-host:pokemon-go1.p.rapidapi.com"
     )
     @GET("/pokemon_stats.json")
-    fun getRapidPokemonGoStats() : Call<PokemonGoStatsResult>
+    suspend fun getRapidPokemonGoStats() : List<PokemonGoStats>
+//    suspend fun getRapidPokemonGoStats() : Call<List<PokemonGoStats>>
 
 //    @GET("/gridpoints/{wfo}/{x},{y}")
 //    fun getNWSGridpoints(@Path("wfo") Office: String,

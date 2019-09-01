@@ -10,14 +10,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.view.home.adapter.PokemonAdapter
 import com.example.pokegostats.R
-import com.example.pokegostats.service.PokemonGoApiService
+import com.example.pokegostats.model.PokemonGoStats
+import com.example.pokegostats.service.PokemonGoService
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
-    @Inject protected lateinit var service: PokemonGoApiService
+    @Inject protected lateinit var service: PokemonGoService
 
     companion object {
         fun newInstance() = MainFragment()
@@ -37,21 +40,27 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        // Creates vertical Layout Manager
+//        rv_pokemon_list.layoutManager = LinearLayoutManager(activity)
+//
+//        GlobalScope.async {
+//            // add pokemon
+//            var list: ArrayList<PokemonGoStats> = ArrayList()
+//
+//            // call out to endpoint to get stats
+//            list.addAll(service.getPokemonGoStats())
+//
+//            // can use gridlayout too
+//            // rv_pokemon_list.layoutManager = GridLayoutManager(this, 2)
+//            rv_pokemon_list.adapter = PokemonAdapter(list, context!!)
+//        }
+//    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // add pokemon
-        var list: ArrayList<String> = ArrayList()
-        list.add("something")
-//        list = service.getPokemonGoStats()
-        service.getPokemonGoStats()
-        var pokemonStatsList: ArrayList<String> = ArrayList()
-
-        var iterator = 0
-//        for(item in list) {
-//            pokemonStatsList[iterator] = item.pokemon_name
-//            iterator++
-//        }
 
 
         // Creates vertical Layout Manager
@@ -60,9 +69,15 @@ class MainFragment : Fragment() {
         // can use gridlayout too
         // rv_pokemon_list.layoutManager = GridLayoutManager(this, 2)
 
-        rv_pokemon_list.adapter = PokemonAdapter(list, context!!)
-    }
 
+
+        // add pokemon
+        GlobalScope.async {
+            val list: ArrayList<PokemonGoStats> = ArrayList()
+            list.addAll(service.getPokemonGoStats())
+            rv_pokemon_list.adapter = PokemonAdapter(list, context!!)
+        }
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)

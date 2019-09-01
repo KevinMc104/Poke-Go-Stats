@@ -1,7 +1,6 @@
 package com.example.pokegostats.injection
 
 import android.app.Application
-import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.service.RapidPokemonGoApiService
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson

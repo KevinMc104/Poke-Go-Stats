@@ -1,9 +1,9 @@
 package com.example.pokegostats.model.events
 
-import com.example.pokegostats.model.PokemonGoStatsResult
+import com.example.pokegostats.model.PokemonGoStats
 
 data class RapidPokemonGoStatsEvent(
-    val response: PokemonGoStatsResult? = null,
+    val response: PokemonGoStats? = null,
     val isSuccess: Boolean,
     val error: String = ""
 )
