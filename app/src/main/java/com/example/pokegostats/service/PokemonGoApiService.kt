@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.pokegostats.model.PokemonGoStatsResult
 import com.example.pokegostats.model.events.RapidPokemonGoStatsEvent
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import retrofit2.Response
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 @Singleton
 class PokemonGoApiService @Inject constructor(private val context: Context, private val pokemonGoService: PokemonGoService){
     fun getPokemonGoStats() {
-        GlobalScope.launch {pokemonGoService.getPokemonGoStats()}
+        GlobalScope.async {pokemonGoService.getPokemonGoStats()}
     }
 
 }

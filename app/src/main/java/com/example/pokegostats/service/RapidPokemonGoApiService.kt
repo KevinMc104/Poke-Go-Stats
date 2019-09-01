@@ -7,7 +7,10 @@ import retrofit2.http.Headers
 
 interface RapidPokemonGoApiService {
 
-    @Headers("x-rapidapi-key:f3ea559106msh45663307fe63d61p1b344bjsn8c047df9ffab; x-rapidapi-host:pokemon-go1.p.rapidapi.com")
+    @Headers(
+        "x-rapidapi-key:1179c81d02mshce35badb04cdbe5p1f2053jsn371b1a7b02dd",
+        "x-rapidapi-host:pokemon-go1.p.rapidapi.com"
+    )
     @GET("/pokemon_stats.json")
     fun getRapidPokemonGoStats() : Call<PokemonGoStatsResult>
 
