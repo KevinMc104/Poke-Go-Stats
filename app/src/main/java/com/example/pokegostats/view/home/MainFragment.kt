@@ -14,13 +14,18 @@ import com.example.pokegostats.model.PokemonGoStats
 import com.example.pokegostats.service.PokemonGoService
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
     @Inject protected lateinit var service: PokemonGoService
+
+    // Reference to the RecyclerView adapter
+    private lateinit var adapter: PokemonAdapter
 
     companion object {
         fun newInstance() = MainFragment()
@@ -40,44 +45,26 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        // Creates vertical Layout Manager
-//        rv_pokemon_list.layoutManager = LinearLayoutManager(activity)
-//
-//        GlobalScope.async {
-//            // add pokemon
-//            var list: ArrayList<PokemonGoStats> = ArrayList()
-//
-//            // call out to endpoint to get stats
-//            list.addAll(service.getPokemonGoStats())
-//
-//            // can use gridlayout too
-//            // rv_pokemon_list.layoutManager = GridLayoutManager(this, 2)
-//            rv_pokemon_list.adapter = PokemonAdapter(list, context!!)
-//        }
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         // Creates vertical Layout Manager
         rv_pokemon_list.layoutManager = LinearLayoutManager(activity)
 
-        // can use gridlayout too
-        // rv_pokemon_list.layoutManager = GridLayoutManager(this, 2)
-
-
-
-        // add pokemon
-        GlobalScope.async {
+        GlobalScope.launch (Dispatchers.Main) {
+            // add pokemon
             val list: ArrayList<PokemonGoStats> = ArrayList()
+
+            // call out to endpoint to get stats
             list.addAll(service.getPokemonGoStats())
+
+            // can use gridlayout too
+            // rv_pokemon_list.layoutManager = GridLayoutManager(this, 2)
             rv_pokemon_list.adapter = PokemonAdapter(list, context!!)
         }
     }
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
