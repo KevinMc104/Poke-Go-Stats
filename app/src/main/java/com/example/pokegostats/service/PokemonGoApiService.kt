@@ -14,7 +14,6 @@ import javax.inject.Singleton
 @Singleton
 class PokemonGoService @Inject constructor(private val apiService: RapidPokemonGoApiService) {
     suspend fun getPokemonGoStats(): List<PokemonGoStats> {
-        // TODO: Add better error handling
         val response: Response<List<PokemonGoStats>> = apiService.getRapidPokemonGoStats()
         if(response.isSuccessful) {
             Log.i("getPokemonGoStats", response.body().toString())
