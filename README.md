@@ -3,9 +3,9 @@
 A simple Android App that consumes off of Rapid's Pokemon Go API and organizes the given data to display to the user
 
 # Built With
-* [Dagger2](https://dagger.dev/) - For Connecting helping to connect Activities to Services and Dependency Injections
-* [Gradle](https://gradle.org/) - Dependency Management
-* [Retrofit](https://square.github.io/retrofit/) - Framework code for Consuming API calls and converting JSON
+* [Dagger2](https://dagger.dev/) - For helping to connect Activities to Services and Dependency Injections with annotations
+* [Gradle](https://gradle.org/) - Dependency management
+* [Retrofit](https://square.github.io/retrofit/) - Framework code for consuming API calls and converting JSON
 * Kotlin
 
 # Goals

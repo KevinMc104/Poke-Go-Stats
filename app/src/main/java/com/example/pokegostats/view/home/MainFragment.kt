@@ -7,16 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.view.home.adapter.PokemonAdapter
 import com.example.pokegostats.R
 import com.example.pokegostats.model.PokemonGoStats
+import com.example.pokegostats.model.exception.NotFoundException
 import com.example.pokegostats.service.PokemonGoService
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.lang.Exception
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -55,7 +60,13 @@ class MainFragment : Fragment() {
             val list: ArrayList<PokemonGoStats> = ArrayList()
 
             // call out to endpoint to get stats
-            list.addAll(service.getPokemonGoStats())
+            try {
+                list.addAll(service.getPokemonGoStats())
+            } catch (e: IOException) {
+                Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
+            }
 
             // can use gridlayout too
             // rv_pokemon_list.layoutManager = GridLayoutManager(this, 2)

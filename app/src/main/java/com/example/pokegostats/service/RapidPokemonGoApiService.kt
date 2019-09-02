@@ -1,10 +1,8 @@
 package com.example.pokegostats.service
 
 import com.example.pokegostats.model.PokemonGoStats
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Headers
 
 interface RapidPokemonGoApiService {
 
