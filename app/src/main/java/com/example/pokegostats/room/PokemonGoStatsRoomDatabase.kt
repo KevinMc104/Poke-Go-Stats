@@ -30,13 +30,6 @@ abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
         suspend fun populateDatabase(pokemonDao: PokemonDao) {
             // Delete all content here.
             pokemonDao.deleteAll()
-
-            // Add sample words.
-            val pokemon = PokemonEntity(1, "500", "Bulbasaur")
-            val pokemon2 = PokemonEntity(2, "550", "Squirtle")
-            pokemonDao.insertAll(pokemon, pokemon2)
-
-            // TODO: Add your own Pokemon!
         }
     }
 
@@ -56,7 +49,9 @@ abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     PokemonGoStatsRoomDatabase::class.java,
                     "pokemon_database"
-                ).build()
+                )
+                    .addCallback(PokemonGoStatsDatabaseCallback(scope))
+                    .build()
                 INSTANCE = instance
                 return instance
             }

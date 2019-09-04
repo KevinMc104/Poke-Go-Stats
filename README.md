@@ -7,6 +7,8 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * [Gradle](https://gradle.org/) - Dependency management
 * [Retrofit](https://square.github.io/retrofit/) - Framework code for consuming API calls and converting JSON
 * [Android Room](https://developer.android.com/topic/libraries/architecture/room) - For internal SQLite database handling/cache
+* [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) - To handle database changes and persist code for views
+* [Live Data](https://developer.android.com/topic/libraries/architecture/livedata) - To monitor changes to the database and assist in populating it to the views
 * Kotlin
 
 # Goals

@@ -9,12 +9,9 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemon_table ORDER BY pokemon_id")
     fun getAll(): LiveData<List<PokemonEntity>>
 
-    @Query("SELECT * FROM pokemon_table WHERE uid IN (:pokemonIds)")
-    fun loadAllByIds(pokemonIds: IntArray): LiveData<List<PokemonEntity>>
-
-    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-            "last_name LIKE :last LIMIT 1")
-    fun findByName(first: String, last: String): PokemonEntity
+//    @Query("SELECT * FROM user WHERE pokemon_name LIKE :first AND " +
+//            "last_name LIKE :last LIMIT 1")
+//    fun findByName(first: String, last: String): PokemonEntity
 
     @Insert
     suspend fun insertAll(vararg pokemon: PokemonEntity)

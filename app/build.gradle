@@ -23,15 +23,17 @@ android {
 }
 
 dependencies {
-    def daggerVer = 2.24
+    def daggerVer = "2.24"
+    def retrofitVer = "2.6.1"
+    def coroutinesVer = "1.3.0"
+    def roomVer = "2.1.0"
+    def lifecycleVer = "2.1.0-rc01"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     // Added Dependencies
@@ -42,28 +44,24 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$daggerVer"
 
     // Consuming API calls and converting JSON
-    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-
-    // Logging
-    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVer"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVer"
 
     // coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVer"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVer"
 
     // Android Room for internal SQLite database handling/cache
-    implementation 'androidx.room:room-runtime:2.1.0'
-    annotationProcessor 'androidx.room:room-compiler:2.1.0'
-    implementation 'androidx.room:room-ktx:2.1.0'
-    androidTestImplementation 'androidx.room:room-testing:2.1.0'
+    implementation "androidx.room:room-runtime:$roomVer"
+    kapt "androidx.room:room-compiler:$roomVer"
+    implementation "androidx.room:room-ktx:$roomVer"
+    androidTestImplementation "androidx.room:room-testing:$roomVer"
 
     // Lifecycle components
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha03'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.2.0-alpha03'
-
-    // ViewModel Kotlin support
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha03'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVer"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVer"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycleVer"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVer"
 
     // Using Snackbar for error handling
     implementation 'com.google.android.material:material:1.0.0'
