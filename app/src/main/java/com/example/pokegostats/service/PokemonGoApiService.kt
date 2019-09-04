@@ -6,6 +6,7 @@ import com.example.pokegostats.model.exception.NotFoundException
 import com.example.pokegostats.model.exception.ServerErrorException
 import com.example.pokegostats.model.exception.UnauthenticatedException
 import com.example.pokegostats.model.exception.UnauthorizedException
+import com.example.pokegostats.room.dao.PokemonDao
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -20,6 +21,9 @@ class PokemonGoService @Inject constructor(private val apiService: RapidPokemonG
         } else {
             handleErrors(response)
         }
+
+        // populate Room database and send that data back
+
         return response.body()!!
     }
 
