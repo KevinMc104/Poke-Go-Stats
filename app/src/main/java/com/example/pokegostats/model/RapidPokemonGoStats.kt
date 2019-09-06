@@ -3,7 +3,7 @@ package com.example.pokegostats.model
 /**
  * These models are based off the API response
  */
-data class PokemonGoStats(
+data class RapidPokemonGoStats(
     val BaseAttack: Int,
     val BaseDefense: Int,
     val BaseStamina: Int,

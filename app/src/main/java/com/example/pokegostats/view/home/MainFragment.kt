@@ -2,13 +2,15 @@ package com.example.pokegostats.view.home
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
-import com.example.pokegostats.service.PokemonGoService
+import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.view.home.adapter.PokemonAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
@@ -17,7 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.lang.Exception
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -27,9 +28,9 @@ class MainFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
 
     /**
-     * TODO: Inject this in the repository
+     * TODO: Inject this in the repository instead of fragment
      */
-    @Inject protected lateinit var service: PokemonGoService
+    @Inject protected lateinit var service: PokemonGoApiService
 
     companion object {
         fun newInstance() = MainFragment()
@@ -83,9 +84,9 @@ class MainFragment : Fragment() {
         // Creates the View Model
         val factory = MainViewModel.Companion.Factory(requireActivity().application, service)
         mainViewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
-        mainViewModel.allPokemon.observe(this, Observer { pokemon ->
+        mainViewModel.allPokemonTypes.observe(this, Observer { pokemon ->
             // Update the cached copy of the words in the adapter.
-            pokemon?.let { adapter.setPokemon(it) }
+            pokemon?.let { adapter.setPokemonAndPokemonTypes(it) }
         })
 
         GlobalScope.launch (Dispatchers.Main) {
@@ -106,5 +107,4 @@ class MainFragment : Fragment() {
 //        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 //        // TODO: Use the ViewModel
 //    }
-
 }

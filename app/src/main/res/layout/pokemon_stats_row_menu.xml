@@ -8,7 +8,7 @@
     android:layout_marginEnd="@dimen/app_whitespace_size_large_material">
 
     <TextView
-        android:id="@+id/tv_menu_row_item"
+        android:id="@+id/tv_menu_pokemon_name_item"
         style="@style/AppTheme.TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +16,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Pokemon Stats" />
+        tools:text="Pokemon Name" />
+
+    <TextView
+        android:id="@+id/tv_menu_type_item"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_whitespace_size_medium_material"
+        android:layout_marginBottom="@dimen/app_whitespace_size_medium_material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Pokemon Type1"/>
+
+    <TextView
+        android:id="@+id/tv_menu_type_item2"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Pokemon Type2"/>
 
     <View
         android:layout_width="0dp"

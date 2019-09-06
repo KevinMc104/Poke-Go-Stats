@@ -56,7 +56,7 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun providePokemonGoApiService(retrofit: Retrofit.Builder): RapidPokemonGoApiService {
+    fun provideRapidPokemonGoApiService(retrofit: Retrofit.Builder): RapidPokemonGoApiService {
         return retrofit.baseUrl(RAPID_POKEMON_GO_API_URL)
             .build()
             .create(RapidPokemonGoApiService::class.java)
