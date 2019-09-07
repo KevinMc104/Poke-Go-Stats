@@ -8,5 +8,6 @@ data class RapidPokemonGoStats(
     val BaseDefense: Int,
     val BaseStamina: Int,
     val PokemonId: Int,
-    val PokemonName: String
+    val PokemonName: String,
+    val Form: String
 )

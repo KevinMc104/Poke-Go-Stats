@@ -6,22 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokegostats.R
-import com.example.pokegostats.room.entity.PokemonAndPokemonForms
-import com.example.pokegostats.room.entity.PokemonFormsAndPokemonTypes
+import com.example.pokegostats.room.entity.PokemonAndFormsAndTypes
 import kotlinx.android.synthetic.main.pokemon_stats_row_menu.view.*
 
 class PokemonAdapter(context: Context) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    // Cached copy of Pokemon and Pokemon Forms
-    private var pokemonAndPokemonForms = emptyList<PokemonAndPokemonForms>()
 
     // Cached copy of Pokemon and Pokemon Types
-    private var pokemonFormsAndPokemonTypes = emptyList<PokemonFormsAndPokemonTypes>()
+    private var pokemonAndFormsAndTypes = emptyList<PokemonAndFormsAndTypes>()
 
     // Gets the number of pokemon in the list
     override fun getItemCount(): Int {
-        return pokemonAndPokemonForms.size
+        return pokemonAndFormsAndTypes.size
     }
 
     // Inflates the item views
@@ -32,44 +29,29 @@ class PokemonAdapter(context: Context) : RecyclerView.Adapter<PokemonAdapter.Pok
 
     // Binds each pokemon in the ArrayList to a view
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        var current = pokemonAndPokemonForms[position].pokemon!!.pokemonName
+        var currentName = pokemonAndFormsAndTypes[position].pokemon!!.pokemonName
+        val formName = pokemonAndFormsAndTypes[position].pokemonForm!!.formName
+        // Don't add form name if it's Default
+        if(!formName.equals("Default")) {
+            currentName += "(${formName})"
+        }
 
         var currentType1 = ""
         var currentType2 = ""
-        if(pokemonAndPokemonForms[position].pokemonForms!!.size == 1) {
-            val formName = pokemonAndPokemonForms[position].pokemonForms!![0]
-            if(!formName.formName.equals("Default")) {
-                current += "(${formName.formName})"
-            }
-            // NOTE: There should never be more than a couple forms and types per pokemon
-            // Get Types of current Form
-            // Pokemon can have at max 2 Types per Form
-            var currentFormId = formName.id
-            for(item in pokemonFormsAndPokemonTypes) {
-                if (currentFormId == item.pokemonForm!!.id) {
-                    if(item.pokemonTypes!!.size == 1) {
-                        currentType1 = item.pokemonTypes!![0].type.toString()
-                    } else {
-                        currentType1 = item.pokemonTypes!![0].type.toString()
-                        currentType2 = item.pokemonTypes!![1].type.toString()
-                    }
-                }
-            }
-        } else if(pokemonAndPokemonForms[position].pokemonForms!!.size > 1) {
-            // TODO: What to do when multiple forms?
+        val pokemonTypes = pokemonAndFormsAndTypes[position].pokemonTypes
+        if(pokemonTypes!!.size == 1) {
+            currentType1 = pokemonTypes!![0].type.toString()
+        } else if(pokemonTypes!!.size == 2) {
+            currentType1 = pokemonTypes!![0].type.toString()
+            currentType2 = pokemonTypes!![1].type.toString()
         }
-        holder.tvPokemonName.text = current
+        holder.tvPokemonName.text = currentName
         holder.tvPokemonType1.text = currentType1
         holder.tvPokemonType2.text = currentType2
     }
 
-    internal fun setPokemonAndPokemonForms(pokemonAndPokemonForms: List<PokemonAndPokemonForms>) {
-        this.pokemonAndPokemonForms = pokemonAndPokemonForms
-        notifyDataSetChanged()
-    }
-
-    internal fun setPokemonFormsAndPokemonTypes(pokemonFormsAndPokemonTypes: List<PokemonFormsAndPokemonTypes>) {
-        this.pokemonFormsAndPokemonTypes = pokemonFormsAndPokemonTypes
+    internal fun setPokemonAndFormsAndPokemonTypes(pokemonAndFormsAndTypes: List<PokemonAndFormsAndTypes>) {
+        this.pokemonAndFormsAndTypes = pokemonAndFormsAndTypes
         notifyDataSetChanged()
     }
 

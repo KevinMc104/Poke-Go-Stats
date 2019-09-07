@@ -84,14 +84,9 @@ class MainFragment : Fragment() {
         // Creates the View Model
         val factory = MainViewModel.Companion.Factory(requireActivity().application, service)
         mainViewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
-        mainViewModel.allPokemonForms.observe(this, Observer { pokemon ->
+        mainViewModel.allPokemonFormsAndTypes.observe(this, Observer { pokemon ->
             // Update the cached copy of the words in the adapter.
-            pokemon?.let { adapter.setPokemonAndPokemonForms(it) }
-        })
-
-        mainViewModel.allPokemonTypes.observe(this, Observer { pokemon ->
-            // Update the cached copy of the words in the adapter.
-            pokemon?.let { adapter.setPokemonFormsAndPokemonTypes(it) }
+            pokemon?.let { adapter.setPokemonAndFormsAndPokemonTypes(it) }
         })
 
         GlobalScope.launch (Dispatchers.Main) {

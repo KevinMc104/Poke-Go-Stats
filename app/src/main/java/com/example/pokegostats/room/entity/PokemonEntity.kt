@@ -31,7 +31,7 @@ data class PokemonEntity(
         onDelete = CASCADE
     )], indices = [Index("form_id"), Index("pokemon_uid")]
 )
-data class PokemonTypeForm(
+data class PokemonFormEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "form_id") val id: Int?,
     @ColumnInfo(name = "pokemon_uid") val pokemonUid: Int,
@@ -42,7 +42,7 @@ data class PokemonTypeForm(
 @Entity(
     tableName = "pokemon_types",
     foreignKeys = [ForeignKey(
-        entity = PokemonTypeForm::class,
+        entity = PokemonFormEntity::class,
         parentColumns = arrayOf("form_id"),
         childColumns = arrayOf("form_uid"),
         onDelete = CASCADE
@@ -56,18 +56,12 @@ data class PokemonTypeEntity(
 )
 
 // Relationship class to get each Pokemon's Types
-class PokemonAndPokemonForms {
+class PokemonAndFormsAndTypes {
     @Embedded
     var pokemon: PokemonEntity? = null
 
-    @Relation(parentColumn = "pokemon_id", entityColumn = "pokemon_uid", entity = PokemonTypeForm::class)
-    var pokemonForms: List<PokemonTypeForm>? = null
-}
-
-// Relationship class to get each Pokemon's Types
-class PokemonFormsAndPokemonTypes {
     @Embedded
-    var pokemonForm: PokemonTypeForm? = null
+    var pokemonForm: PokemonFormEntity? = null
 
     @Relation(parentColumn = "form_id", entityColumn = "form_uid", entity = PokemonTypeEntity::class)
     var pokemonTypes: List<PokemonTypeEntity>? = null
