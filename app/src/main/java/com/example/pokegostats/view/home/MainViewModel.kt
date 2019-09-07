@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.pokegostats.room.PokemonGoStatsRepository
 import com.example.pokegostats.room.PokemonGoStatsRoomDatabase
-import com.example.pokegostats.room.entity.PokemonAndPokemonTypes
+import com.example.pokegostats.room.entity.PokemonAndPokemonForms
 import com.example.pokegostats.room.entity.PokemonEntity
+import com.example.pokegostats.room.entity.PokemonFormsAndPokemonTypes
 import com.example.pokegostats.service.PokemonGoApiService
 import kotlinx.coroutines.launch
 
@@ -17,13 +18,16 @@ class MainViewModel(application: Application, val service: PokemonGoApiService) 
     private val repository: PokemonGoStatsRepository
 
     val allPokemon: LiveData<List<PokemonEntity>>
-    val allPokemonTypes: LiveData<List<PokemonAndPokemonTypes>>
+    val allPokemonForms: LiveData<List<PokemonAndPokemonForms>>
+    val allPokemonTypes: LiveData<List<PokemonFormsAndPokemonTypes>>
 
     init {
         val pokemonDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonDao()
-        val pokemonAndPokemonTypesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonAndPokemonTypesDao()
-        repository = PokemonGoStatsRepository(pokemonDao, pokemonAndPokemonTypesDao, service)
+        val pokemonAndPokemonFormsDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonAndPokemonFormsDao()
+        val pokemonFormsAndPokemonTypesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonFormsAndPokemonTypesDao()
+        repository = PokemonGoStatsRepository(pokemonDao, pokemonAndPokemonFormsDao, pokemonFormsAndPokemonTypesDao, service)
         allPokemon = repository.allPokemon
+        allPokemonForms = repository.allPokemonForms
         allPokemonTypes = repository.allPokemonTypes
     }
 

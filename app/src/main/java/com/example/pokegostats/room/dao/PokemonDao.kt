@@ -5,6 +5,7 @@ import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
 import com.example.pokegostats.room.entity.PokemonEntity
 import com.example.pokegostats.room.entity.PokemonTypeEntity
+import com.example.pokegostats.room.entity.PokemonTypeForm
 
 @Dao
 interface PokemonDao {
@@ -16,6 +17,9 @@ interface PokemonDao {
 
     @Insert(onConflict = REPLACE)
     suspend fun insertAllPokemon(vararg pokemon: PokemonEntity)
+
+    @Insert
+    suspend fun insertAllForms(vararg forms: PokemonTypeForm): List<Long>
 
     @Insert
     suspend fun insertAllTypes(vararg types: PokemonTypeEntity)

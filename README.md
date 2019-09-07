@@ -11,10 +11,14 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * [Live Data](https://developer.android.com/topic/libraries/architecture/livedata) - To monitor changes to the database and assist in populating it to the views
 * Kotlin
 
-# Goals
-Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1) 's Pokemon Go Endpoints to consume and organize the data for the end user
+# How it works
+JSON Data of all the endpoints [here](https://pastebin.com/UXTUaGDX)
+TODO add Documentation
 
 Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11ra9U2rWBj0/Poke-Go-Stats?node-id=0%3A1)
+
+# Goals
+Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints to consume and organize the data for the end user
 
 # TODO
 * Every endpoint has data involving each pokemon, organize all data from endpoints into an easy to read format
