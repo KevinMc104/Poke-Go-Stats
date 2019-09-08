@@ -24,6 +24,9 @@ interface PokemonDao {
     @Insert
     suspend fun insertAllTypes(vararg types: PokemonTypeEntity)
 
+    @Query("UPDATE pokemon_table SET max_cp = :maxCp WHERE pokemon_id = :pokemonId")
+    suspend fun updateMaxCp(maxCp: Int, pokemonId: Int)
+
     @Delete
     suspend fun delete(pokemon: PokemonEntity)
 

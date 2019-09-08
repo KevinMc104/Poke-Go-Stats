@@ -2,6 +2,7 @@ package com.example.pokegostats.service
 
 import android.util.Log
 import com.example.pokegostats.model.RapidPokemonGoFastMoves
+import com.example.pokegostats.model.RapidPokemonGoMaxCp
 import com.example.pokegostats.model.RapidPokemonGoStats
 import com.example.pokegostats.model.RapidPokemonGoTypes
 import com.example.pokegostats.model.exception.NotFoundException
@@ -24,6 +25,13 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
     suspend fun getRapidPokemonGoTypes(): List<RapidPokemonGoTypes> {
         val response: Response<List<RapidPokemonGoTypes>> = apiService.getRapidPokemonGoTypes()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "getRapidPokemonGoTypes")
+
+        return response.body()!!
+    }
+
+    suspend fun getRapidPokemonGoMaxCp(): List<RapidPokemonGoMaxCp> {
+        val response: Response<List<RapidPokemonGoMaxCp>> = apiService.getRapidPokemonGoMaxCp()
+        handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
 
         return response.body()!!
     }

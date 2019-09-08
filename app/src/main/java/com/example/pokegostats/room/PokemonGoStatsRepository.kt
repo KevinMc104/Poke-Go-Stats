@@ -2,6 +2,7 @@ package com.example.pokegostats.room
 
 import androidx.lifecycle.LiveData
 import com.example.pokegostats.model.RapidPokemonGoFastMoves
+import com.example.pokegostats.model.RapidPokemonGoMaxCp
 import com.example.pokegostats.model.RapidPokemonGoStats
 import com.example.pokegostats.model.RapidPokemonGoTypes
 import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
@@ -30,13 +31,34 @@ class PokemonGoStatsRepository(
         // TODO: Add logic to not call out to the API every time
 
         // add pokemon
+        val formPrimaryKeys = insertPokemonStats()
+
+        // Update with MaxCp
+        updateMaxCp()
+
+        val rapidPokemonGoTypes: ArrayList<RapidPokemonGoTypes> = ArrayList()
+        rapidPokemonGoTypes.addAll(service.getRapidPokemonGoTypes())
+
+        val pokemonTypesListToBeInserted = ArrayList<PokemonTypeEntity>()
+        var iterator = 0
+        rapidPokemonGoTypes.forEach { pokemon ->
+            pokemon.Type.forEach { type ->
+                val currentType = PokemonTypeEntity(null, formPrimaryKeys.get(iterator), type)
+                pokemonTypesListToBeInserted.add(currentType)
+            }
+            iterator++
+        }
+        pokemonDao.insertAllTypes(*pokemonTypesListToBeInserted.toTypedArray())
+    }
+
+    suspend fun insertPokemonStats(): List<Long> {
         val rapidPokemonGoStats: ArrayList<RapidPokemonGoStats> = ArrayList()
         rapidPokemonGoStats.addAll(service.getRapidPokemonGoStats())
 
         val pokemonListToBeInserted = ArrayList<PokemonEntity>()
         val pokemonFormsListToBeInserted = ArrayList<PokemonFormEntity>()
         for(item in rapidPokemonGoStats) {
-            pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense, item.BaseStamina, item.PokemonName))
+            pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense, item.BaseStamina, null, item.PokemonName))
             if(item.Form.isNullOrBlank()) {
                 pokemonFormsListToBeInserted.add(PokemonFormEntity(null, item.PokemonId, "Default"))
             } else {
@@ -46,21 +68,16 @@ class PokemonGoStatsRepository(
 
         // Batch Insert
         pokemonDao.insertAllPokemon(*pokemonListToBeInserted.toTypedArray())
-        val primaryKeys = pokemonDao.insertAllForms(*pokemonFormsListToBeInserted.toTypedArray())
+        return pokemonDao.insertAllForms(*pokemonFormsListToBeInserted.toTypedArray())
+    }
 
-        val rapidPokemonGoTypes: ArrayList<RapidPokemonGoTypes> = ArrayList()
-        rapidPokemonGoTypes.addAll(service.getRapidPokemonGoTypes())
+    suspend fun updateMaxCp() {
+        val rapidPokemonGoMaxCp: ArrayList<RapidPokemonGoMaxCp> = ArrayList()
+        rapidPokemonGoMaxCp.addAll(service.getRapidPokemonGoMaxCp())
 
-        val pokemonTypesListToBeInserted = ArrayList<PokemonTypeEntity>()
-        var iterator = 0
-        rapidPokemonGoTypes.forEach { pokemon ->
-            pokemon.Type.forEach { type ->
-                val currentType = PokemonTypeEntity(null, primaryKeys.get(iterator), type)
-                pokemonTypesListToBeInserted.add(currentType)
-            }
-            iterator++
+        for(item in rapidPokemonGoMaxCp) {
+            pokemonDao.updateMaxCp(item.MaxCp, item.pokemon_id)
         }
-        pokemonDao.insertAllTypes(*pokemonTypesListToBeInserted.toTypedArray())
     }
 
     suspend fun insertMoves() {

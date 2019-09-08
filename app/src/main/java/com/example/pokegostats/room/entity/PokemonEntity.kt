@@ -18,6 +18,7 @@ data class PokemonEntity(
     @ColumnInfo(name = "base_attack") val baseAttack: Int?,
     @ColumnInfo(name = "base_defense") val baseDefense: Int?,
     @ColumnInfo(name = "base_stamina") val baseStamina: Int?,
+    @ColumnInfo(name = "max_cp") val maxCp: Int?,
     @ColumnInfo(name = "pokemon_name") val pokemonName: String?
 )
 
