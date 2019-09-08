@@ -1,31 +1,34 @@
 package com.example.pokegostats.room
 
 import androidx.lifecycle.LiveData
+import com.example.pokegostats.model.RapidPokemonGoFastMoves
 import com.example.pokegostats.model.RapidPokemonGoStats
 import com.example.pokegostats.model.RapidPokemonGoTypes
 import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
 import com.example.pokegostats.room.dao.PokemonDao
-import com.example.pokegostats.room.entity.PokemonAndFormsAndTypes
-import com.example.pokegostats.room.entity.PokemonEntity
-import com.example.pokegostats.room.entity.PokemonFormEntity
-import com.example.pokegostats.room.entity.PokemonTypeEntity
+import com.example.pokegostats.room.dao.PokemonMovesDao
+import com.example.pokegostats.room.entity.*
 import com.example.pokegostats.service.PokemonGoApiService
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
 // instead of the whole database, because you only need access to the DAO
 class PokemonGoStatsRepository(
     private val pokemonDao: PokemonDao,
+    private val pokemonMovesDao: PokemonMovesDao,
     private val pokemonAndFormsAndTypesDao: PokemonAndFormsAndTypesDao,
     var service: PokemonGoApiService
 ) {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     val allPokemon: LiveData<List<PokemonEntity>> = pokemonDao.getAllPokemon()
+    val allPokemonMoves: LiveData<List<PokemonMovesEntity>> = pokemonMovesDao.getAllMoves()
     val allPokemonFormsAndTypes: LiveData<List<PokemonAndFormsAndTypes>> = pokemonAndFormsAndTypesDao.getAllPokemonAndFormsAndTypes()
 
     // The suspend modifier tells the compiler that this must be called from a
     // coroutine or another suspend function.
     suspend fun insertPokemon() {
+        // TODO: Add logic to not call out to the API every time
+
         // add pokemon
         val rapidPokemonGoStats: ArrayList<RapidPokemonGoStats> = ArrayList()
         rapidPokemonGoStats.addAll(service.getRapidPokemonGoStats())
@@ -58,5 +61,16 @@ class PokemonGoStatsRepository(
             iterator++
         }
         pokemonDao.insertAllTypes(*pokemonTypesListToBeInserted.toTypedArray())
+    }
+
+    suspend fun insertMoves() {
+        val rapidPokemonGoFastMoves: ArrayList<RapidPokemonGoFastMoves> = ArrayList()
+        rapidPokemonGoFastMoves.addAll(service.getRapidPokemonGoFastMoves())
+
+        val pokemonListToBeInserted = ArrayList<PokemonMovesEntity>()
+        for(item in rapidPokemonGoFastMoves) {
+            pokemonListToBeInserted.add(PokemonMovesEntity(item.Name, item.Duration, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+        }
+        pokemonMovesDao.insertAll(*pokemonListToBeInserted.toTypedArray())
     }
 }

@@ -1,12 +1,16 @@
 package com.example.pokegostats.injection
 
-import com.example.pokegostats.view.home.MainFragment
-import com.example.pokegostats.view.home.MainFragmentModule
+import com.example.pokegostats.view.home.PokemonListFragment
+import com.example.pokegostats.view.home.PokemonFragmentModule
+import com.example.pokegostats.view.home.PokemonMovesListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ModuleBuilder {
-    @ContributesAndroidInjector(modules = [MainFragmentModule::class])
-    abstract fun mainFragmentInject(): MainFragment
+    @ContributesAndroidInjector(modules = [PokemonFragmentModule::class])
+    abstract fun pokemonListFragmentInject(): PokemonListFragment
+
+    @ContributesAndroidInjector(modules = [PokemonFragmentModule::class])
+    abstract fun pokemonMovesListFragmentInject(): PokemonMovesListFragment
 }

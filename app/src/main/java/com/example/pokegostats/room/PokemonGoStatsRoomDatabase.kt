@@ -7,15 +7,18 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
 import com.example.pokegostats.room.dao.PokemonDao
+import com.example.pokegostats.room.dao.PokemonMovesDao
 import com.example.pokegostats.room.entity.PokemonEntity
 import com.example.pokegostats.room.entity.PokemonTypeEntity
 import com.example.pokegostats.room.entity.PokemonFormEntity
+import com.example.pokegostats.room.entity.PokemonMovesEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [PokemonEntity::class, PokemonFormEntity::class, PokemonTypeEntity::class], version = 1)
+@Database(entities = [PokemonEntity::class, PokemonFormEntity::class, PokemonTypeEntity::class, PokemonMovesEntity::class], version = 1)
 abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
+    abstract fun pokemonMovesDao(): PokemonMovesDao
     abstract fun pokemonAndFormsAndTypesDao(): PokemonAndFormsAndTypesDao
 
     private class PokemonGoStatsDatabaseCallback(
@@ -26,14 +29,15 @@ abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    populateDatabase(database.pokemonDao())
+                    populateDatabase(database.pokemonDao(), database.pokemonMovesDao())
                 }
             }
         }
 
-        suspend fun populateDatabase(pokemonDao: PokemonDao) {
+        suspend fun populateDatabase(pokemonDao: PokemonDao, pokemonMovesDao: PokemonMovesDao) {
             // Delete all content here.
             pokemonDao.deleteAll()
+            pokemonMovesDao.deleteAll()
             // Test Code
 //            val pokemon = PokemonEntity(5, 550, 452, 376,  "Squirtle")
 //            val pokemon2 = PokemonEntity(6, 550, 452, 376,  "Bobby Boi")

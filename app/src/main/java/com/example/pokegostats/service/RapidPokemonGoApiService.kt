@@ -1,5 +1,6 @@
 package com.example.pokegostats.service
 
+import com.example.pokegostats.model.RapidPokemonGoFastMoves
 import com.example.pokegostats.model.RapidPokemonGoStats
 import com.example.pokegostats.model.RapidPokemonGoTypes
 import retrofit2.Response
@@ -12,6 +13,9 @@ interface RapidPokemonGoApiService {
 
     @GET("/pokemon_types.json")
     suspend fun getRapidPokemonGoTypes() : Response<List<RapidPokemonGoTypes>>
+
+    @GET("/fast_moves.json")
+    suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>
 
     // TODO: Implement other Endpoints
 }

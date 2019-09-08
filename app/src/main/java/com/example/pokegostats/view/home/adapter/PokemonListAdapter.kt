@@ -1,6 +1,7 @@
 package com.example.pokegostats.view.home.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import com.example.pokegostats.R
 import com.example.pokegostats.room.entity.PokemonAndFormsAndTypes
 import kotlinx.android.synthetic.main.pokemon_stats_row_menu.view.*
 
-class PokemonAdapter(context: Context) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
+class PokemonListAdapter(context: Context) : RecyclerView.Adapter<PokemonListAdapter.PokemonViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -45,6 +46,10 @@ class PokemonAdapter(context: Context) : RecyclerView.Adapter<PokemonAdapter.Pok
             currentType1 = pokemonTypes!![0].type.toString()
             currentType2 = pokemonTypes!![1].type.toString()
         }
+        // TODO: Make the text colors for Types pretty
+//        holder.tvPokemonType1.setTextColor(Color.WHITE)
+//        holder.tvPokemonType1.setBackgroundColor(Color.BLACK)
+
         holder.tvPokemonName.text = currentName
         holder.tvPokemonType1.text = currentType1
         holder.tvPokemonType2.text = currentType2
@@ -58,9 +63,9 @@ class PokemonAdapter(context: Context) : RecyclerView.Adapter<PokemonAdapter.Pok
     // Links to TextView that is added to each row in the RecyclerView
     inner class PokemonViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each animal to
-        val tvPokemonName = view.tv_menu_pokemon_name_item
-        val tvPokemonType1 = view.tv_menu_type_item
-        val tvPokemonType2 = view.tv_menu_type_item2
+        val tvPokemonName = view.tv_menu_type_item
+        val tvPokemonType1 = view.tv_menu_type_item2
+        val tvPokemonType2 = view.tv_menu_type_item3
     }
 }
 

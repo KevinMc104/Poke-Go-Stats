@@ -11,20 +11,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
 import com.example.pokegostats.service.PokemonGoApiService
-import com.example.pokegostats.view.home.adapter.PokemonAdapter
+import com.example.pokegostats.view.home.adapter.PokemonListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.pokemon_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class PokemonListFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
-    private lateinit var adapter: PokemonAdapter
+    private lateinit var adapter: PokemonListAdapter
     private lateinit var mainViewModel: MainViewModel
 
     /**
@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
     @Inject protected lateinit var service: PokemonGoApiService
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = PokemonListFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.pokemon_fragment, container, false)
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -75,7 +75,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // adapter to the list
-        adapter = PokemonAdapter(context!!)
+        adapter = PokemonListAdapter(context!!)
         rv_pokemon_list.adapter = adapter
 
         // Creates vertical Layout Manager
@@ -100,11 +100,4 @@ class MainFragment : Fragment() {
             }
         }
     }
-
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-//        // TODO: Use the ViewModel
-//    }
 }
