@@ -14,7 +14,7 @@ import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.view.home.adapter.PokemonMovesListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.pokemon_fragment.*
+import kotlinx.android.synthetic.main.pokemon_moves_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -77,10 +77,10 @@ class PokemonMovesListFragment : Fragment() {
 
         // adapter to the list
         adapter = PokemonMovesListAdapter(context!!)
-        rv_pokemon_list.adapter = adapter
+        rv_pokemon_moves_list.adapter = adapter
 
         // Creates vertical Layout Manager
-        rv_pokemon_list.layoutManager = LinearLayoutManager(activity)
+        rv_pokemon_moves_list.layoutManager = LinearLayoutManager(activity)
 
         // Creates the View Model
         val factory = MainViewModel.Companion.Factory(requireActivity().application, service)

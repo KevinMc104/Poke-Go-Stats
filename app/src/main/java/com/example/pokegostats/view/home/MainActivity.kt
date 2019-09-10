@@ -16,17 +16,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        val vpPager = findViewById<ViewPager>(R.id.view_pager)
+        val vpPager = findViewById<ViewPager>(R.id.view_pager_main)
         adapter = PokemonPagerAdapter(supportFragmentManager)
         vpPager.adapter = adapter
 
-        val tabs = findViewById<View>(R.id.tab_layout) as TabLayout
+        val tabs = findViewById<View>(R.id.tab_layout_main) as TabLayout
         tabs.setupWithViewPager(vpPager)
-
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(com.example.pokegostats.R.id.list, PokemonListFragment.newInstance())
-//                .commitNow()
-//        }
     }
 }

@@ -8,7 +8,7 @@
     tools:context=".view.home.PokemonMovesListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_pokemon_moves_list"
+        android:id="@+id/rv_pokemon_detailed_weather_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"

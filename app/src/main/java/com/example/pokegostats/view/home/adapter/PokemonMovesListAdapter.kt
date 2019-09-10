@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokegostats.R
 import com.example.pokegostats.room.entity.PokemonMovesEntity
-import com.example.pokegostats.view.home.PokemonHelper
-import kotlinx.android.synthetic.main.pokemon_moves_row_menu.view.*
+import com.example.pokegostats.service.PokemonHelper
+import kotlinx.android.synthetic.main.pokemon_moves_row.view.*
 
 class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMovesListAdapter.PokemonMovesViewHolder>() {
 
@@ -27,7 +27,7 @@ class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMo
 
     // Inflates the item views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonMovesViewHolder {
-        val itemView = inflater.inflate(R.layout.pokemon_moves_row_menu, parent, false)
+        val itemView = inflater.inflate(R.layout.pokemon_moves_row, parent, false)
         return PokemonMovesViewHolder(itemView)
     }
 
@@ -51,7 +51,7 @@ class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMo
 
     // Links to TextView that is added to each row in the RecyclerView
     inner class PokemonMovesViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        // Holds the TextView that will add each animal to
+        // Holds the TextView that will add each move to
         val tvMoveName = view.tv_menu_move_name
         val tvPower = view.tv_menu_power
         val tvMoveType = view.tv_menu_type

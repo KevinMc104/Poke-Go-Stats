@@ -11,5 +11,5 @@
     <color name="opaque_white">#808080</color>
     <color name="red">#A6192E</color>
 
-    <color name="pokemonGoMenuBackground">#888888</color>
+    <color name="pokemonGoAppBackground">#888888</color>
 </resources>

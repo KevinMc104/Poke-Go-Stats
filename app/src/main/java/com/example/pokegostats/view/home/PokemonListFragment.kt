@@ -1,6 +1,7 @@
 package com.example.pokegostats.view.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
 import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.view.home.adapter.PokemonListAdapter
+import com.example.pokegostats.view.pokemon.detailed.PokemonDetailedActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.pokemon_fragment.*
+import kotlinx.android.synthetic.main.pokemon_list_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -51,7 +53,7 @@ class PokemonListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.pokemon_fragment, container, false)
+        return inflater.inflate(R.layout.pokemon_list_fragment, container, false)
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -85,7 +87,6 @@ class PokemonListFragment : Fragment() {
         val factory = MainViewModel.Companion.Factory(requireActivity().application, service)
         mainViewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         mainViewModel.allPokemonFormsAndTypes.observe(this, Observer { pokemon ->
-            // Update the cached copy of the words in the adapter.
             pokemon?.let { adapter.setPokemonAndFormsAndPokemonTypes(it) }
         })
 

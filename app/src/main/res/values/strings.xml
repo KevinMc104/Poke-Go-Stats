@@ -11,6 +11,8 @@
 
     <string name="pokemon">Pokemon</string>
     <string name="moves">Moves</string>
+    <string name="stats">Stats</string>
+    <string name="weather">Weather</string>
 
     <string name="action_search">Search</string>
 </resources>

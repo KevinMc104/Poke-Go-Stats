@@ -20,6 +20,16 @@
         tools:text="Pokemon Name" />
 
     <TextView
+        android:id="@+id/tv_menu_id"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
         android:id="@+id/tv_menu_max_cp"
         style="@style/AppTheme.TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"

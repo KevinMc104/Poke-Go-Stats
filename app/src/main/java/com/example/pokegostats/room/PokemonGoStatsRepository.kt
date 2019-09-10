@@ -1,6 +1,7 @@
 package com.example.pokegostats.room
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.pokegostats.model.RapidPokemonGoFastMoves
 import com.example.pokegostats.model.RapidPokemonGoMaxCp
 import com.example.pokegostats.model.RapidPokemonGoStats
@@ -69,6 +70,10 @@ class PokemonGoStatsRepository(
         // Batch Insert
         pokemonDao.insertAllPokemon(*pokemonListToBeInserted.toTypedArray())
         return pokemonDao.insertAllForms(*pokemonFormsListToBeInserted.toTypedArray())
+    }
+
+    suspend fun getPokemon(pokemonId: Int): PokemonAndFormsAndTypes {
+        return pokemonAndFormsAndTypesDao.getPokemon(pokemonId)
     }
 
     suspend fun updateMaxCp() {

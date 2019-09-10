@@ -1,4 +1,4 @@
-package com.example.pokegostats.view.home
+package com.example.pokegostats.service
 
 import android.graphics.Color
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.home.PokemonMovesListFragment">
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_id_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_name_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_id_row"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_form_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_name_row"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_base_attack_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_form_row"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_base_defense_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_base_attack_row"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_base_stamina_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_base_defense_row"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_max_cp_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_base_stamina_row"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/pokemon_types_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pokemon_max_cp_row"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
