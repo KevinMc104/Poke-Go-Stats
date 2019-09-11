@@ -1,10 +1,7 @@
 package com.example.pokegostats.service
 
 import android.util.Log
-import com.example.pokegostats.model.RapidPokemonGoFastMoves
-import com.example.pokegostats.model.RapidPokemonGoMaxCp
-import com.example.pokegostats.model.RapidPokemonGoStats
-import com.example.pokegostats.model.RapidPokemonGoTypes
+import com.example.pokegostats.model.*
 import com.example.pokegostats.model.exception.NotFoundException
 import com.example.pokegostats.model.exception.ServerErrorException
 import com.example.pokegostats.model.exception.UnauthenticatedException
@@ -38,6 +35,13 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
 
     suspend fun getRapidPokemonGoFastMoves(): List<RapidPokemonGoFastMoves> {
         val response: Response<List<RapidPokemonGoFastMoves>> = apiService.getRapidPokemonGoFastMoves()
+        handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "getRapidPokemonGoFastMoves")
+
+        return response.body()!!
+    }
+
+    suspend fun getRapidPokemonGoChargedMoves(): List<RapidPokemonGoChargedMoves> {
+        val response: Response<List<RapidPokemonGoChargedMoves>> = apiService.getRapidPokemonGoChargedMoves()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "getRapidPokemonGoFastMoves")
 
         return response.body()!!

@@ -9,6 +9,9 @@ interface PokemonMovesDao {
     @Query("SELECT * FROM pokemon_moves_table")
     fun getAllMoves(): LiveData<List<PokemonMovesEntity>>
 
+    @Query("SELECT * FROM pokemon_moves_table WHERE move_name = :moveName")
+    suspend fun getMove(moveName: String): PokemonMovesEntity
+
     @Update
     suspend fun update(vararg pokemon: PokemonMovesEntity)
 

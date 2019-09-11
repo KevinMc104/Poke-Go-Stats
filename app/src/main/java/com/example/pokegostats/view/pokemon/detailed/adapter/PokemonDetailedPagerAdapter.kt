@@ -8,6 +8,7 @@ import com.example.pokegostats.view.pokemon.detailed.PokemonDetailedWeatherListF
 
 class PokemonDetailedPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     private var pokemonId: Int = 0
+    private var pokemonFormName: String = ""
 
     override fun getCount(): Int = 2
 
@@ -22,13 +23,17 @@ class PokemonDetailedPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapt
 
     override fun getItem(position: Int): Fragment {
         when (position) {
-            0 -> return PokemonDetailedListFragment.newInstance(pokemonId)
-            1 -> return PokemonDetailedWeatherListFragment.newInstance(pokemonId)
+            0 -> return PokemonDetailedListFragment.newInstance(pokemonId, pokemonFormName)
+            1 -> return PokemonDetailedWeatherListFragment.newInstance(pokemonId, pokemonFormName)
         }
         return null!!
     }
 
     fun setPokemonId(pokemonId: Int) {
         this.pokemonId = pokemonId
+    }
+
+    fun setPokemonFormName(pokemonFormName: String) {
+        this.pokemonFormName = pokemonFormName
     }
 }

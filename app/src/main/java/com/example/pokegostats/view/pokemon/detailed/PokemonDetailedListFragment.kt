@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.pokegostats.R
 import com.example.pokegostats.service.PokemonGoApiService
+import com.example.pokegostats.service.PokemonHelper
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.pokemon_detailed_stats_fragment.*
@@ -23,6 +24,7 @@ class PokemonDetailedListFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
     private lateinit var pokemonDetailedViewModel: PokemonDetailedViewModel
+    private val helper: PokemonHelper = PokemonHelper.instance
 
     /**
      * TODO: Inject this in the repository instead of fragment
@@ -30,9 +32,10 @@ class PokemonDetailedListFragment : Fragment() {
     @Inject protected lateinit var service: PokemonGoApiService
 
     companion object {
-        fun newInstance(pokemonId: Int): PokemonDetailedListFragment = PokemonDetailedListFragment().apply {
+        fun newInstance(pokemonId: Int, pokemonFormName: String): PokemonDetailedListFragment = PokemonDetailedListFragment().apply {
             val args = Bundle()
-            args.putInt("pokemonId", pokemonId)
+            args.putInt(helper.POKEMON_ID, pokemonId)
+            args.putString(helper.POKEMON_FORM_NAME, pokemonFormName)
             arguments = args
         }
     }
@@ -53,12 +56,12 @@ class PokemonDetailedListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Creates the View Model
-        val factory = PokemonDetailedViewModel.Companion.Factory(requireActivity().application, service, arguments!!.getInt("pokemonId"))
+        val factory = PokemonDetailedViewModel.Companion.Factory(requireActivity().application, service)
         pokemonDetailedViewModel = ViewModelProvider(this, factory).get(PokemonDetailedViewModel::class.java)
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                pokemonDetailedViewModel.getPokemon(arguments!!.getInt("pokemonId"))
+                pokemonDetailedViewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getString(helper.POKEMON_FORM_NAME).toString())
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
@@ -70,18 +73,19 @@ class PokemonDetailedListFragment : Fragment() {
                 val pokemon = it.pokemon!!
                 val form = it.pokemonForm!!
                 val types = it.pokemonTypes!!
-                pokemon_id_row.setup("Pokemon ID", pokemon.pokemonId.toString(), null)
-                pokemon_name_row.setup("Pokemon Name", pokemon.pokemonName.toString(), null)
-                pokemon_form_row.setup("Pokemon Form", form.formName.toString(), null)
-                pokemon_base_attack_row.setup("Pokemon Base Attack Damage", pokemon.baseAttack.toString(), null)
-                pokemon_base_defense_row.setup("Pokemon Base Defense", pokemon.baseDefense.toString(), null)
-                pokemon_base_stamina_row.setup("Pokemon Base Stamina", pokemon.baseStamina.toString(), null)
-                pokemon_max_cp_row.setup("Pokemon Max CP", pokemon.maxCp.toString(), null)
+                pokemon_id_row.setup("ID", pokemon.pokemonId.toString(), null, false)
+                pokemon_name_row.setup("Name", pokemon.pokemonName.toString(), null, false)
+                pokemon_form_row.setup("Form", form.formName.toString(), null, false)
                 if(types.size == 2) {
-                    pokemon_types_row.setup("Pokemon Types", types[0].type.toString(), types[1].type.toString())
+                    pokemon_types_row.setup("Types", types[0].type.toString(), types[1].type.toString(), true)
                 } else {
-                    pokemon_types_row.setup("Pokemon Types", types[0].type.toString(), null)
+                    pokemon_types_row.setup("Type", types[0].type.toString(), null, true)
                 }
+                pokemon_base_attack_row.setup("Base Attack Damage", pokemon.baseAttack.toString(), null, false)
+                pokemon_base_defense_row.setup("Base Defense", pokemon.baseDefense.toString(), null, false)
+                pokemon_base_stamina_row.setup("Base Stamina", pokemon.baseStamina.toString(), null, false)
+                pokemon_max_cp_row.setup("Max CP", pokemon.maxCp.toString(), null, false)
+
             }
         })
     }

@@ -15,4 +15,8 @@
     <string name="weather">Weather</string>
 
     <string name="action_search">Search</string>
+
+    <string name="pokemon_id">Pokemon Id</string>
+    <string name="pokemon_form_name">Pokemon Form Name</string>
+
 </resources>

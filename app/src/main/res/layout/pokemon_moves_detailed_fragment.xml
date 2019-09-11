@@ -2,66 +2,57 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.pokemon.detailed.PokemonDetailedListFragment">
+    tools:context=".view.move.detailed.PokemonMoveDetailedFragment">
 
     <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_id_row"
+        android:id="@+id/move_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_name_row"
+        android:id="@+id/move_power"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_id_row"/>
+        app:layout_constraintTop_toBottomOf="@+id/move_name"/>
 
     <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_form_row"
+        android:id="@+id/move_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_name_row"/>
+        app:layout_constraintTop_toBottomOf="@+id/move_power"/>
 
     <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_types_row"
+        android:id="@+id/move_crit_chance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_form_row"/>
+        app:layout_constraintTop_toBottomOf="@+id/move_type"/>
 
     <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_base_attack_row"
+        android:id="@+id/move_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_types_row"/>
+        app:layout_constraintTop_toBottomOf="@+id/move_crit_chance"/>
 
     <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_base_defense_row"
+        android:id="@+id/move_stamina_loss_scaler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_base_attack_row"/>
+        app:layout_constraintTop_toBottomOf="@+id/move_duration"/>
 
     <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_base_stamina_row"
+        android:id="@+id/move_energy_delta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_base_defense_row"/>
-
-    <com.example.pokegostats.view.custom.PokemonDetailedRowView
-        android:id="@+id/pokemon_max_cp_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_base_stamina_row"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/move_stamina_loss_scaler"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

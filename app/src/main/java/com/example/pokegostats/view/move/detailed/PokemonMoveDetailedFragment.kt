@@ -1,4 +1,4 @@
-package com.example.pokegostats.view.pokemon.detailed
+package com.example.pokegostats.view.move.detailed
 
 import android.content.Context
 import android.os.Bundle
@@ -13,30 +13,29 @@ import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.service.PokemonHelper
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.pokemon_detailed_stats_fragment.*
-import kotlinx.android.synthetic.main.pokemon_detailed_weather_fragment.*
+import kotlinx.android.synthetic.main.pokemon_moves_detailed_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
-class PokemonDetailedWeatherListFragment : Fragment() {
+class PokemonMoveDetailedFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
-    private lateinit var pokemonDetailedViewModel: PokemonDetailedViewModel
+    private lateinit var pokemonMoveDetailedViewModel: PokemonMoveDetailedViewModel
     private val helper: PokemonHelper = PokemonHelper.instance
 
     /**
      * TODO: Inject this in the repository instead of fragment
      */
-    @Inject protected lateinit var service: PokemonGoApiService
+    @Inject
+    protected lateinit var service: PokemonGoApiService
 
     companion object {
-        fun newInstance(pokemonId: Int, pokemonFormName: String): PokemonDetailedWeatherListFragment = PokemonDetailedWeatherListFragment().apply {
+        fun newInstance(moveName: String): PokemonMoveDetailedFragment = PokemonMoveDetailedFragment().apply {
             val args = Bundle()
-            args.putInt(helper.POKEMON_ID, pokemonId)
-            args.putString(helper.POKEMON_FORM_NAME, pokemonFormName)
+            args.putString(helper.POKEMON_MOVE_NAME, moveName)
             arguments = args
         }
     }
@@ -50,33 +49,35 @@ class PokemonDetailedWeatherListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.pokemon_detailed_weather_fragment, container, false)
+        return inflater.inflate(R.layout.pokemon_moves_detailed_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Creates the View Model
-        val factory = PokemonDetailedViewModel.Companion.Factory(requireActivity().application, service)
-        pokemonDetailedViewModel = ViewModelProvider(this, factory).get(PokemonDetailedViewModel::class.java)
+        val factory = PokemonMoveDetailedViewModel.Companion.Factory(requireActivity().application, service)
+        pokemonMoveDetailedViewModel = ViewModelProvider(this, factory).get(PokemonMoveDetailedViewModel::class.java)
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                pokemonDetailedViewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getString(helper.POKEMON_FORM_NAME).toString())
+                pokemonMoveDetailedViewModel.getMove(arguments!!.getString(helper.POKEMON_MOVE_NAME).toString())
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-        pokemonDetailedViewModel.pokemonDetailed.observe(this, Observer { pokemon ->
-            pokemon?.let {
-                val pokemon = it.pokemon!!
-                val form = it.pokemonForm!!
-                val types = it.pokemonTypes!!
-                weather_name.setup("Pokemon ID", pokemon.pokemonId.toString(), null, false)
-                weather_name2.setup("Pokemon Name", pokemon.pokemonName.toString(), null, false)
-                weather_name3.setup("Pokemon Form", form.formName.toString(), null, false)
+        pokemonMoveDetailedViewModel.pokemonMoveDetailed.observe(this, Observer { move ->
+            move?.let {
+                move_name.setup("Move", it.name, null, false)
+                move_power.setup("Power", it.power.toString(), null, false)
+                move_type.setup("Type", it.type, null, true)
+                move_crit_chance.setup("Crit Chance", it.criticalChance.toString(), null, false)
+                move_duration.setup("Duration", it.duration.toString(), null, false)
+                move_stamina_loss_scaler.setup("Stamina Loss Scaler", it.staminaLossScaler, null, false)
+                move_energy_delta.setup("Energy Delta", it.energyDelta.toString(), null, false)
+
             }
         })
     }

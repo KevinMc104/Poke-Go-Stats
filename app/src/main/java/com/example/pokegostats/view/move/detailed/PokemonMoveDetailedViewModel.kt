@@ -1,19 +1,18 @@
-package com.example.pokegostats.view.pokemon.detailed
+package com.example.pokegostats.view.move.detailed
 
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.pokegostats.room.PokemonGoStatsRepository
 import com.example.pokegostats.room.PokemonGoStatsRoomDatabase
-import com.example.pokegostats.room.entity.PokemonAndFormsAndTypes
+import com.example.pokegostats.room.entity.PokemonMovesEntity
 import com.example.pokegostats.service.PokemonGoApiService
 import kotlinx.coroutines.launch
 
-// Class extends AndroidViewModel and requires application as a parameter
-class PokemonDetailedViewModel(application: Application, val service: PokemonGoApiService) : AndroidViewModel(application) {
+class PokemonMoveDetailedViewModel(application: Application, val service: PokemonGoApiService) : AndroidViewModel(application) {
 
     // The ViewModel maintains a reference to the repository to get data
     private val repository: PokemonGoStatsRepository
-    var pokemonDetailed: MutableLiveData<PokemonAndFormsAndTypes> = MutableLiveData()
+    var pokemonMoveDetailed: MutableLiveData<PokemonMovesEntity> = MutableLiveData()
 
     init {
         val pokemonDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonDao()
@@ -22,8 +21,8 @@ class PokemonDetailedViewModel(application: Application, val service: PokemonGoA
         repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, pokemonAndFormsAndTypesDao, service)
     }
 
-    suspend fun getPokemon(pokemonId: Int, pokemonFormName: String) = viewModelScope.launch {
-        pokemonDetailed.postValue(repository.getPokemon(pokemonId, pokemonFormName))
+    suspend fun getMove(moveName: String) = viewModelScope.launch {
+        pokemonMoveDetailed.postValue(repository.getMove(moveName))
     }
 
     companion object {
@@ -31,7 +30,7 @@ class PokemonDetailedViewModel(application: Application, val service: PokemonGoA
             private val mApplication: Application, private val service: PokemonGoApiService
         ) : ViewModelProvider.NewInstanceFactory() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return PokemonDetailedViewModel(mApplication, service) as T
+                return PokemonMoveDetailedViewModel(mApplication, service) as T
             }
         }
     }

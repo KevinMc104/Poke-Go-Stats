@@ -5,13 +5,28 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.home.PokemonMovesListFragment">
+    tools:context=".view.pokemon.detailed.PokemonDetailedWeatherListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_pokemon_detailed_weather_list"
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/weather_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/weather_name2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weather_name"/>
+
+    <com.example.pokegostats.view.custom.PokemonDetailedRowView
+        android:id="@+id/weather_name3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weather_name2"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

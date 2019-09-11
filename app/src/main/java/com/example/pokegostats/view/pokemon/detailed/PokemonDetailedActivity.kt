@@ -5,13 +5,14 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.pokegostats.R
+import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.pokemon.detailed.adapter.PokemonDetailedPagerAdapter
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 
 class PokemonDetailedActivity : AppCompatActivity() {
 
     private lateinit var adapter: PokemonDetailedPagerAdapter
+    private val helper: PokemonHelper = PokemonHelper.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +20,9 @@ class PokemonDetailedActivity : AppCompatActivity() {
 
         val vpPager = findViewById<ViewPager>(R.id.view_pager_detailed)
         adapter = PokemonDetailedPagerAdapter(supportFragmentManager)
-        val pokemonId = intent.extras!!.getString("pokemonId")!!.toInt()
-        Snackbar.make(findViewById(android.R.id.content), pokemonId.toString(), Snackbar.LENGTH_LONG).show()
+        val pokemonId = intent.extras!!.getString(helper.POKEMON_ID)!!.toInt()
+        val formName = intent.extras!!.getString(helper.POKEMON_FORM_NAME).toString()
+        adapter.setPokemonFormName(formName)
         adapter.setPokemonId(pokemonId)
         vpPager.adapter = adapter
 

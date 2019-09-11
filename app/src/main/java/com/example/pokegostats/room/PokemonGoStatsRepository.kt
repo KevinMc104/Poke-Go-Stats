@@ -1,11 +1,7 @@
 package com.example.pokegostats.room
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.pokegostats.model.RapidPokemonGoFastMoves
-import com.example.pokegostats.model.RapidPokemonGoMaxCp
-import com.example.pokegostats.model.RapidPokemonGoStats
-import com.example.pokegostats.model.RapidPokemonGoTypes
+import com.example.pokegostats.model.*
 import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
 import com.example.pokegostats.room.dao.PokemonDao
 import com.example.pokegostats.room.dao.PokemonMovesDao
@@ -26,33 +22,25 @@ class PokemonGoStatsRepository(
     val allPokemonMoves: LiveData<List<PokemonMovesEntity>> = pokemonMovesDao.getAllMoves()
     val allPokemonFormsAndTypes: LiveData<List<PokemonAndFormsAndTypes>> = pokemonAndFormsAndTypesDao.getAllPokemonAndFormsAndTypes()
 
-    // The suspend modifier tells the compiler that this must be called from a
-    // coroutine or another suspend function.
+    suspend fun getPokemon(pokemonId: Int, pokemonFormName: String): PokemonAndFormsAndTypes {
+        return pokemonAndFormsAndTypesDao.getPokemon(pokemonId, pokemonFormName)
+    }
+
+    suspend fun getMove(moveName: String): PokemonMovesEntity {
+        return pokemonMovesDao.getMove(moveName)
+    }
+
     suspend fun insertPokemon() {
-        // TODO: Add logic to not call out to the API every time
+        // TODO: Add logic to not call out to the API every time app is opened
 
         // add pokemon
-        val formPrimaryKeys = insertPokemonStats()
+        insertPokemonStats()
 
         // Update with MaxCp
         updateMaxCp()
-
-        val rapidPokemonGoTypes: ArrayList<RapidPokemonGoTypes> = ArrayList()
-        rapidPokemonGoTypes.addAll(service.getRapidPokemonGoTypes())
-
-        val pokemonTypesListToBeInserted = ArrayList<PokemonTypeEntity>()
-        var iterator = 0
-        rapidPokemonGoTypes.forEach { pokemon ->
-            pokemon.Type.forEach { type ->
-                val currentType = PokemonTypeEntity(null, formPrimaryKeys.get(iterator), type)
-                pokemonTypesListToBeInserted.add(currentType)
-            }
-            iterator++
-        }
-        pokemonDao.insertAllTypes(*pokemonTypesListToBeInserted.toTypedArray())
     }
 
-    suspend fun insertPokemonStats(): List<Long> {
+    private suspend fun insertPokemonStats() {
         val rapidPokemonGoStats: ArrayList<RapidPokemonGoStats> = ArrayList()
         rapidPokemonGoStats.addAll(service.getRapidPokemonGoStats())
 
@@ -69,14 +57,10 @@ class PokemonGoStatsRepository(
 
         // Batch Insert
         pokemonDao.insertAllPokemon(*pokemonListToBeInserted.toTypedArray())
-        return pokemonDao.insertAllForms(*pokemonFormsListToBeInserted.toTypedArray())
+        insertPokemonTypes(pokemonDao.insertAllForms(*pokemonFormsListToBeInserted.toTypedArray()))
     }
 
-    suspend fun getPokemon(pokemonId: Int): PokemonAndFormsAndTypes {
-        return pokemonAndFormsAndTypesDao.getPokemon(pokemonId)
-    }
-
-    suspend fun updateMaxCp() {
+    private suspend fun updateMaxCp() {
         val rapidPokemonGoMaxCp: ArrayList<RapidPokemonGoMaxCp> = ArrayList()
         rapidPokemonGoMaxCp.addAll(service.getRapidPokemonGoMaxCp())
 
@@ -85,14 +69,47 @@ class PokemonGoStatsRepository(
         }
     }
 
-    suspend fun insertMoves() {
-        val rapidPokemonGoFastMoves: ArrayList<RapidPokemonGoFastMoves> = ArrayList()
-        rapidPokemonGoFastMoves.addAll(service.getRapidPokemonGoFastMoves())
+    private suspend fun insertPokemonTypes(formTablePrimaryKeys: List<Long>) {
+        val rapidPokemonGoTypes: ArrayList<RapidPokemonGoTypes> = ArrayList()
+        rapidPokemonGoTypes.addAll(service.getRapidPokemonGoTypes())
 
-        val pokemonListToBeInserted = ArrayList<PokemonMovesEntity>()
-        for(item in rapidPokemonGoFastMoves) {
-            pokemonListToBeInserted.add(PokemonMovesEntity(item.Name, item.Duration, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+        val list = ArrayList<PokemonTypeEntity>()
+        var iterator = 0
+        rapidPokemonGoTypes.forEach { pokemon ->
+            pokemon.Type.forEach { type ->
+                val currentType = PokemonTypeEntity(null, formTablePrimaryKeys.get(iterator), type)
+                list.add(currentType)
+            }
+            iterator++
         }
-        pokemonMovesDao.insertAll(*pokemonListToBeInserted.toTypedArray())
+        pokemonDao.insertAllTypes(*list.toTypedArray())
+    }
+
+    suspend fun insertMoves() {
+        var list = getFastMoves()
+        list = getChargedMoves(list)
+
+        pokemonMovesDao.insertAll(*list.toTypedArray())
+    }
+
+    private suspend fun getFastMoves(): ArrayList<PokemonMovesEntity> {
+        val moves: ArrayList<RapidPokemonGoFastMoves> = ArrayList()
+        moves.addAll(service.getRapidPokemonGoFastMoves())
+
+        val list = ArrayList<PokemonMovesEntity>()
+        for(item in moves) {
+            list.add(PokemonMovesEntity(item.Name, item.Duration, null, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+        }
+        return list
+    }
+
+    private suspend fun getChargedMoves(list: ArrayList<PokemonMovesEntity>): ArrayList<PokemonMovesEntity> {
+        val moves: ArrayList<RapidPokemonGoChargedMoves> = ArrayList()
+        moves.addAll(service.getRapidPokemonGoChargedMoves())
+
+        for(item in moves) {
+            list.add(PokemonMovesEntity(item.Name, item.Duration, item.CriticalChance, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+        }
+        return list
     }
 }
