@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
 import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.service.PokemonHelper
+import com.example.pokegostats.view.pokemon.detailed.adapter.PokemonDetailedWeatherListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.pokemon_detailed_weather_fragment.*
@@ -23,6 +25,7 @@ import javax.inject.Inject
 class PokemonDetailedWeatherListFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
+    private lateinit var adapter: PokemonDetailedWeatherListAdapter
     private lateinit var pokemonDetailedViewModel: PokemonDetailedViewModel
     private val helper: PokemonHelper = PokemonHelper.instance
 
@@ -55,6 +58,14 @@ class PokemonDetailedWeatherListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        // adapter to the list
+        adapter = PokemonDetailedWeatherListAdapter(context!!)
+        rv_pokemon_weather_list.adapter = adapter
+
+        // Creates vertical Layout Manager
+        rv_pokemon_weather_list.layoutManager = LinearLayoutManager(activity)
+
         // Creates the View Model
         val factory = PokemonDetailedViewModel.Companion.Factory(requireActivity().application, service)
         pokemonDetailedViewModel = ViewModelProvider(this, factory).get(PokemonDetailedViewModel::class.java)
@@ -69,24 +80,7 @@ class PokemonDetailedWeatherListFragment : Fragment() {
             }
         }
         pokemonDetailedViewModel.pokemonDetailed.observe(this, Observer { pokemon ->
-            pokemon?.let {
-                val weatherBoosts= it.pokemonWeatherBoosts
-                // TODO: Make this a recyclerView as the size will always be different
-                when(weatherBoosts!!.size) {
-                    1 -> {
-                        weather_name.setup("Weather Boost", weatherBoosts[0].weatherName.toString(), null, false)
-                    }
-                    2 -> {
-                        weather_name.setup("Weather Boost", weatherBoosts[0].weatherName.toString(), null, false)
-                        weather_name2.setup("Weather Boost", weatherBoosts[1].weatherName.toString(), null, false)
-                    }
-                    3 -> {
-                        weather_name.setup("Weather Boost", weatherBoosts[0].weatherName.toString(), null, false)
-                        weather_name2.setup("Weather Boost", weatherBoosts[1].weatherName.toString(), null, false)
-                        weather_name3.setup("Weather Boost", weatherBoosts[2].weatherName.toString(), null, false)
-                    }
-                }
-            }
+            pokemon?.let { adapter.setWeatherBoosts(it.pokemonWeatherBoosts!!)}
         })
     }
 }

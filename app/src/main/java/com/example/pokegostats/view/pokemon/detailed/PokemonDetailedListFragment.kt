@@ -85,7 +85,6 @@ class PokemonDetailedListFragment : Fragment() {
                 pokemon_base_defense_row.setup("Base Defense", pokemon.baseDefense.toString(), null, false)
                 pokemon_base_stamina_row.setup("Base Stamina", pokemon.baseStamina.toString(), null, false)
                 pokemon_max_cp_row.setup("Max CP", pokemon.maxCp.toString(), null, false)
-
             }
         })
     }
