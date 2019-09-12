@@ -13,7 +13,6 @@ import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.service.PokemonHelper
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.pokemon_detailed_stats_fragment.*
 import kotlinx.android.synthetic.main.pokemon_detailed_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -71,12 +70,22 @@ class PokemonDetailedWeatherListFragment : Fragment() {
         }
         pokemonDetailedViewModel.pokemonDetailed.observe(this, Observer { pokemon ->
             pokemon?.let {
-                val pokemon = it.pokemon!!
-                val form = it.pokemonForm!!
-                val types = it.pokemonTypes!!
-                weather_name.setup("Pokemon ID", pokemon.pokemonId.toString(), null, false)
-                weather_name2.setup("Pokemon Name", pokemon.pokemonName.toString(), null, false)
-                weather_name3.setup("Pokemon Form", form.formName.toString(), null, false)
+                val weatherBoosts= it.pokemonWeatherBoosts
+                // TODO: Make this a recyclerView as the size will always be different
+                when(weatherBoosts!!.size) {
+                    1 -> {
+                        weather_name.setup("Weather Boost", weatherBoosts[0].weatherName.toString(), null, false)
+                    }
+                    2 -> {
+                        weather_name.setup("Weather Boost", weatherBoosts[0].weatherName.toString(), null, false)
+                        weather_name2.setup("Weather Boost", weatherBoosts[1].weatherName.toString(), null, false)
+                    }
+                    3 -> {
+                        weather_name.setup("Weather Boost", weatherBoosts[0].weatherName.toString(), null, false)
+                        weather_name2.setup("Weather Boost", weatherBoosts[1].weatherName.toString(), null, false)
+                        weather_name3.setup("Weather Boost", weatherBoosts[2].weatherName.toString(), null, false)
+                    }
+                }
             }
         })
     }

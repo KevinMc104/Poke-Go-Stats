@@ -8,14 +8,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
 import com.example.pokegostats.room.dao.PokemonDao
 import com.example.pokegostats.room.dao.PokemonMovesDao
-import com.example.pokegostats.room.entity.PokemonEntity
-import com.example.pokegostats.room.entity.PokemonTypeEntity
-import com.example.pokegostats.room.entity.PokemonFormEntity
-import com.example.pokegostats.room.entity.PokemonMovesEntity
+import com.example.pokegostats.room.entity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [PokemonEntity::class, PokemonFormEntity::class, PokemonTypeEntity::class, PokemonMovesEntity::class], version = 1)
+@Database(entities = [PokemonEntity::class, PokemonFormEntity::class, PokemonTypeEntity::class, PokemonMovesEntity::class, PokemonWeatherBoostsEntity::class], version = 1)
 abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
     abstract fun pokemonMovesDao(): PokemonMovesDao

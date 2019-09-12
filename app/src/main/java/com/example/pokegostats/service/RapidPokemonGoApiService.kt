@@ -12,6 +12,9 @@ interface RapidPokemonGoApiService {
     @GET("/pokemon_types.json")
     suspend fun getRapidPokemonGoTypes() : Response<List<RapidPokemonGoTypes>>
 
+    @GET("/weather_boosts.json")
+    suspend fun getRapidPokemonGoWeatherBoosts() : Response<RapidPokemonGoWeatherBoosts>
+
     @GET("/pokemon_max_cp.json")
     suspend fun getRapidPokemonGoMaxCp() : Response<List<RapidPokemonGoMaxCp>>
 

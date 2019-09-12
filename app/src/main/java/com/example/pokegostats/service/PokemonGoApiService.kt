@@ -26,6 +26,13 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
         return response.body()!!
     }
 
+    suspend fun getRapidPokemonGoWeatherBoosts(): RapidPokemonGoWeatherBoosts {
+        val response: Response<RapidPokemonGoWeatherBoosts> = apiService.getRapidPokemonGoWeatherBoosts()
+        handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "getRapidPokemonGoTypes")
+
+        return response.body()!!
+    }
+
     suspend fun getRapidPokemonGoMaxCp(): List<RapidPokemonGoMaxCp> {
         val response: Response<List<RapidPokemonGoMaxCp>> = apiService.getRapidPokemonGoMaxCp()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")

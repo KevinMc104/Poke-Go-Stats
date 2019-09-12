@@ -22,7 +22,7 @@ data class PokemonEntity(
     @ColumnInfo(name = "pokemon_name") val pokemonName: String?
 )
 
-// One to Many relationship. One Pokemon can have multiple types
+// One to Many relationship. One Pokemon can have multiple Forms
 @Entity(
     tableName = "pokemon_forms",
     foreignKeys = [ForeignKey(
@@ -50,13 +50,30 @@ data class PokemonFormEntity(
     )], indices = [Index("form_uid")]
 )
 data class PokemonTypeEntity(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val id: Int?,
+    @PrimaryKey
+    @ColumnInfo(name = "type_id") val id: Int?,
     @ColumnInfo(name = "form_uid") val formUid: Long,
     @ColumnInfo(name = "type") val type: String?
 )
 
-// Relationship class to get each Pokemon's Types
+// One to Many relationship. One Type can have multiple Weather Boosts
+@Entity(
+    tableName = "pokemon_weather_boosts",
+    foreignKeys = [ForeignKey(
+        entity = PokemonTypeEntity::class,
+        parentColumns = arrayOf("type_id"),
+        childColumns = arrayOf("type_uid"),
+        onDelete = CASCADE
+    )], indices = [Index("type_uid")]
+)
+data class PokemonWeatherBoostsEntity(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "weather_id") val id: Int?,
+    @ColumnInfo(name = "type_uid") val typeUid: Long,
+    @ColumnInfo(name = "weather_name") val weatherName: String?
+)
+
+// Relationship class to get each Pokemon's Forms/Types
 class PokemonAndFormsAndTypes {
     @Embedded
     var pokemon: PokemonEntity? = null
@@ -64,6 +81,12 @@ class PokemonAndFormsAndTypes {
     @Embedded
     var pokemonForm: PokemonFormEntity? = null
 
+    @Embedded
+    var pokemonType: PokemonTypeEntity? = null
+
     @Relation(parentColumn = "form_id", entityColumn = "form_uid", entity = PokemonTypeEntity::class)
     var pokemonTypes: List<PokemonTypeEntity>? = null
+
+    @Relation(parentColumn = "type_id", entityColumn = "type_uid", entity = PokemonWeatherBoostsEntity::class)
+    var pokemonWeatherBoosts: List<PokemonWeatherBoostsEntity>? = null
 }

@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import com.example.pokegostats.room.entity.PokemonEntity
 import com.example.pokegostats.room.entity.PokemonFormEntity
 import com.example.pokegostats.room.entity.PokemonTypeEntity
+import com.example.pokegostats.room.entity.PokemonWeatherBoostsEntity
 
 @Dao
 interface PokemonDao {
@@ -22,7 +23,10 @@ interface PokemonDao {
     suspend fun insertAllForms(vararg forms: PokemonFormEntity): List<Long>
 
     @Insert
-    suspend fun insertAllTypes(vararg types: PokemonTypeEntity)
+    suspend fun insertAllTypes(vararg types: PokemonTypeEntity): List<Long>
+
+    @Insert
+    suspend fun insertAllWeatherBoosts(vararg types: PokemonWeatherBoostsEntity): List<Long>
 
     @Query("UPDATE pokemon_table SET max_cp = :maxCp WHERE pokemon_id = :pokemonId")
     suspend fun updateMaxCp(maxCp: Int, pokemonId: Int)

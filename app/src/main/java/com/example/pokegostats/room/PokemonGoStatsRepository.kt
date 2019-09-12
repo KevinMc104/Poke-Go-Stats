@@ -57,7 +57,79 @@ class PokemonGoStatsRepository(
 
         // Batch Insert
         pokemonDao.insertAllPokemon(*pokemonListToBeInserted.toTypedArray())
-        insertPokemonTypes(pokemonDao.insertAllForms(*pokemonFormsListToBeInserted.toTypedArray()))
+        insertPokemonTypesAndWeatherBoosts(pokemonDao.insertAllForms(*pokemonFormsListToBeInserted.toTypedArray()))
+    }
+
+    private suspend fun insertPokemonTypesAndWeatherBoosts(formTablePrimaryKeys: List<Long>) {
+        // Get Types list
+        val rapidPokemonGoTypes: ArrayList<RapidPokemonGoTypes> = ArrayList()
+        rapidPokemonGoTypes.addAll(service.getRapidPokemonGoTypes())
+
+        // Get Weather Boosts
+        val weatherBoost = service.getRapidPokemonGoWeatherBoosts()
+
+        val typeList = ArrayList<PokemonTypeEntity>()
+        var weatherBoostList = ArrayList<PokemonWeatherBoostsEntity>()
+        var formTableIterator = 0
+        var typePrimaryKey = 1
+        rapidPokemonGoTypes.forEach { pokemon ->
+            pokemon.Type.forEach { type ->
+                typeList.add(PokemonTypeEntity(typePrimaryKey, formTablePrimaryKeys.get(formTableIterator), type))
+                // Check if Type is matched to any number of weather boosts
+                weatherBoostList = checkAllWeatherTypesByType(weatherBoost, weatherBoostList, type, typePrimaryKey)
+                typePrimaryKey++
+            }
+            formTableIterator++
+        }
+        pokemonDao.insertAllTypes(*typeList.toTypedArray())
+        pokemonDao.insertAllWeatherBoosts(*weatherBoostList.toTypedArray())
+    }
+
+    private suspend fun checkAllWeatherTypesByType(weatherBoost: RapidPokemonGoWeatherBoosts,
+                                                   weatherBoostList: ArrayList<PokemonWeatherBoostsEntity>,
+                                                   type: String,
+                                                   currKey: Int): ArrayList<PokemonWeatherBoostsEntity> {
+        weatherBoost.Clear.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Clear"))
+            }
+        }
+        weatherBoost.Cloudy.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Cloudy"))
+            }
+        }
+        weatherBoost.Fog.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Fog"))
+            }
+        }
+        weatherBoost.PartlyCloudy.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Partly Cloudy"))
+            }
+        }
+        weatherBoost.Rain.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Rain"))
+            }
+        }
+        weatherBoost.Snow.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Snow"))
+            }
+        }
+        weatherBoost.Sunny.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Sunny"))
+            }
+        }
+        weatherBoost.Wind.forEach { weatherItem ->
+            if(weatherItem == type) {
+                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currKey.toLong(), "Wind"))
+            }
+        }
+        return weatherBoostList
     }
 
     private suspend fun updateMaxCp() {
@@ -67,22 +139,6 @@ class PokemonGoStatsRepository(
         for(item in rapidPokemonGoMaxCp) {
             pokemonDao.updateMaxCp(item.MaxCp, item.pokemon_id)
         }
-    }
-
-    private suspend fun insertPokemonTypes(formTablePrimaryKeys: List<Long>) {
-        val rapidPokemonGoTypes: ArrayList<RapidPokemonGoTypes> = ArrayList()
-        rapidPokemonGoTypes.addAll(service.getRapidPokemonGoTypes())
-
-        val list = ArrayList<PokemonTypeEntity>()
-        var iterator = 0
-        rapidPokemonGoTypes.forEach { pokemon ->
-            pokemon.Type.forEach { type ->
-                val currentType = PokemonTypeEntity(null, formTablePrimaryKeys.get(iterator), type)
-                list.add(currentType)
-            }
-            iterator++
-        }
-        pokemonDao.insertAllTypes(*list.toTypedArray())
     }
 
     suspend fun insertMoves() {
