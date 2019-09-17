@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.pokemon_list_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.io.IOException
 import javax.inject.Inject
 

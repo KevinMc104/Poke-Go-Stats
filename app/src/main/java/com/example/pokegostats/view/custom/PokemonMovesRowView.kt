@@ -5,11 +5,9 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.pokegostats.R
-import com.example.pokegostats.room.entity.PokemonFormsTypesWeatherBoosts
 import com.example.pokegostats.room.entity.PokemonMovesEntity
 import com.example.pokegostats.service.PokemonHelper
 import kotlinx.android.synthetic.main.pokemon_moves_row.view.*
-import kotlinx.android.synthetic.main.pokemon_stats_row.view.*
 
 class PokemonMovesRowView @JvmOverloads constructor(context: Context,
                                                     attrs: AttributeSet? = null,

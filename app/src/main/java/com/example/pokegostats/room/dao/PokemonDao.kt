@@ -3,7 +3,10 @@ package com.example.pokegostats.room.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import com.example.pokegostats.room.entity.*
+import com.example.pokegostats.room.entity.PokemonEntity
+import com.example.pokegostats.room.entity.PokemonFormEntity
+import com.example.pokegostats.room.entity.PokemonFormsTypesWeatherBoosts
+import com.example.pokegostats.room.entity.PokemonWeatherBoostsEntity
 
 @Dao
 interface PokemonDao {

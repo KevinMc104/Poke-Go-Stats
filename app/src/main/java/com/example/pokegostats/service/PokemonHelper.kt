@@ -3,9 +3,7 @@ package com.example.pokegostats.service
 import android.content.Context
 import android.graphics.Color
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pokegostats.R
 
 class PokemonHelper {
