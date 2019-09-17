@@ -7,6 +7,7 @@ import com.example.pokegostats.room.entity.PokemonAndFormsAndTypes
 
 @Dao
 interface PokemonAndFormsAndTypesDao {
+    // TODO: Remove this DAO
     @Query("SELECT * FROM pokemon_table " +
             "INNER JOIN pokemon_forms " +
                 "ON pokemon_table.pokemon_id = pokemon_forms.pokemon_uid " +

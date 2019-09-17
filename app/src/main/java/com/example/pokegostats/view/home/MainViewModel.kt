@@ -4,8 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.pokegostats.room.PokemonGoStatsRepository
 import com.example.pokegostats.room.PokemonGoStatsRoomDatabase
-import com.example.pokegostats.room.entity.PokemonAndFormsAndTypes
-import com.example.pokegostats.room.entity.PokemonEntity
+import com.example.pokegostats.room.entity.PokemonFormsTypesWeatherBoosts
 import com.example.pokegostats.room.entity.PokemonMovesEntity
 import com.example.pokegostats.service.PokemonGoApiService
 import kotlinx.coroutines.launch
@@ -16,22 +15,24 @@ class MainViewModel(application: Application, val service: PokemonGoApiService) 
     // The ViewModel maintains a reference to the repository to get data
     private val repository: PokemonGoStatsRepository
 
-    val allPokemon: LiveData<List<PokemonEntity>>
     val allPokemonMoves: LiveData<List<PokemonMovesEntity>>
-    val allPokemonFormsAndTypes: LiveData<List<PokemonAndFormsAndTypes>>
+    val allPokemonFormsTypesWeatherBoosts: LiveData<List<PokemonFormsTypesWeatherBoosts>>
 
     init {
         val pokemonDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonDao()
         val pokemonMovesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonMovesDao()
         val pokemonAndFormsAndTypesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonAndFormsAndTypesDao()
         repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, pokemonAndFormsAndTypesDao, service)
-        allPokemon = repository.allPokemon
         allPokemonMoves = repository.allPokemonMoves
-        allPokemonFormsAndTypes = repository.allPokemonFormsAndTypes
+        allPokemonFormsTypesWeatherBoosts = repository.allPokemonFormsTypesWeatherBoosts
     }
 
-    fun populatePokemonTable() = viewModelScope.launch {
+    suspend fun populatePokemonTable() {
         repository.insertPokemon()
+    }
+
+    suspend fun updateDetailedPokemonData() {
+        repository.updateDetailedPokemonData()
     }
 
     fun populatePokemonMovesTable() = viewModelScope.launch {

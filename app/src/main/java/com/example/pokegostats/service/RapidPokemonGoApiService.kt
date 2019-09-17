@@ -18,6 +18,9 @@ interface RapidPokemonGoApiService {
     @GET("/pokemon_max_cp.json")
     suspend fun getRapidPokemonGoMaxCp() : Response<List<RapidPokemonGoMaxCp>>
 
+    @GET("/pokemon_candy_to_evolve.json")
+    suspend fun getRapidPokemonGoCandyEvolve() : Response<RapidPokemonGoCandyEvolve>
+
     @GET("/fast_moves.json")
     suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>
 

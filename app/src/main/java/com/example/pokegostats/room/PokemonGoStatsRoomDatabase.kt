@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
 import com.example.pokegostats.room.dao.PokemonDao
@@ -70,6 +71,7 @@ abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
                 return tempInstance
             }
             synchronized(this) {
+                context.applicationContext.deleteDatabase("pokemon_database")
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     PokemonGoStatsRoomDatabase::class.java,

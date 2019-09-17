@@ -72,7 +72,7 @@ class PokemonMoveDetailedFragment : Fragment() {
             move?.let {
                 move_name.setup("Move", it.name, null, false)
                 move_power.setup("Power", it.power.toString(), null, false)
-                move_type.setup("Type", it.type, null, true)
+                move_type.setup("Type", it.typeName, null, true)
                 if(it.criticalChance.isNullOrBlank()) {
                     move_crit_chance.setup("Crit Chance", "0", null, false)
                 } else {

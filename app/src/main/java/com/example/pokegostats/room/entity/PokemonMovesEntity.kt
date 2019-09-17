@@ -14,5 +14,5 @@ data class PokemonMovesEntity(
     @ColumnInfo(name = "energy_delta") val energyDelta: Int,
     @ColumnInfo(name = "power") val power: Int,
     @ColumnInfo(name = "stamina_loss_scaler") val staminaLossScaler: String,
-    @ColumnInfo(name = "type") val type: String
+    @ColumnInfo(name = "type_name") val typeName: String
 )

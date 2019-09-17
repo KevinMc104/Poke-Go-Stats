@@ -77,14 +77,15 @@ class PokemonDetailedListFragment : Fragment() {
                 pokemon_name_row.setup("Name", pokemon.pokemonName.toString(), null, false)
                 pokemon_form_row.setup("Form", form.formName.toString(), null, false)
                 if(types.size == 2) {
-                    pokemon_types_row.setup("Types", types[0].type.toString(), types[1].type.toString(), true)
+                    pokemon_types_row.setup("Types", types[0].typeName.toString(), types[1].typeName.toString(), true)
                 } else {
-                    pokemon_types_row.setup("Type", types[0].type.toString(), null, true)
+                    pokemon_types_row.setup("Type", types[0].typeName.toString(), null, true)
                 }
                 pokemon_base_attack_row.setup("Base Attack Damage", pokemon.baseAttack.toString(), null, false)
                 pokemon_base_defense_row.setup("Base Defense", pokemon.baseDefense.toString(), null, false)
                 pokemon_base_stamina_row.setup("Base Stamina", pokemon.baseStamina.toString(), null, false)
                 pokemon_max_cp_row.setup("Max CP", pokemon.maxCp.toString(), null, false)
+                pokemon_candy_to_evolve.setup("Candy Required to Evolve", pokemon.candyToEvolve.toString(), null, false)
             }
         })
     }

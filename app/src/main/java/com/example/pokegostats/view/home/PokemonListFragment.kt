@@ -1,7 +1,6 @@
 package com.example.pokegostats.view.home
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
 import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.view.home.adapter.PokemonListAdapter
-import com.example.pokegostats.view.pokemon.detailed.PokemonDetailedActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.pokemon_list_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.IOException
 import javax.inject.Inject
 
@@ -86,19 +85,21 @@ class PokemonListFragment : Fragment() {
         // Creates the View Model
         val factory = MainViewModel.Companion.Factory(requireActivity().application, service)
         mainViewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
-        mainViewModel.allPokemonFormsAndTypes.observe(this, Observer { pokemon ->
-            pokemon?.let { adapter.setPokemonAndFormsAndPokemonTypes(it) }
-        })
-
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
                 mainViewModel.populatePokemonTable()
+                mainViewModel.updateDetailedPokemonData()
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
+        mainViewModel.allPokemonFormsTypesWeatherBoosts.observe(this, Observer { pokemon ->
+            pokemon?.let {
+                adapter.setPokemonFormsTypesWeatherBoosts(pokemon)
+            }
+        })
     }
 }

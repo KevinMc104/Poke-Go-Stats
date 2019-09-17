@@ -2,7 +2,6 @@ package com.example.pokegostats.view.home.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.example.pokegostats.R
 import com.example.pokegostats.room.entity.PokemonMovesEntity
 import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.move.detailed.PokemonMoveDetailedActivity
-import com.example.pokegostats.view.pokemon.detailed.PokemonDetailedActivity
 import kotlinx.android.synthetic.main.pokemon_moves_row.view.*
 
 class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMovesListAdapter.PokemonMovesViewHolder>() {
@@ -37,7 +35,7 @@ class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMo
     override fun onBindViewHolder(holder: PokemonMovesViewHolder, position: Int) {
         holder.tvMoveName.text = pokemonMoves[position].name
         holder.tvPower.text = pokemonMoves[position].power.toString()
-        helper.setPokemonTypeLook(context, holder.tvMoveType, pokemonMoves[position].type)
+        helper.setPokemonTypeLook(context, holder.tvMoveType, pokemonMoves[position].typeName)
     }
 
     internal fun setPokemonMoves(pokemonMoves: List<PokemonMovesEntity>) {
