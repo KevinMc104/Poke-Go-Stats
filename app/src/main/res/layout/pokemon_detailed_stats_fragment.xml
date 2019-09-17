@@ -75,13 +75,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemon_max_cp_row"/>
 
-
         <com.example.pokegostats.view.custom.PokemonDetailedRowView
             android:id="@+id/pokemon_buddy_distance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemon_candy_to_evolve"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_raid_exclusive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_buddy_distance"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_raid_level"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_raid_exclusive"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

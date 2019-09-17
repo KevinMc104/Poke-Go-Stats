@@ -42,3 +42,7 @@ Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11
 * ~~Use GSON Converter to convert JSON to data classes to easily use with inserts into Android Room Database Tables(Entities)~~
 * ~~Populate Android Room Databases with [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1) data~~
 * ~~Live Data Objects to gather Android Room Data~~
+
+## Extra Goals
+* Move Combos for each Pokemon
+*

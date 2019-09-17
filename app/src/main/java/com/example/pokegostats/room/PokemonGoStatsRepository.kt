@@ -46,7 +46,7 @@ class PokemonGoStatsRepository(
         val pokemonFormsListToBeInserted = ArrayList<PokemonFormEntity>()
         var formsPrimaryKey = 1L
         for(item in rapidPokemonGoStats) {
-            pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense, item.BaseStamina, null, item.PokemonName, null, null))
+            pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense, item.BaseStamina, null, item.PokemonName, null, null, 0, 0))
             if(item.Form.isNullOrBlank()) {
                 pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, "Default"))
             } else {
@@ -203,6 +203,16 @@ class PokemonGoStatsRepository(
         }
     }
 
+    private suspend fun updatePokemonRaidExclusive() {
+        val getRapidPokemonGoRaidExclusive = service.getRapidPokemonGoRaidExclusive()
+        for(item in getRapidPokemonGoRaidExclusive.ThreeHundredFiftyNine) {
+            pokemonDao.updateRaidExclusive(1, item.RaidLevel, item.PokemonId.toInt())
+        }
+        for(item in getRapidPokemonGoRaidExclusive.ThreeHundredThree) {
+            pokemonDao.updateRaidExclusive(1, item.RaidLevel, item.PokemonId.toInt())
+        }
+    }
+
     suspend fun insertMoves() {
         var list = getFastMoves()
         list = getChargedMoves(list)
@@ -313,6 +323,8 @@ class PokemonGoStatsRepository(
         flattenedPokemon.pokemon_name = pokemon.pokemon_name
         flattenedPokemon.candy_to_evolve = pokemon.candy_to_evolve
         flattenedPokemon.buddy_distances = pokemon.buddy_distances
+        flattenedPokemon.raidExclusive = pokemon.raidExclusive
+        flattenedPokemon.raidLevel = pokemon.raidLevel
         return flattenedPokemon
     }
 }

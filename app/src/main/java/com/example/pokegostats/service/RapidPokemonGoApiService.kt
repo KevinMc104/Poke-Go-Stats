@@ -24,6 +24,9 @@ interface RapidPokemonGoApiService {
     @GET("/pokemon_buddy_distances.json")
     suspend fun getRapidPokemonGoBuddyDistances() : Response<RapidPokemonGoBuddyDistances>
 
+    @GET("/raid_exclusive_pokemon.json")
+    suspend fun getRapidPokemonGoRaidExclusive() : Response<RapidPokemonGoRaidExclusive>
+
     @GET("/fast_moves.json")
     suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>
 

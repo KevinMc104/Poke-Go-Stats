@@ -25,7 +25,13 @@ data class PokemonEntity(
     @ColumnInfo(name = "max_cp") val maxCp: Int?,
     @ColumnInfo(name = "pokemon_name") val pokemonName: String?,
     @ColumnInfo(name = "candy_to_evolve") val candyToEvolve: String?,
-    @ColumnInfo(name = "buddy_distances") val buddyDistances: String?
+    @ColumnInfo(name = "buddy_distances") val buddyDistances: String?,
+    /**
+     * SQLite/Android Room does not support boolean types on columns
+     * 1 = True, 0 = False
+     */
+    @ColumnInfo(name = "raid_exclusive") val raidExclusive: Int?,
+    @ColumnInfo(name = "raid_level") val raidLevel: Int?
 )
 
 // One to Many relationship. One Pokemon can have multiple Forms
@@ -103,6 +109,8 @@ class PokemonFormsTypesWeatherBoosts {
     var pokemon_name: String? = ""
     var candy_to_evolve: String? = ""
     var buddy_distances: String? = ""
+    var raidExclusive: Int? = 0
+    var raidLevel: Int? = 0
     @TypeConverters(Converters::class)
     var FORMS_LIST: ArrayList<String>? = ArrayList()
     @TypeConverters(Converters::class)

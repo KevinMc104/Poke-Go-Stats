@@ -94,6 +94,16 @@ class PokemonDetailedListFragment : Fragment() {
                 } else {
                     pokemon_buddy_distance.setup("Distance Required to get Candy", "N/A", null, false)
                 }
+                if(pokemon.raidExclusive == 1) {
+                    pokemon_raid_exclusive.setup("Raid Exclusive Pokemon", "True", null, false)
+                } else {
+                    pokemon_raid_exclusive.setup("Raid Exclusive Pokemon", "False", null, false)
+                }
+                if(pokemon.raidLevel != 0 && pokemon.raidLevel != null) {
+                    pokemon_raid_level.setup("Raid Level", pokemon.raidLevel.toString(), null, false)
+                } else {
+                    pokemon_raid_level.setup("Raid Level", "N/A", null, false)
+                }
             }
         })
     }
