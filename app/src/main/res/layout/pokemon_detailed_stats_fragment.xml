@@ -96,5 +96,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemon_raid_exclusive"/>
 
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_nested_pokemon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_raid_level"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

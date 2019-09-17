@@ -27,6 +27,9 @@ interface RapidPokemonGoApiService {
     @GET("/raid_exclusive_pokemon.json")
     suspend fun getRapidPokemonGoRaidExclusive() : Response<RapidPokemonGoRaidExclusive>
 
+    @GET("/nesting_pokemon.json")
+    suspend fun getRapidPokemonGoNestingPokemon() : Response<RapidPokemonGoNestingPokemon>
+
     @GET("/fast_moves.json")
     suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>
 

@@ -31,7 +31,11 @@ data class PokemonEntity(
      * 1 = True, 0 = False
      */
     @ColumnInfo(name = "raid_exclusive") val raidExclusive: Int?,
-    @ColumnInfo(name = "raid_level") val raidLevel: Int?
+    @ColumnInfo(name = "raid_level") val raidLevel: Int?,
+    /**
+     * 1 = True, 0 = False
+     */
+    @ColumnInfo(name = "nested_pokemon") val nestedPokemon: Int?
 )
 
 // One to Many relationship. One Pokemon can have multiple Forms
@@ -109,8 +113,9 @@ class PokemonFormsTypesWeatherBoosts {
     var pokemon_name: String? = ""
     var candy_to_evolve: String? = ""
     var buddy_distances: String? = ""
-    var raidExclusive: Int? = 0
-    var raidLevel: Int? = 0
+    var raid_exclusive: Int? = 0
+    var raid_level: Int? = 0
+    var nested_pokemon: Int? = 0
     @TypeConverters(Converters::class)
     var FORMS_LIST: ArrayList<String>? = ArrayList()
     @TypeConverters(Converters::class)

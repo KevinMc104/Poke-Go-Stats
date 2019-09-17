@@ -93,6 +93,9 @@ interface PokemonDao {
     @Query("UPDATE pokemon_table SET raid_exclusive = :raidExclusive, raid_level = :raidLevel WHERE pokemon_id = :pokemonId")
     suspend fun updateRaidExclusive(raidExclusive: Int, raidLevel: Int, pokemonId: Int)
 
+    @Query("UPDATE pokemon_table SET nested_pokemon = :nestedPokemon WHERE pokemon_id = :pokemonId")
+    suspend fun updateNestingPokemon(nestedPokemon: Int, pokemonId: Int)
+
     @Delete
     suspend fun delete(pokemon: PokemonEntity)
 

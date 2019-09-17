@@ -44,5 +44,4 @@ Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11
 * ~~Live Data Objects to gather Android Room Data~~
 
 ## Extra Goals
-* Move Combos for each Pokemon
-*
+* Move Combos for each Pokemon - Will likely need to get this data from a different API

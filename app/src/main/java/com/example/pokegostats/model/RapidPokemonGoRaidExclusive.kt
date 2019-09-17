@@ -14,12 +14,12 @@ import com.google.gson.annotations.SerializedName
  */
 data class RapidPokemonGoRaidExclusive(
     @SerializedName("303")
-    val ThreeHundredThree: List<RapidRaidExclusive>,
+    val ThreeHundredThree: RapidRaidExclusive,
     @SerializedName("359")
-    val ThreeHundredFiftyNine: List<RapidRaidExclusive>
+    val ThreeHundredFiftyNine: RapidRaidExclusive
 )
 
 data class RapidRaidExclusive(
     val RaidLevel: Int,
-    val PokemonId: String
+    val Id: String
 )
