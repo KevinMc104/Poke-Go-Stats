@@ -4,11 +4,15 @@ import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 
 /**
- * A Pokemon can have multiple Types and multiple different forms
- * The form the pokemon has can change which types it has
+ * A Pokemon can have multiple Types, multiple different forms, and
+ * multiple different weather boosts that affect it.
+ * The form the pokemon has can change which types it has, which in turn affect the weather boosts
+ *
  * A Pokemon will always have at least one type
  *
- * Pokemon to many Forms(One to Many) and Form to Many types(One to Many)
+ * Pokemon to many Forms(One to Many)
+ * Form to Many Types(One to Many)
+ * Type to Many Weather Boosts(One to Many)
  */
 
 @Entity(tableName = "pokemon_table", indices = [Index("pokemon_id")])
@@ -20,7 +24,8 @@ data class PokemonEntity(
     @ColumnInfo(name = "base_stamina") val baseStamina: Int?,
     @ColumnInfo(name = "max_cp") val maxCp: Int?,
     @ColumnInfo(name = "pokemon_name") val pokemonName: String?,
-    @ColumnInfo(name = "candy_to_evolve") val candyToEvolve: String?
+    @ColumnInfo(name = "candy_to_evolve") val candyToEvolve: String?,
+    @ColumnInfo(name = "buddy_distances") val buddyDistances: String?
 )
 
 // One to Many relationship. One Pokemon can have multiple Forms
@@ -97,6 +102,7 @@ class PokemonFormsTypesWeatherBoosts {
     var max_cp: Int? = 0
     var pokemon_name: String? = ""
     var candy_to_evolve: String? = ""
+    var buddy_distances: String? = ""
     @TypeConverters(Converters::class)
     var FORMS_LIST: ArrayList<String>? = ArrayList()
     @TypeConverters(Converters::class)

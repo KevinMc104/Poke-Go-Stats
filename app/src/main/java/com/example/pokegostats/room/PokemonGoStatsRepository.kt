@@ -46,7 +46,7 @@ class PokemonGoStatsRepository(
         val pokemonFormsListToBeInserted = ArrayList<PokemonFormEntity>()
         var formsPrimaryKey = 1L
         for(item in rapidPokemonGoStats) {
-            pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense, item.BaseStamina, null, item.PokemonName, null))
+            pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense, item.BaseStamina, null, item.PokemonName, null, null))
             if(item.Form.isNullOrBlank()) {
                 pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, "Default"))
             } else {
@@ -142,6 +142,9 @@ class PokemonGoStatsRepository(
 
         // Update with Candy To Evolve
         updateCandyToEvolve()
+
+        // Update Pokemon Buddy Distances
+        updatePokemonBuddyDistances()
     }
 
     private suspend fun updateMaxCp() {
@@ -181,6 +184,22 @@ class PokemonGoStatsRepository(
         }
         for(item in rapidRapidPokemonGoCandyEvolve.Ninety) {
             pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
+        }
+    }
+
+    private suspend fun updatePokemonBuddyDistances() {
+        val rapidRapidPokemonGoBuddyDistances = service.getRapidPokemonGoBuddyDistances()
+        for(item in rapidRapidPokemonGoBuddyDistances.One) {
+            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
+        }
+        for(item in rapidRapidPokemonGoBuddyDistances.Three) {
+            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
+        }
+        for(item in rapidRapidPokemonGoBuddyDistances.Five) {
+            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
+        }
+        for(item in rapidRapidPokemonGoBuddyDistances.Twenty) {
+            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
         }
     }
 
@@ -293,6 +312,7 @@ class PokemonGoStatsRepository(
         flattenedPokemon.max_cp = pokemon.max_cp
         flattenedPokemon.pokemon_name = pokemon.pokemon_name
         flattenedPokemon.candy_to_evolve = pokemon.candy_to_evolve
+        flattenedPokemon.buddy_distances = pokemon.buddy_distances
         return flattenedPokemon
     }
 }

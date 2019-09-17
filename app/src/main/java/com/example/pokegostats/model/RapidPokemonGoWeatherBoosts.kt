@@ -3,7 +3,14 @@ package com.example.pokegostats.model
 import com.google.gson.annotations.SerializedName
 
 /**
- * These models are based off the API response
+ * These models are based off the JSON API response
+ * GET - https://pokemon-go1.p.rapidapi.com/weather_boosts.json
+ *
+ * During different weather certain types will be boosted.
+ * When they are boosted Pokemon of the boosted types will be
+ * found at a higher level, and moves of that type will be more powerful.
+ * This API lists what each weather type boosts. Returns a JSON dict
+ * where each key is the weather type and the value is an array of boosted types.
  */
 data class RapidPokemonGoWeatherBoosts(
     @SerializedName("Clear")

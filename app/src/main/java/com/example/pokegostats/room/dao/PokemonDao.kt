@@ -87,6 +87,9 @@ interface PokemonDao {
     @Query("UPDATE pokemon_table SET candy_to_evolve = :candyToEvolve WHERE pokemon_id = :pokemonId")
     suspend fun updateCandyToEvolve(candyToEvolve: String, pokemonId: Int)
 
+    @Query("UPDATE pokemon_table SET buddy_distances = :buddyDistances WHERE pokemon_id = :pokemonId")
+    suspend fun updateBuddyDistances(buddyDistances: String, pokemonId: Int)
+
     @Delete
     suspend fun delete(pokemon: PokemonEntity)
 

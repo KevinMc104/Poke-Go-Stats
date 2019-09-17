@@ -88,6 +88,12 @@ class PokemonDetailedListFragment : Fragment() {
                 } else {
                     pokemon_candy_to_evolve.setup("Candy Required to Evolve", "Final Evolution", null, false)
                 }
+                if(!pokemon.buddy_distances.isNullOrBlank()) {
+                    val str = pokemon.buddy_distances.toString() + " KM"
+                    pokemon_buddy_distance.setup("Distance Required to get Candy", str, null, false)
+                } else {
+                    pokemon_buddy_distance.setup("Distance Required to get Candy", "N/A", null, false)
+                }
             }
         })
     }

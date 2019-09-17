@@ -21,6 +21,9 @@ interface RapidPokemonGoApiService {
     @GET("/pokemon_candy_to_evolve.json")
     suspend fun getRapidPokemonGoCandyEvolve() : Response<RapidPokemonGoCandyEvolve>
 
+    @GET("/pokemon_buddy_distances.json")
+    suspend fun getRapidPokemonGoBuddyDistances() : Response<RapidPokemonGoBuddyDistances>
+
     @GET("/fast_moves.json")
     suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>
 

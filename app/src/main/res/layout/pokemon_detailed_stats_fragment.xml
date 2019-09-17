@@ -75,5 +75,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemon_max_cp_row"/>
 
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_buddy_distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_candy_to_evolve"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
