@@ -21,8 +21,7 @@ class MainViewModel(application: Application, val service: PokemonGoApiService) 
     init {
         val pokemonDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonDao()
         val pokemonMovesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonMovesDao()
-        val pokemonAndFormsAndTypesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonAndFormsAndTypesDao()
-        repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, pokemonAndFormsAndTypesDao, service)
+        repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, service)
         allPokemonMoves = repository.allPokemonMoves
         allPokemonFormsTypesWeatherBoosts = repository.allPokemonFormsTypesWeatherBoosts
     }

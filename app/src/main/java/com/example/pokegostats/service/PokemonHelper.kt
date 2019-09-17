@@ -8,9 +8,8 @@ import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pokegostats.R
 
 class PokemonHelper {
-
     val POKEMON_ID: String = "Pokemon ID"
-    val POKEMON_FORM_NAME: String = "Pokemon Form Name"
+    val POKEMON_FORM_ID: String = "Pokemon Form ID"
     val POKEMON_MOVE_NAME: String = "Pokemon Move Name"
 
     companion object {

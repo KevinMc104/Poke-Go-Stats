@@ -35,10 +35,10 @@ class PokemonDetailedWeatherListFragment : Fragment() {
     @Inject protected lateinit var service: PokemonGoApiService
 
     companion object {
-        fun newInstance(pokemonId: Int, pokemonFormName: String): PokemonDetailedWeatherListFragment = PokemonDetailedWeatherListFragment().apply {
+        fun newInstance(pokemonId: Int, formId: Int): PokemonDetailedWeatherListFragment = PokemonDetailedWeatherListFragment().apply {
             val args = Bundle()
             args.putInt(helper.POKEMON_ID, pokemonId)
-            args.putString(helper.POKEMON_FORM_NAME, pokemonFormName)
+            args.putInt(helper.POKEMON_FORM_ID, formId)
             arguments = args
         }
     }
@@ -72,7 +72,7 @@ class PokemonDetailedWeatherListFragment : Fragment() {
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                pokemonDetailedViewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getString(helper.POKEMON_FORM_NAME).toString())
+                pokemonDetailedViewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getInt(helper.POKEMON_FORM_ID))
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
@@ -80,7 +80,7 @@ class PokemonDetailedWeatherListFragment : Fragment() {
             }
         }
         pokemonDetailedViewModel.pokemonDetailed.observe(this, Observer { pokemon ->
-            pokemon?.let { adapter.setWeatherBoosts(it.pokemonWeatherBoosts!!)}
+            pokemon?.let { adapter.setWeatherBoosts(pokemon.WEATHER_LIST!!)}
         })
     }
 }

@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.pokegostats.room.PokemonGoStatsRepository
 import com.example.pokegostats.room.PokemonGoStatsRoomDatabase
-import com.example.pokegostats.room.entity.PokemonAndFormsAndTypes
+import com.example.pokegostats.room.entity.PokemonFormsTypesWeatherBoosts
 import com.example.pokegostats.service.PokemonGoApiService
 import kotlinx.coroutines.launch
 
@@ -13,17 +13,16 @@ class PokemonDetailedViewModel(application: Application, val service: PokemonGoA
 
     // The ViewModel maintains a reference to the repository to get data
     private val repository: PokemonGoStatsRepository
-    var pokemonDetailed: MutableLiveData<PokemonAndFormsAndTypes> = MutableLiveData()
+    var pokemonDetailed: MutableLiveData<PokemonFormsTypesWeatherBoosts> = MutableLiveData()
 
     init {
         val pokemonDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonDao()
         val pokemonMovesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonMovesDao()
-        val pokemonAndFormsAndTypesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonAndFormsAndTypesDao()
-        repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, pokemonAndFormsAndTypesDao, service)
+        repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, service)
     }
 
-    suspend fun getPokemon(pokemonId: Int, pokemonFormName: String) = viewModelScope.launch {
-        pokemonDetailed.postValue(repository.getPokemon(pokemonId, pokemonFormName))
+    suspend fun getPokemon(pokemonId: Int, pokemonFormId: Int) = viewModelScope.launch {
+        pokemonDetailed.postValue(repository.getPokemon(pokemonId, pokemonFormId))
     }
 
     companion object {

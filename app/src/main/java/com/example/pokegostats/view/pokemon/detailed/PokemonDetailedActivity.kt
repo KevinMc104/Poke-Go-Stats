@@ -21,8 +21,8 @@ class PokemonDetailedActivity : AppCompatActivity() {
         val vpPager = findViewById<ViewPager>(R.id.view_pager_detailed)
         adapter = PokemonDetailedPagerAdapter(supportFragmentManager)
         val pokemonId = intent.extras!!.getString(helper.POKEMON_ID)!!.toInt()
-        val formName = intent.extras!!.getString(helper.POKEMON_FORM_NAME).toString()
-        adapter.setPokemonFormName(formName)
+        val formId = intent.extras!!.getString(helper.POKEMON_FORM_ID)!!.toInt()
+        adapter.setPokemonFormId(formId)
         adapter.setPokemonId(pokemonId)
         vpPager.adapter = adapter
 

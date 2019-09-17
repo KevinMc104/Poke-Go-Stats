@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
 import com.example.pokegostats.room.dao.PokemonDao
 import com.example.pokegostats.room.dao.PokemonMovesDao
 import com.example.pokegostats.room.entity.*
@@ -17,7 +15,6 @@ import kotlinx.coroutines.launch
 abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
     abstract fun pokemonMovesDao(): PokemonMovesDao
-    abstract fun pokemonAndFormsAndTypesDao(): PokemonAndFormsAndTypesDao
 
     private class PokemonGoStatsDatabaseCallback(
         private val scope: CoroutineScope

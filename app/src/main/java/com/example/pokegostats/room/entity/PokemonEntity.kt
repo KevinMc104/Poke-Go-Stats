@@ -2,7 +2,6 @@ package com.example.pokegostats.room.entity
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import com.google.gson.annotations.SerializedName
 
 /**
  * A Pokemon can have multiple Types and multiple different forms
@@ -75,28 +74,9 @@ data class PokemonWeatherBoostsEntity(
     @ColumnInfo(name = "weather_name") val weatherName: String
 )
 
-// Relationship class to get each Pokemon's Forms/Types
-// TODO: Remove this relationship and just use the PokemonFormsTypesWeatherBoosts
-class PokemonAndFormsAndTypes {
-    @Embedded
-    var pokemon: PokemonEntity? = null
-
-    @Embedded
-    var pokemonForm: PokemonFormEntity? = null
-
-    @Embedded
-    var pokemonType: PokemonTypeEntity? = null
-
-    @Relation(parentColumn = "form_id", entityColumn = "form_uid", entity = PokemonTypeEntity::class)
-    var pokemonTypes: List<PokemonTypeEntity>? = null
-
-    @Relation(parentColumn = "type_id", entityColumn = "type_uid", entity = PokemonWeatherBoostsEntity::class)
-    var pokemonWeatherBoosts: List<PokemonWeatherBoostsEntity>? = null
-}
-
 /**
- * Pokemon Entity Fields
- * var names MUST match SQL Statment column names found in the SQL statement in
+ * Pokemon Entity Fields var names MUST match SQL Statment
+ * column names found in the SQL statement in
  * PokemonDao.getAllPokemonFormsTypesWeatherBoosts()
  *
  * Initial format of List fields before Map Transformation in PokemonGoStatsRepository

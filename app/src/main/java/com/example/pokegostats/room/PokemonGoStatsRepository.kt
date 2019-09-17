@@ -3,7 +3,6 @@ package com.example.pokegostats.room
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.pokegostats.model.*
-import com.example.pokegostats.room.dao.PokemonAndFormsAndTypesDao
 import com.example.pokegostats.room.dao.PokemonDao
 import com.example.pokegostats.room.dao.PokemonMovesDao
 import com.example.pokegostats.room.entity.*
@@ -14,16 +13,15 @@ import com.example.pokegostats.service.PokemonGoApiService
 class PokemonGoStatsRepository(
     private val pokemonDao: PokemonDao,
     private val pokemonMovesDao: PokemonMovesDao,
-    private val pokemonAndFormsAndTypesDao: PokemonAndFormsAndTypesDao,
     var service: PokemonGoApiService
 ) {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     val allPokemonMoves: LiveData<List<PokemonMovesEntity>> = pokemonMovesDao.getAllMoves()
-    val allPokemonFormsTypesWeatherBoosts: LiveData<List<PokemonFormsTypesWeatherBoosts>> = Transformations.map(pokemonDao.getAllPokemonFormsTypesWeatherBoosts(), ::flattenList)
+    val allPokemonFormsTypesWeatherBoosts: LiveData<List<PokemonFormsTypesWeatherBoosts>> = Transformations.map(pokemonDao.getAllPokemonFormsTypesWeatherBoosts(), ::flattenAllPokemonLists)
 
-    suspend fun getPokemon(pokemonId: Int, pokemonFormName: String): PokemonAndFormsAndTypes {
-        return pokemonAndFormsAndTypesDao.getPokemon(pokemonId, pokemonFormName)
+    suspend fun getPokemon(pokemonId: Int, pokemonFormId: Int): PokemonFormsTypesWeatherBoosts {
+        return flattenPokemonLists(pokemonDao.getPokemon(pokemonId, pokemonFormId))
     }
 
     suspend fun getMove(moveName: String): PokemonMovesEntity {
@@ -214,7 +212,7 @@ class PokemonGoStatsRepository(
         return list
     }
 
-    private fun flattenList(liveDataList: List<PokemonFormsTypesWeatherBoosts>): List<PokemonFormsTypesWeatherBoosts> {
+    private fun flattenAllPokemonLists(liveDataList: List<PokemonFormsTypesWeatherBoosts>): List<PokemonFormsTypesWeatherBoosts> {
         val list = ArrayList<PokemonFormsTypesWeatherBoosts>()
         liveDataList.forEach { pokemonList ->
             var formsListIterator = 0
@@ -262,5 +260,39 @@ class PokemonGoStatsRepository(
             }
         }
         return list
+    }
+
+    private suspend fun flattenPokemonLists(pokemon: PokemonFormsTypesWeatherBoosts) : PokemonFormsTypesWeatherBoosts {
+        val flattenedPokemon = PokemonFormsTypesWeatherBoosts()
+        // Format of FORMS_LIST is formId, formName
+        // We only need form name for detailed views
+        flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![1])
+
+        var typesListIterator = 0
+        val pokemonListTypes = pokemon.TYPES_LIST!!
+        while(typesListIterator != pokemonListTypes.size) {
+            // Format of list is formId, typeId, typeName
+            // We only need typeName for detailed views
+            flattenedPokemon.TYPES_LIST!!.add(pokemonListTypes[typesListIterator+2])
+            typesListIterator += 3
+        }
+
+        var weatherListIterator = 0
+        val pokemonListWeather = pokemon.WEATHER_LIST!!
+        while(weatherListIterator != pokemonListWeather.size) {
+            // format of list is typeId, weatherName
+            // We only need weatherName for detailed views
+            flattenedPokemon.WEATHER_LIST!!.add(pokemonListWeather[weatherListIterator+1])
+            weatherListIterator += 2
+        }
+
+        flattenedPokemon.pokemon_id = pokemon.pokemon_id
+        flattenedPokemon.base_attack = pokemon.base_attack
+        flattenedPokemon.base_defense = pokemon.base_defense
+        flattenedPokemon.base_stamina = pokemon.base_stamina
+        flattenedPokemon.max_cp = pokemon.max_cp
+        flattenedPokemon.pokemon_name = pokemon.pokemon_name
+        flattenedPokemon.candy_to_evolve = pokemon.candy_to_evolve
+        return flattenedPokemon
     }
 }

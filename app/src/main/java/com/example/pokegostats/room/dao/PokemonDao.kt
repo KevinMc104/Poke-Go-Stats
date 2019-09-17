@@ -35,6 +35,34 @@ interface PokemonDao {
             "FROM pokemon_table")
     fun getAllPokemonFormsTypesWeatherBoosts(): LiveData<List<PokemonFormsTypesWeatherBoosts>>
 
+    @Query("SELECT *, " +
+            "(SELECT " +
+                "GROUP_CONCAT(pokemon_forms.form_id || ',' || pokemon_forms.form_name) " +
+                "FROM pokemon_forms " +
+                    "WHERE pokemon_table.pokemon_id = pokemon_forms.pokemon_uid " +
+                    "AND pokemon_forms.form_id = :pokemonFormId) AS FORMS_LIST, " +
+            "(SELECT " +
+                "GROUP_CONCAT(pokemon_types.form_uid || ',' || pokemon_types.type_id || ',' || pokemon_types.type_name) " +
+                "FROM pokemon_forms " +
+                    "INNER JOIN pokemon_types " +
+                        "ON pokemon_forms.form_id = pokemon_types.form_uid " +
+                "WHERE pokemon_types.form_uid = pokemon_forms.form_id " +
+                    "AND pokemon_table.pokemon_id = pokemon_forms.pokemon_uid " +
+                    "AND pokemon_forms.form_id = :pokemonFormId) AS TYPES_LIST, " +
+            "(SELECT " +
+                "GROUP_CONCAT(pokemon_weather_boosts.type_uid || ',' || pokemon_weather_boosts.weather_name) " +
+                "FROM pokemon_weather_boosts " +
+                "INNER JOIN pokemon_types " +
+                    "ON pokemon_types.type_id = pokemon_weather_boosts.type_uid " +
+                "INNER JOIN pokemon_forms " +
+                    "ON pokemon_forms.form_id = pokemon_types.form_uid " +
+                "WHERE pokemon_types.type_id = pokemon_weather_boosts.type_uid " +
+                    "AND pokemon_types.form_uid = pokemon_forms.form_id " +
+                    "AND pokemon_table.pokemon_id = pokemon_forms.pokemon_uid " +
+                    "AND pokemon_forms.form_id = :pokemonFormId) AS WEATHER_LIST " +
+            "FROM pokemon_table WHERE pokemon_table.pokemon_id = :pokemonId")
+    suspend fun getPokemon(pokemonId: Int, pokemonFormId: Int): PokemonFormsTypesWeatherBoosts
+
     @Update
     suspend fun update(vararg pokemon: PokemonEntity)
 

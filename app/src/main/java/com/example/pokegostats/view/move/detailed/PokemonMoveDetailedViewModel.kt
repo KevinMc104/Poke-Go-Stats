@@ -17,8 +17,7 @@ class PokemonMoveDetailedViewModel(application: Application, val service: Pokemo
     init {
         val pokemonDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonDao()
         val pokemonMovesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonMovesDao()
-        val pokemonAndFormsAndTypesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonAndFormsAndTypesDao()
-        repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, pokemonAndFormsAndTypesDao, service)
+        repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, service)
     }
 
     suspend fun getMove(moveName: String) = viewModelScope.launch {
