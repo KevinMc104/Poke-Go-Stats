@@ -38,7 +38,7 @@ class PokemonStatsRowView @JvmOverloads constructor(context: Context,
         val pokemonTypes = pokemon.TYPES_LIST!!
         if (pokemonTypes.size == 2) {
             helper.setPokemonTypeLook(context, tv_menu_type1, pokemonTypes[1])
-            helper.setPokemonTypeLook(context, tv_menu_type1, "")
+            helper.setPokemonTypeLook(context, tv_menu_type2, "")
         } else if (pokemonTypes.size == 4) {
             helper.setPokemonTypeLook(context, tv_menu_type1, pokemonTypes[1])
             helper.setPokemonTypeLook(context, tv_menu_type2, pokemonTypes[3])

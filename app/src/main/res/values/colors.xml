@@ -11,5 +11,24 @@
     <color name="opaque_white">#808080</color>
     <color name="red">#A6192E</color>
 
+    <color name="Normal">#AAAA99</color>
+    <color name="Fire">#FF4422</color>
+    <color name="Water">#3399FF</color>
+    <color name="Electric">#FFCC33</color>
+    <color name="Grass">#77CC55</color>
+    <color name="Ice">#66CCFF</color>
+    <color name="Fighting">#BB5544</color>
+    <color name="Poison">#AA5599</color>
+    <color name="Ground">#DDBB55</color>
+    <color name="Flying">#8899FF</color>
+    <color name="Psychic">#FF5599</color>
+    <color name="Bug">#AABB22</color>
+    <color name="Rock">#BBAA66</color>
+    <color name="Ghost">#6666BB</color>
+    <color name="Dragon">#7766EE</color>
+    <color name="Dark">#775544</color>
+    <color name="Steel">#AAAABB</color>
+    <color name="Fairy">#EE99EE</color>
+
     <color name="pokemonGoAppBackground">#888888</color>
 </resources>

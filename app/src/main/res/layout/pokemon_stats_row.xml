@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/app_whitespace_size_large_material"
     android:layout_marginEnd="@dimen/app_whitespace_size_large_material"
-    android:background="@drawable/rounded_corner">
+    android:background="@drawable/rounded_corner_drawable">
 
     <TextView
         android:id="@+id/tv_menu_id"
@@ -71,6 +71,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:shadowRadius="3"
+            android:shadowDx="3"
+            android:shadowDy="3"
             tools:text="Pokemon Type1" />
 
         <TextView
@@ -84,6 +89,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/white"
+            android:shadowColor="@color/black"
+            android:shadowRadius="3"
+            android:shadowDx="3"
+            android:shadowDy="3"
             tools:text="Pokemon Type2" />
 
     </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.pokegostats.view.custom
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -27,8 +28,14 @@ class PokemonDetailedRowView @JvmOverloads constructor(context: Context,
         tv_menu_stat_name.text = statName
         if(isType) {
             if(statValue2.isNullOrBlank()) {
+                tv_menu_stat_value.setTextColor(Color.WHITE)
+                tv_menu_stat_value.setShadowLayer(3.0f, 3.0f, 3.0f, Color.BLACK)
                 helper.setPokemonTypeLook(context, tv_menu_stat_value, statValue)
             } else {
+                tv_menu_stat_value.setTextColor(Color.WHITE)
+                tv_menu_stat_value.setShadowLayer(3.0f, 3.0f, 3.0f, Color.BLACK)
+                tv_menu_stat_value2.setTextColor(Color.WHITE)
+                tv_menu_stat_value2.setShadowLayer(3.0f, 3.0f, 3.0f, Color.BLACK)
                 helper.setPokemonTypeLook(context, tv_menu_stat_value, statValue)
                 helper.setPokemonTypeLook(context, tv_menu_stat_value2, statValue2)
             }

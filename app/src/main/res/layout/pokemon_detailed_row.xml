@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/app_whitespace_size_large_material"
     android:layout_marginEnd="@dimen/app_whitespace_size_large_material"
-    android:background="@drawable/rounded_corner">
+    android:background="@drawable/rounded_corner_drawable">
 
     <TextView
         android:id="@+id/tv_menu_stat_name"

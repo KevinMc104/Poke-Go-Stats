@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.example.pokegostats.R
 
@@ -17,37 +18,31 @@ class PokemonHelper {
     }
 
     fun setPokemonTypeLook(context: Context, view: TextView, type: String) {
-        val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.rounded_type)!!
-        val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable).mutate()
-
-        view.setTextColor(Color.WHITE)
-        view.setShadowLayer(3.0f,3.0f,3.0f, Color.BLACK)
-        DrawableCompat.setTint(wrappedDrawable, setColorByType(type))
-        view.background = wrappedDrawable
-        view.text = type
-    }
-
-    private fun setColorByType(type: String): Int {
-        when {
-            type.equals("Normal") -> return Color.parseColor("#AAAA99")
-            type.equals("Fire") -> return Color.parseColor("#FF4422")
-            type.equals("Water") -> return Color.parseColor("#3399FF")
-            type.equals("Electric") -> return Color.parseColor("#FFCC33")
-            type.equals("Grass") -> return Color.parseColor("#77CC55")
-            type.equals("Ice") -> return Color.parseColor("#66CCFF")
-            type.equals("Fighting") -> return Color.parseColor("#BB5544")
-            type.equals("Poison") -> return Color.parseColor("#AA5599")
-            type.equals("Ground") -> return Color.parseColor("#DDBB55")
-            type.equals("Flying") -> return Color.parseColor("#8899FF")
-            type.equals("Psychic") -> return Color.parseColor("#FF5599")
-            type.equals("Bug") -> return Color.parseColor("#AABB22")
-            type.equals("Rock") -> return Color.parseColor("#BBAA66")
-            type.equals("Ghost") -> return Color.parseColor("#6666BB")
-            type.equals("Dragon") -> return Color.parseColor("#7766EE")
-            type.equals("Dark") -> return Color.parseColor("#775544")
-            type.equals("Steel") -> return Color.parseColor("#AAAABB")
-            type.equals("Fairy") -> return Color.parseColor("#EE99EE")
+        if(type.isBlank()) {
+            view.text = type
+        } else {
+            view.background = ContextCompat.getDrawable(context, when(type) {
+                "Normal" -> R.drawable.grass_type_drawable
+                "Fire" -> R.drawable.fire_type_drawable
+                "Water" -> R.drawable.water_type_drawable
+                "Electric" -> R.drawable.electric_type_drawable
+                "Grass" -> R.drawable.grass_type_drawable
+                "Ice" -> R.drawable.ice_type_drawable
+                "Fighting" -> R.drawable.fighting_type_drawable
+                "Poison" -> R.drawable.poison_type_drawable
+                "Ground" -> R.drawable.ground_type_drawable
+                "Flying" -> R.drawable.flying_type_drawable
+                "Psychic" -> R.drawable.psychic_type_drawable
+                "Bug" -> R.drawable.bug_type_drawable
+                "Rock" -> R.drawable.rock_type_drawable
+                "Ghost" -> R.drawable.ghost_type_drawable
+                "Dragon" -> R.drawable.dragon_type_drawable
+                "Dark" -> R.drawable.dark_type_drawable
+                "Steel" -> R.drawable.steel_type_drawable
+                "Fairy" -> R.drawable.fairy_type_drawable
+                else -> Color.BLACK
+            })
+            view.text = type
         }
-        return Color.BLACK
     }
 }
