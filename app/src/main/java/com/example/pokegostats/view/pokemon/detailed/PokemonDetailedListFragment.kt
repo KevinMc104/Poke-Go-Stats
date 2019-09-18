@@ -115,24 +115,29 @@ class PokemonDetailedListFragment : Fragment() {
                     pokemon_shiny_found_egg.setup("Shiny can be found in Egg", "False", null, false)
                 }
                 if(pokemon.shiny_found_evolution == 1) {
-                    shiny_found_evolution.setup("Shiny can be found in Evolution", "True", null, false)
+                    pokemon_shiny_found_evolution.setup("Shiny can be found in Evolution", "True", null, false)
                 } else {
-                    shiny_found_evolution.setup("Shiny can be found in Evolution", "False", null, false)
+                    pokemon_shiny_found_evolution.setup("Shiny can be found in Evolution", "False", null, false)
                 }
                 if(pokemon.shiny_found_raid == 1) {
-                    shiny_found_raid.setup("Shiny can be found in Raid", "True", null, false)
+                    pokemon_shiny_found_raid.setup("Shiny can be found in Raid", "True", null, false)
                 } else {
-                    shiny_found_raid.setup("Shiny can be found in Raid", "False", null, false)
+                    pokemon_shiny_found_raid.setup("Shiny can be found in Raid", "False", null, false)
                 }
                 if(pokemon.shiny_found_wild == 1) {
-                    shiny_found_wild.setup("Shiny can be found in Wild", "True", null, false)
+                    pokemon_shiny_found_wild.setup("Shiny can be found in Wild", "True", null, false)
                 } else {
-                    shiny_found_wild.setup("Shiny can be found in Wild", "False", null, false)
+                    pokemon_shiny_found_wild.setup("Shiny can be found in Wild", "False", null, false)
                 }
                 if(pokemon.released_pokemon == 1) {
-                    released_pokemon.setup("Released to Pokemon Go", "True", null, false)
+                    pokemon_released_pokemon.setup("Released to Pokemon Go", "True", null, false)
                 } else {
-                    released_pokemon.setup("Released to Pokemon Go", "False", null, false)
+                    pokemon_released_pokemon.setup("Released to Pokemon Go", "False", null, false)
+                }
+                if(pokemon.possible_ditto == 1) {
+                    pokemon_possible_ditto.setup("Can be Ditto", "True", null, false)
+                } else {
+                    pokemon_possible_ditto.setup("Can be Ditto", "False", null, false)
                 }
             }
         })

@@ -50,7 +50,7 @@ class PokemonGoStatsRepository(
                                     item.BaseStamina, null, item.PokemonName,null,
                                     null, 0, 0, 0,
                                     0, 0, 0, 0,
-                                    0))
+                                    0, 0))
             if(item.Form.isNullOrBlank()) {
                 pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, "Default"))
             } else {
@@ -161,6 +161,9 @@ class PokemonGoStatsRepository(
 
         // Update Released Pokemon
         updateReleasedPokemon()
+
+        // Update Possible Ditto Pokemon
+        updatePossibleDittoTypes()
     }
 
     private suspend fun updateMaxCp() {
@@ -173,49 +176,20 @@ class PokemonGoStatsRepository(
     }
 
     private suspend fun updateCandyToEvolve() {
-        val rapidRapidPokemonGoCandyEvolve = service.getRapidPokemonGoCandyEvolve()
-        for(item in rapidRapidPokemonGoCandyEvolve.OneHundred) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.Twelve) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.TwentyTwo) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.TwentyFive) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.ThreeHundredSixty) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.FourHundred) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.FortyFive) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.Fifty) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoCandyEvolve.Ninety) {
-            pokemonDao.updateCandyToEvolve(item.CandyRequired, item.PokemonId.toInt())
+        val results = service.getRapidPokemonGoCandyEvolve()
+        results.forEach {(key, value) ->
+            value.forEach{ pokemon ->
+                pokemonDao.updateCandyToEvolve(pokemon.CandyRequired, pokemon.PokemonId.toInt())
+            }
         }
     }
 
     private suspend fun updatePokemonBuddyDistances() {
-        val rapidRapidPokemonGoBuddyDistances = service.getRapidPokemonGoBuddyDistances()
-        for(item in rapidRapidPokemonGoBuddyDistances.One) {
-            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoBuddyDistances.Three) {
-            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoBuddyDistances.Five) {
-            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
-        }
-        for(item in rapidRapidPokemonGoBuddyDistances.Twenty) {
-            pokemonDao.updateBuddyDistances(item.Distance, item.PokemonId.toInt())
+        val results = service.getRapidPokemonGoBuddyDistances()
+        results.forEach {(key, value) ->
+            value.forEach{ pokemon ->
+                pokemonDao.updateBuddyDistances(pokemon.Distance, pokemon.PokemonId.toInt())
+            }
         }
     }
 
@@ -255,6 +229,13 @@ class PokemonGoStatsRepository(
         val results = service.getRapidPokemonGoReleasedPokemon()
         results.forEach {(key, value) ->
             pokemonDao.updateReleasedPokemon(1, value.Id)
+        }
+    }
+
+    private suspend fun updatePossibleDittoTypes() {
+        val results = service.getRapidPokemonGoPossibleDittoTypes()
+        results.forEach {(key, value) ->
+            pokemonDao.updatePossibleDittoTypes(1, value.Id)
         }
     }
 
@@ -376,6 +357,7 @@ class PokemonGoStatsRepository(
         flattenedPokemon.shiny_found_raid = pokemon.shiny_found_raid
         flattenedPokemon.shiny_found_wild = pokemon.shiny_found_wild
         flattenedPokemon.released_pokemon = pokemon.released_pokemon
+        flattenedPokemon.possible_ditto = pokemon.possible_ditto
         return flattenedPokemon
     }
 }

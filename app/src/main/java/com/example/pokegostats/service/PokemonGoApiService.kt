@@ -40,15 +40,15 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
         return response.body()!!
     }
 
-    suspend fun getRapidPokemonGoCandyEvolve(): RapidPokemonGoCandyEvolve {
-        val response: Response<RapidPokemonGoCandyEvolve> = apiService.getRapidPokemonGoCandyEvolve()
+    suspend fun getRapidPokemonGoCandyEvolve(): HashMap<String, List<RapidPokemonGoCandyEvolve>> {
+        val response: Response<HashMap<String, List<RapidPokemonGoCandyEvolve>>> = apiService.getRapidPokemonGoCandyEvolve()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
 
         return response.body()!!
     }
 
-    suspend fun getRapidPokemonGoBuddyDistances(): RapidPokemonGoBuddyDistances {
-        val response: Response<RapidPokemonGoBuddyDistances> = apiService.getRapidPokemonGoBuddyDistances()
+    suspend fun getRapidPokemonGoBuddyDistances(): HashMap<String, List<RapidPokemonGoBuddyDistances>> {
+        val response: Response<HashMap<String, List<RapidPokemonGoBuddyDistances>>> = apiService.getRapidPokemonGoBuddyDistances()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
 
         return response.body()!!
@@ -77,6 +77,13 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
 
     suspend fun getRapidPokemonGoReleasedPokemon(): HashMap<String, RapidPokemonGoReleasedPokemon> {
         val response: Response<HashMap<String, RapidPokemonGoReleasedPokemon>> = apiService.getRapidPokemonGoReleasedPokemon()
+        handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
+
+        return response.body()!!
+    }
+
+    suspend fun getRapidPokemonGoPossibleDittoTypes(): HashMap<String, RapidPokemonGoPossibleDittoTypes> {
+        val response: Response<HashMap<String, RapidPokemonGoPossibleDittoTypes>> = apiService.getRapidPokemonGoPossibleDittoTypes()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
 
         return response.body()!!

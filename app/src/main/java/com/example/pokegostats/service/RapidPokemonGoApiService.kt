@@ -19,10 +19,10 @@ interface RapidPokemonGoApiService {
     suspend fun getRapidPokemonGoMaxCp() : Response<List<RapidPokemonGoMaxCp>>
 
     @GET("/pokemon_candy_to_evolve.json")
-    suspend fun getRapidPokemonGoCandyEvolve() : Response<RapidPokemonGoCandyEvolve>
+    suspend fun getRapidPokemonGoCandyEvolve() : Response<HashMap<String, List<RapidPokemonGoCandyEvolve>>>
 
     @GET("/pokemon_buddy_distances.json")
-    suspend fun getRapidPokemonGoBuddyDistances() : Response<RapidPokemonGoBuddyDistances>
+    suspend fun getRapidPokemonGoBuddyDistances() : Response<HashMap<String, List<RapidPokemonGoBuddyDistances>>>
 
     @GET("/raid_exclusive_pokemon.json")
     suspend fun getRapidPokemonGoRaidExclusive() : Response<HashMap<String, RapidPokemonGoRaidExclusive>>
@@ -35,6 +35,9 @@ interface RapidPokemonGoApiService {
 
     @GET("/released_pokemon.json")
     suspend fun getRapidPokemonGoReleasedPokemon() : Response<HashMap<String, RapidPokemonGoReleasedPokemon>>
+
+    @GET("/possible_ditto_pokemon.json")
+    suspend fun getRapidPokemonGoPossibleDittoTypes() : Response<HashMap<String, RapidPokemonGoPossibleDittoTypes>>
 
     @GET("/fast_moves.json")
     suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>

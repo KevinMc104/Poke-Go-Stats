@@ -1,7 +1,5 @@
 package com.example.pokegostats.model
 
-import com.google.gson.annotations.SerializedName
-
 /**
  * These models are based off the JSON API response
  * GET - https://pokemon-go1.p.rapidapi.com/pokemon_buddy_distances.json
@@ -13,17 +11,6 @@ import com.google.gson.annotations.SerializedName
  * multiple objects holding distance, Pokemon ID, Pokemon name and optionally the form.
  */
 data class RapidPokemonGoBuddyDistances(
-    @SerializedName("1")
-    val One: List<RapidBuddyDistance>,
-    @SerializedName("3")
-    val Three: List<RapidBuddyDistance>,
-    @SerializedName("5")
-    val Five: List<RapidBuddyDistance>,
-    @SerializedName("20")
-    val Twenty: List<RapidBuddyDistance>
-)
-
-data class RapidBuddyDistance(
     val Distance: String,
     val PokemonId: String
 )

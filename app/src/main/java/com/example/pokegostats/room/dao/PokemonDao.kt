@@ -107,6 +107,9 @@ interface PokemonDao {
     @Query("UPDATE pokemon_table SET released_pokemon = :releasedPokemon WHERE pokemon_id = :pokemonId")
     suspend fun updateReleasedPokemon(releasedPokemon: Int, pokemonId: Int)
 
+    @Query("UPDATE pokemon_table SET possible_ditto = :possibleDitto WHERE pokemon_id = :pokemonId")
+    suspend fun updatePossibleDittoTypes(possibleDitto: Int, pokemonId: Int)
+
     @Delete
     suspend fun delete(pokemon: PokemonEntity)
 
