@@ -104,6 +104,9 @@ interface PokemonDao {
                 "WHERE pokemon_id = :pokemonId")
     suspend fun updateShinyPokemon(shinyFoundEgg: Int, shinyFoundEvolution: Int, shinyFoundRaid: Int, shinyFoundWild: Int, pokemonId: Int)
 
+    @Query("UPDATE pokemon_table SET released_pokemon = :releasedPokemon WHERE pokemon_id = :pokemonId")
+    suspend fun updateReleasedPokemon(releasedPokemon: Int, pokemonId: Int)
+
     @Delete
     suspend fun delete(pokemon: PokemonEntity)
 

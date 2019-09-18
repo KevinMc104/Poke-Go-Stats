@@ -129,6 +129,11 @@ class PokemonDetailedListFragment : Fragment() {
                 } else {
                     shiny_found_wild.setup("Shiny can be found in Wild", "False", null, false)
                 }
+                if(pokemon.released_pokemon == 1) {
+                    released_pokemon.setup("Released to Pokemon Go", "True", null, false)
+                } else {
+                    released_pokemon.setup("Released to Pokemon Go", "False", null, false)
+                }
             }
         })
     }

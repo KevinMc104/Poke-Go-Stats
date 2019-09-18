@@ -51,7 +51,11 @@ data class PokemonEntity(
     /**
      * 1 = True, 0 = False
      */
-    @ColumnInfo(name = "shiny_found_wild") val shinyFoundWild: Int?
+    @ColumnInfo(name = "shiny_found_wild") val shinyFoundWild: Int?,
+    /**
+     * 1 = True, 0 = False
+     */
+    @ColumnInfo(name = "released_pokemon") val releasedPokemon: Int?
 )
 
 // One to Many relationship. One Pokemon can have multiple Forms
@@ -136,6 +140,7 @@ class PokemonFormsTypesWeatherBoosts {
     var shiny_found_evolution: Int? = 0
     var shiny_found_raid: Int? = 0
     var shiny_found_wild: Int? = 0
+    var released_pokemon: Int? = 0
     @TypeConverters(Converters::class)
     var FORMS_LIST: ArrayList<String>? = ArrayList()
     @TypeConverters(Converters::class)

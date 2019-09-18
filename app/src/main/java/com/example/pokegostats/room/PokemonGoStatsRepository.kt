@@ -49,7 +49,8 @@ class PokemonGoStatsRepository(
             pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense,
                                     item.BaseStamina, null, item.PokemonName,null,
                                     null, 0, 0, 0,
-                                    0, 0, 0, 0))
+                                    0, 0, 0, 0,
+                                    0))
             if(item.Form.isNullOrBlank()) {
                 pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, "Default"))
             } else {
@@ -157,6 +158,9 @@ class PokemonGoStatsRepository(
 
         // Update Shiny Pokemon
         updateShinyPokemon()
+
+        // Update Released Pokemon
+        updateReleasedPokemon()
     }
 
     private suspend fun updateMaxCp() {
@@ -244,6 +248,13 @@ class PokemonGoStatsRepository(
             var foundWild = 0
             if(value.FoundWild) foundWild = 1
             pokemonDao.updateShinyPokemon(foundEgg, foundEvolution, foundRaid, foundWild, value.Id.toInt())
+        }
+    }
+
+    private suspend fun updateReleasedPokemon() {
+        val results = service.getRapidPokemonGoReleasedPokemon()
+        results.forEach {(key, value) ->
+            pokemonDao.updateReleasedPokemon(1, value.Id)
         }
     }
 
@@ -364,6 +375,7 @@ class PokemonGoStatsRepository(
         flattenedPokemon.shiny_found_evolution = pokemon.shiny_found_evolution
         flattenedPokemon.shiny_found_raid = pokemon.shiny_found_raid
         flattenedPokemon.shiny_found_wild = pokemon.shiny_found_wild
+        flattenedPokemon.released_pokemon = pokemon.released_pokemon
         return flattenedPokemon
     }
 }

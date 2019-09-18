@@ -33,6 +33,9 @@ interface RapidPokemonGoApiService {
     @GET("/shiny_pokemon.json")
     suspend fun getRapidPokemonGoShinyPokemon() : Response<HashMap<String, RapidPokemonGoShinyPokemon>>
 
+    @GET("/released_pokemon.json")
+    suspend fun getRapidPokemonGoReleasedPokemon() : Response<HashMap<String, RapidPokemonGoReleasedPokemon>>
+
     @GET("/fast_moves.json")
     suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>
 
