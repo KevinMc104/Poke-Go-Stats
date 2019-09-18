@@ -12,8 +12,9 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * Kotlin
 
 ## How it works
-JSON Data of all the endpoints [here](https://pastebin.com/UXTUaGDX)
-Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11ra9U2rWBj0/Poke-Go-Stats?node-id=0%3A1)
+* JSON Data of all the endpoints and Pseudo Data Models [here](https://pastebin.com/UXTUaGDX)
+* SQL Test Code [here](https://pastebin.com/j9iQZfRN)
+* Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11ra9U2rWBj0/Poke-Go-Stats?node-id=0%3A1)
 
 ## Goals
 * Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints data to consume, cache, organize, and display for the end user

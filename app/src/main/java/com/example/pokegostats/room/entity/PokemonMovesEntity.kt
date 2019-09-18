@@ -10,7 +10,7 @@ data class PokemonMovesEntity(
     @PrimaryKey
     @ColumnInfo(name = "move_name") val name: String,
     @ColumnInfo(name = "duration") val duration: Int,
-    @ColumnInfo(name = "critical_chance") val criticalChance: String?,
+    @ColumnInfo(name = "critical_chance") val criticalChance: Double,
     @ColumnInfo(name = "energy_delta") val energyDelta: Int,
     @ColumnInfo(name = "power") val power: Int,
     @ColumnInfo(name = "stamina_loss_scaler") val staminaLossScaler: String,

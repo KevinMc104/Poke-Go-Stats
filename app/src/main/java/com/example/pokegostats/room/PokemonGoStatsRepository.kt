@@ -232,7 +232,7 @@ class PokemonGoStatsRepository(
 
         val list = ArrayList<PokemonMovesEntity>()
         for(item in moves) {
-            list.add(PokemonMovesEntity(item.Name, item.Duration, null, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+            list.add(PokemonMovesEntity(item.Name, item.Duration, 0.0, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
         }
         return list
     }
@@ -242,7 +242,13 @@ class PokemonGoStatsRepository(
         moves.addAll(service.getRapidPokemonGoChargedMoves())
 
         for(item in moves) {
-            list.add(PokemonMovesEntity(item.Name, item.Duration, item.CriticalChance, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+            // Convert to a percent
+            if(!item.CriticalChance.isNullOrBlank()) {
+                val criticalChance = item.CriticalChance.toDouble() * 100
+                list.add(PokemonMovesEntity(item.Name, item.Duration, criticalChance, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+            } else {
+                list.add(PokemonMovesEntity(item.Name, item.Duration, 0.0, item.EnergyDelta, item.Power, item.StaminaLossScaler, item.Type))
+            }
         }
         return list
     }
