@@ -54,15 +54,22 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
         return response.body()!!
     }
 
-    suspend fun getRapidPokemonGoRaidExclusive(): RapidPokemonGoRaidExclusive {
-        val response: Response<RapidPokemonGoRaidExclusive> = apiService.getRapidPokemonGoRaidExclusive()
+    suspend fun getRapidPokemonGoRaidExclusive(): HashMap<String, RapidPokemonGoRaidExclusive> {
+        val response: Response<HashMap<String, RapidPokemonGoRaidExclusive>> = apiService.getRapidPokemonGoRaidExclusive()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
 
         return response.body()!!
     }
 
-    suspend fun getRapidPokemonGoNestingPokemon(): RapidPokemonGoNestingPokemon {
-        val response: Response<RapidPokemonGoNestingPokemon> = apiService.getRapidPokemonGoNestingPokemon()
+    suspend fun getRapidPokemonGoNestingPokemon(): HashMap<String, RapidPokemonGoNestingPokemon> {
+        val response: Response<HashMap<String, RapidPokemonGoNestingPokemon>> = apiService.getRapidPokemonGoNestingPokemon()
+        handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
+
+        return response.body()!!
+    }
+
+    suspend fun getRapidPokemonGoShinyPokemon(): HashMap<String, RapidPokemonGoShinyPokemon> {
+        val response: Response<HashMap<String, RapidPokemonGoShinyPokemon>> = apiService.getRapidPokemonGoShinyPokemon()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
 
         return response.body()!!

@@ -1,7 +1,5 @@
 package com.example.pokegostats.model
 
-import com.google.gson.annotations.SerializedName
-
 /**
  * These models are based off the JSON API response
  * GET - https://pokemon-go1.p.rapidapi.com/raid_exclusive_pokemon.json
@@ -13,13 +11,6 @@ import com.google.gson.annotations.SerializedName
  * In the future the API might need to change if this changes.
  */
 data class RapidPokemonGoRaidExclusive(
-    @SerializedName("303")
-    val ThreeHundredThree: RapidRaidExclusive,
-    @SerializedName("359")
-    val ThreeHundredFiftyNine: RapidRaidExclusive
-)
-
-data class RapidRaidExclusive(
     val RaidLevel: Int,
     val Id: String
 )

@@ -48,7 +48,8 @@ class PokemonGoStatsRepository(
         for(item in rapidPokemonGoStats) {
             pokemonListToBeInserted.add(PokemonEntity(item.PokemonId, item.BaseAttack, item.BaseDefense,
                                     item.BaseStamina, null, item.PokemonName,null,
-                                    null, 0, 0, 0))
+                                    null, 0, 0, 0,
+                                    0, 0, 0, 0))
             if(item.Form.isNullOrBlank()) {
                 pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, "Default"))
             } else {
@@ -153,6 +154,9 @@ class PokemonGoStatsRepository(
 
         // Update Nesting Pokemon
         updateNestingPokemon()
+
+        // Update Shiny Pokemon
+        updateShinyPokemon()
     }
 
     private suspend fun updateMaxCp() {
@@ -213,98 +217,34 @@ class PokemonGoStatsRepository(
 
     private suspend fun updatePokemonRaidExclusive() {
         val results = service.getRapidPokemonGoRaidExclusive()
-        pokemonDao.updateRaidExclusive(1, results.ThreeHundredThree.RaidLevel, results.ThreeHundredThree.Id.toInt())
-        pokemonDao.updateRaidExclusive(1, results.ThreeHundredFiftyNine.RaidLevel, results.ThreeHundredFiftyNine.Id.toInt())
+        results.forEach {(key, value) ->
+            pokemonDao.updateRaidExclusive(1, value.RaidLevel, value.Id.toInt())
+        }
     }
 
     private suspend fun updateNestingPokemon() {
         val results = service.getRapidPokemonGoNestingPokemon()
-        pokemonDao.updateNestingPokemon(1, results.One.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.Four.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.Seven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwentyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThirtyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThirtySeven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.FortyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.FiftyFour.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.FiftyEight.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.Sixty.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.SixtyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.SixtySix.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.SeventyTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.SeventySeven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.EightyOne.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.EightyFour.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.EightySix.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.Ninety.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.NinetyTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.NinetyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundred.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredFour.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredEleven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredSixteen.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredTwentyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredTwentyFour.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredTwentyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredTwentySix.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredTwentySeven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredTwentyNine.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredThirtyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredThirtyEight.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredForty.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredFiftyTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredFiftyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredFiftyEight.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredSeventy.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredEightyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredNinety.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.OneHundredNinetyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundred.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredSix.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredNine.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredEleven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredThirteen.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredFifteen.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredSixteen.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredTwenty.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredTwentySix.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredThirtyOne.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredThirtyFour.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredFiftyTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredFiftyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredFiftyEight.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredSixtyOne.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredSeventyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredSeventyEight.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredEightyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredEightyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredNinetySix.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.TwoHundredNinetyNine.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundred.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredSeven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredNine.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredEleven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredTwelve.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredEighteen.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredTwenty.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredTwentyTwo.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredTwentyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredThirtyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredFortyOne.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredFortyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredFortyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredFortySeven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredFiftyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredFiftyFive.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredSeventy.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredEightySeven.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredNinety.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredNinetyThree.Id.toInt())
-        pokemonDao.updateNestingPokemon(1, results.ThreeHundredNinetyNine.Id.toInt())
+        results.forEach {(key, value) ->
+            pokemonDao.updateNestingPokemon(1, value.Id.toInt())
+        }
+    }
+
+    private suspend fun updateShinyPokemon() {
+        val results = service.getRapidPokemonGoShinyPokemon()
+        results.forEach {(key, value) ->
+            var foundEgg = 0
+            if(value.FoundEgg) foundEgg = 1
+
+            var foundEvolution = 0
+            if(value.FoundEvolution) foundEvolution = 1
+
+            var foundRaid = 0
+            if(value.FoundRaid) foundRaid = 1
+
+            var foundWild = 0
+            if(value.FoundWild) foundWild = 1
+            pokemonDao.updateShinyPokemon(foundEgg, foundEvolution, foundRaid, foundWild, value.Id.toInt())
+        }
     }
 
     suspend fun insertMoves() {
@@ -420,6 +360,10 @@ class PokemonGoStatsRepository(
         flattenedPokemon.raid_exclusive = pokemon.raid_exclusive
         flattenedPokemon.raid_level = pokemon.raid_level
         flattenedPokemon.nested_pokemon = pokemon.nested_pokemon
+        flattenedPokemon.shiny_found_egg = pokemon.shiny_found_egg
+        flattenedPokemon.shiny_found_evolution = pokemon.shiny_found_evolution
+        flattenedPokemon.shiny_found_raid = pokemon.shiny_found_raid
+        flattenedPokemon.shiny_found_wild = pokemon.shiny_found_wild
         return flattenedPokemon
     }
 }

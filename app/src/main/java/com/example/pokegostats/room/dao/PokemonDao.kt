@@ -96,6 +96,14 @@ interface PokemonDao {
     @Query("UPDATE pokemon_table SET nested_pokemon = :nestedPokemon WHERE pokemon_id = :pokemonId")
     suspend fun updateNestingPokemon(nestedPokemon: Int, pokemonId: Int)
 
+    @Query("UPDATE pokemon_table " +
+                "SET shiny_found_egg = :shinyFoundEgg, " +
+                    "shiny_found_evolution = :shinyFoundEvolution, " +
+                    "shiny_found_raid = :shinyFoundRaid, " +
+                    "shiny_found_wild = :shinyFoundWild " +
+                "WHERE pokemon_id = :pokemonId")
+    suspend fun updateShinyPokemon(shinyFoundEgg: Int, shinyFoundEvolution: Int, shinyFoundRaid: Int, shinyFoundWild: Int, pokemonId: Int)
+
     @Delete
     suspend fun delete(pokemon: PokemonEntity)
 

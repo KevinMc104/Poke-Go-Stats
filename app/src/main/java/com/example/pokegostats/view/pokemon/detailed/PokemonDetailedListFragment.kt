@@ -109,6 +109,26 @@ class PokemonDetailedListFragment : Fragment() {
                 } else {
                     pokemon_nested_pokemon.setup("Can be Nested", "False", null, false)
                 }
+                if(pokemon.shiny_found_egg == 1) {
+                    pokemon_shiny_found_egg.setup("Shiny can be found in Egg", "True", null, false)
+                } else {
+                    pokemon_shiny_found_egg.setup("Shiny can be found in Egg", "False", null, false)
+                }
+                if(pokemon.shiny_found_evolution == 1) {
+                    shiny_found_evolution.setup("Shiny can be found in Evolution", "True", null, false)
+                } else {
+                    shiny_found_evolution.setup("Shiny can be found in Evolution", "False", null, false)
+                }
+                if(pokemon.shiny_found_raid == 1) {
+                    shiny_found_raid.setup("Shiny can be found in Raid", "True", null, false)
+                } else {
+                    shiny_found_raid.setup("Shiny can be found in Raid", "False", null, false)
+                }
+                if(pokemon.shiny_found_wild == 1) {
+                    shiny_found_wild.setup("Shiny can be found in Wild", "True", null, false)
+                } else {
+                    shiny_found_wild.setup("Shiny can be found in Wild", "False", null, false)
+                }
             }
         })
     }

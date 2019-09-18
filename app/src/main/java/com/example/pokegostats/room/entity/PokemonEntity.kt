@@ -35,7 +35,23 @@ data class PokemonEntity(
     /**
      * 1 = True, 0 = False
      */
-    @ColumnInfo(name = "nested_pokemon") val nestedPokemon: Int?
+    @ColumnInfo(name = "nested_pokemon") val nestedPokemon: Int?,
+    /**
+     * 1 = True, 0 = False
+     */
+    @ColumnInfo(name = "shiny_found_egg") val shinyFoundEgg: Int?,
+    /**
+     * 1 = True, 0 = False
+     */
+    @ColumnInfo(name = "shiny_found_evolution") val shinyFoundEvolution: Int?,
+    /**
+     * 1 = True, 0 = False
+     */
+    @ColumnInfo(name = "shiny_found_raid") val shinyFoundRaid: Int?,
+    /**
+     * 1 = True, 0 = False
+     */
+    @ColumnInfo(name = "shiny_found_wild") val shinyFoundWild: Int?
 )
 
 // One to Many relationship. One Pokemon can have multiple Forms
@@ -116,6 +132,10 @@ class PokemonFormsTypesWeatherBoosts {
     var raid_exclusive: Int? = 0
     var raid_level: Int? = 0
     var nested_pokemon: Int? = 0
+    var shiny_found_egg: Int? = 0
+    var shiny_found_evolution: Int? = 0
+    var shiny_found_raid: Int? = 0
+    var shiny_found_wild: Int? = 0
     @TypeConverters(Converters::class)
     var FORMS_LIST: ArrayList<String>? = ArrayList()
     @TypeConverters(Converters::class)

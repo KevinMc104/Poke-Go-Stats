@@ -103,5 +103,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemon_raid_level"/>
 
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_shiny_found_egg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_nested_pokemon"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/shiny_found_evolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_shiny_found_egg"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/shiny_found_raid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shiny_found_evolution"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/shiny_found_wild"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shiny_found_raid"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -25,8 +25,6 @@ class PokemonStatsRowView @JvmOverloads constructor(context: Context,
     }
 
     fun setup(pokemon: PokemonFormsTypesWeatherBoosts) {
-        var currentName = pokemon.pokemon_name
-        currentName = "-$currentName"
         var formName = pokemon.FORMS_LIST!![1]
         // Don't add form name if it's Default
         if(formName != "Default") {
@@ -44,8 +42,7 @@ class PokemonStatsRowView @JvmOverloads constructor(context: Context,
             helper.setPokemonTypeLook(context, tv_menu_type2, pokemonTypes[3])
         }
 
-        tv_menu_id.text = pokemon.pokemon_id.toString()
-        tv_menu_pokemon_name.text = currentName
+        tv_menu_pokemon_name.text = pokemon.pokemon_name
         tv_menu_pokemon_form_name.text = formName
         tv_menu_max_cp.text = pokemon.max_cp.toString()
     }

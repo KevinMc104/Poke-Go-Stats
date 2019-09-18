@@ -9,23 +9,13 @@
     android:background="@drawable/rounded_corner_drawable">
 
     <TextView
-        android:id="@+id/tv_menu_id"
+        android:id="@+id/tv_menu_pokemon_name"
         style="@style/AppTheme.TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/app_whitespace_size_large_material"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Id"/>
-
-    <TextView
-        android:id="@+id/tv_menu_pokemon_name"
-        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_menu_id"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Name" />
 
