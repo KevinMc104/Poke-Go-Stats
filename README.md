@@ -20,8 +20,6 @@ Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11
 * Publish finished product to Google Play Store
 
 ## TODO
-* Implement all the endpoints from [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints and organize/insert into Android Room for use in Repository for ViewModel classes
-    * Only a handful of endpoints left to gather JSON data from
 * Implement Search feature for Pokemon and Moves
     * Sort by Max CP, Name, Type, Max CP+Type
     * Searchable Pokemon Names/Moves
@@ -31,6 +29,7 @@ Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11
 * Add detailed documentation of how the app works and present on Twitch live
     * Include screenshots of code and of the running app in written documentation
     * Add live video recording to YouTube to be shared
+* ~~Implement all the endpoints from [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints and organize/insert into Android Room for use in Repository for ViewModel classes~~
 * ~~View Models for each group of Activities/Fragments~~
 * ~~Tab Layout for the following~~
     * ~~All Pokemon View~~

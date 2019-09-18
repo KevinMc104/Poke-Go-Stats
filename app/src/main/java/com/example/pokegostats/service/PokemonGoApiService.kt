@@ -26,8 +26,18 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
         return response.body()!!
     }
 
-    suspend fun getRapidPokemonGoWeatherBoosts(): RapidPokemonGoWeatherBoosts {
-        val response: Response<RapidPokemonGoWeatherBoosts> = apiService.getRapidPokemonGoWeatherBoosts()
+    /**
+     * No Model object for this as it was not represented with objects in the response
+     * GET - https://pokemon-go1.p.rapidapi.com/weather_boosts.json
+     *
+     * During different weather certain types will be boosted.
+     * When they are boosted Pokemon of the boosted types will be
+     * found at a higher level, and moves of that type will be more powerful.
+     * This API lists what each weather type boosts. Returns a JSON dict
+     * where each key is the weather type and the value is an array of boosted types.
+     */
+    suspend fun getRapidPokemonGoWeatherBoosts(): HashMap<String, List<String>> {
+        val response: Response<HashMap<String, List<String>>> = apiService.getRapidPokemonGoWeatherBoosts()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "getRapidPokemonGoTypes")
 
         return response.body()!!
@@ -84,6 +94,13 @@ class PokemonGoApiService @Inject constructor(private val apiService: RapidPokem
 
     suspend fun getRapidPokemonGoPossibleDittoTypes(): HashMap<String, RapidPokemonGoPossibleDittoTypes> {
         val response: Response<HashMap<String, RapidPokemonGoPossibleDittoTypes>> = apiService.getRapidPokemonGoPossibleDittoTypes()
+        handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
+
+        return response.body()!!
+    }
+
+    suspend fun getRapidPokemonGoEncounterData(): List<RapidPokemonGoEncounterData> {
+        val response: Response<List<RapidPokemonGoEncounterData>> = apiService.getRapidPokemonGoEncounterData()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "RapidPokemonGoMaxCp")
 
         return response.body()!!

@@ -52,9 +52,13 @@ class PokemonGoStatsRepository(
                                     0, 0, 0, 0,
                                     0, 0))
             if(item.Form.isNullOrBlank()) {
-                pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, "Default"))
+                pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, "Default",
+                    0.0, 0.0, 0.0, 0.0,
+                    0.0, 0.0))
             } else {
-                pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, item.Form))
+                pokemonFormsListToBeInserted.add(PokemonFormEntity(formsPrimaryKey, item.PokemonId, item.Form,
+                    0.0, 0.0, 0.0, 0.0,
+                    0.0, 0.0))
             }
             formsPrimaryKey++
         }
@@ -72,9 +76,9 @@ class PokemonGoStatsRepository(
         rapidPokemonGoTypes.addAll(service.getRapidPokemonGoTypes())
 
         // Get Weather Boosts
-        val weatherBoost = service.getRapidPokemonGoWeatherBoosts()
+        val weatherBoosts = service.getRapidPokemonGoWeatherBoosts()
 
-        var weatherBoostList = ArrayList<PokemonWeatherBoostsEntity>()
+        var weatherBoostsList = ArrayList<PokemonWeatherBoostsEntity>()
         var typePrimaryKey = 1L
         rapidPokemonGoTypes.forEach { pokemon ->
             pokemon.Type.forEach { type ->
@@ -84,60 +88,19 @@ class PokemonGoStatsRepository(
                     pokemonDao.insertType(typePrimaryKey, pokemon.PokemonId, pokemon.Form, type)
                 }
                 // Check if Type is matched to any number of weather boosts
-                weatherBoostList = checkAllWeatherTypesByType(weatherBoost, weatherBoostList, type, typePrimaryKey)
+                weatherBoosts.forEach {(key, value) ->
+                    for(item in value) {
+                        if(item == type) {
+                            weatherBoostsList.add(PokemonWeatherBoostsEntity(null, typePrimaryKey, key))
+                        }
+                    }
+                }
                 typePrimaryKey++
             }
         }
 
         // Batch Insert
-        pokemonDao.insertAllWeatherBoosts(*weatherBoostList.toTypedArray())
-    }
-
-    private suspend fun checkAllWeatherTypesByType(weatherBoost: RapidPokemonGoWeatherBoosts,
-                                                   weatherBoostList: ArrayList<PokemonWeatherBoostsEntity>,
-                                                   type: String,
-                                                   currTypePrimaryKey: Long): ArrayList<PokemonWeatherBoostsEntity> {
-        weatherBoost.Clear.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Clear"))
-            }
-        }
-        weatherBoost.Cloudy.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Cloudy"))
-            }
-        }
-        weatherBoost.Fog.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Fog"))
-            }
-        }
-        weatherBoost.PartlyCloudy.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Partly Cloudy"))
-            }
-        }
-        weatherBoost.Rain.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Rain"))
-            }
-        }
-        weatherBoost.Snow.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Snow"))
-            }
-        }
-        weatherBoost.Sunny.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Sunny"))
-            }
-        }
-        weatherBoost.Wind.forEach { weatherItem ->
-            if(weatherItem == type) {
-                weatherBoostList.add(PokemonWeatherBoostsEntity(null, currTypePrimaryKey, "Wind"))
-            }
-        }
-        return weatherBoostList
+        pokemonDao.insertAllWeatherBoosts(*weatherBoostsList.toTypedArray())
     }
 
     suspend fun updateDetailedPokemonData() {
@@ -164,6 +127,9 @@ class PokemonGoStatsRepository(
 
         // Update Possible Ditto Pokemon
         updatePossibleDittoTypes()
+
+        // Update Pokemon Encounter Data
+        updatePokemonEncounterData()
     }
 
     private suspend fun updateMaxCp() {
@@ -239,6 +205,20 @@ class PokemonGoStatsRepository(
         }
     }
 
+    private suspend fun updatePokemonEncounterData() {
+        val results = service.getRapidPokemonGoEncounterData()
+        for(item in results) {
+            // Convert Decimals to Percents
+            val attackProb = item.AttackProbability * 100
+            val baseCapRate = item.BaseCaptureRate * 100
+            val baseFleeRate = item.BaseFleeRate * 100
+            val dodgeProb = item.DodgeProbability * 100
+            pokemonDao.updatePokemonEncounterData(attackProb, baseCapRate, baseFleeRate, dodgeProb,
+                item.MaxPokemonActionFrequency, item.MinPokemonActionFrequency,
+                item.Form, item.PokemonId)
+        }
+    }
+
     suspend fun insertMoves() {
         var list = getFastMoves()
         list = getChargedMoves(list)
@@ -274,15 +254,28 @@ class PokemonGoStatsRepository(
             val pokemonListForms = pokemonList.FORMS_LIST!!
             while(formsListIterator != pokemonListForms.size) {
                 val pokemon = PokemonFormsTypesWeatherBoosts()
-                // format of list is formId, formName
+                // format of FORMS_LIST is formId, formName, attack_probability, base_capture_rate, base_flee_rate,
+                // dodge_probability, min_pokemon_action_frequency, max_pokemon_action_frequency
                 val formId = pokemonListForms[formsListIterator]
                 val formName = pokemonListForms[formsListIterator + 1]
+                val attackProbability = pokemonListForms[formsListIterator + 2]
+                val baseCaptureRate = pokemonListForms[formsListIterator + 3]
+                val baseFleeRate = pokemonListForms[formsListIterator + 4]
+                val dodgeProbability = pokemonListForms[formsListIterator + 5]
+                val minPokemonActionFrequency = pokemonListForms[formsListIterator + 6]
+                val maxPokemonActionFrequency = pokemonListForms[formsListIterator + 7]
                 pokemon.FORMS_LIST!!.add(formId)
                 pokemon.FORMS_LIST!!.add(formName)
+                pokemon.FORMS_LIST!!.add(attackProbability)
+                pokemon.FORMS_LIST!!.add(baseCaptureRate)
+                pokemon.FORMS_LIST!!.add(baseFleeRate)
+                pokemon.FORMS_LIST!!.add(dodgeProbability)
+                pokemon.FORMS_LIST!!.add(minPokemonActionFrequency)
+                pokemon.FORMS_LIST!!.add(maxPokemonActionFrequency)
                 var typesListIterator = 0
                 val pokemonListTypes = pokemonList.TYPES_LIST!!
                 while(typesListIterator != pokemonListTypes.size) {
-                    // format of list is formId, typeId, typeName
+                    // format of TYPES_LIST is formId, typeId, typeName
                     val formIdTypes = pokemonListTypes[typesListIterator]
                     val typeId = pokemonListTypes[typesListIterator+1]
                     val typeName = pokemonListTypes[typesListIterator+2]
@@ -293,7 +286,7 @@ class PokemonGoStatsRepository(
                     var weatherListIterator = 0
                     val pokemonListWeather = pokemonList.WEATHER_LIST!!
                     while(weatherListIterator != pokemonListWeather.size) {
-                        // format of list is typeId, weatherName
+                        // format of WEATHER_LIST is typeId, weatherName
                         val typeIdWeathers = pokemonListWeather[weatherListIterator]
                         val weatherName = pokemonListWeather[weatherListIterator+1]
                         if(typeId == typeIdWeathers) {
@@ -303,7 +296,7 @@ class PokemonGoStatsRepository(
                     }
                     typesListIterator += 3
                 }
-                formsListIterator += 2
+                formsListIterator += 8
                 pokemon.pokemon_id = pokemonList.pokemon_id
                 pokemon.base_attack = pokemonList.base_attack
                 pokemon.base_defense = pokemonList.base_defense
@@ -311,6 +304,16 @@ class PokemonGoStatsRepository(
                 pokemon.max_cp = pokemonList.max_cp
                 pokemon.pokemon_name = pokemonList.pokemon_name
                 pokemon.candy_to_evolve = pokemonList.candy_to_evolve
+                pokemon.buddy_distances = pokemonList.buddy_distances
+                pokemon.raid_exclusive = pokemonList.raid_exclusive
+                pokemon.raid_level = pokemonList.raid_level
+                pokemon.nested_pokemon = pokemonList.nested_pokemon
+                pokemon.shiny_found_egg = pokemonList.shiny_found_egg
+                pokemon.shiny_found_evolution = pokemonList.shiny_found_evolution
+                pokemon.shiny_found_raid = pokemonList.shiny_found_raid
+                pokemon.shiny_found_wild = pokemonList.shiny_found_wild
+                pokemon.released_pokemon = pokemonList.released_pokemon
+                pokemon.possible_ditto = pokemonList.possible_ditto
                 list.add(pokemon)
             }
         }
@@ -319,14 +322,20 @@ class PokemonGoStatsRepository(
 
     private suspend fun flattenPokemonLists(pokemon: PokemonFormsTypesWeatherBoosts) : PokemonFormsTypesWeatherBoosts {
         val flattenedPokemon = PokemonFormsTypesWeatherBoosts()
-        // Format of FORMS_LIST is formId, formName
-        // We only need form name for detailed views
+        // Format of FORMS_LIST is formId, formName, attack_probability, base_capture_rate, base_flee_rate,
+        // dodge_probability, min_pokemon_action_frequency, max_pokemon_action_frequency
         flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![1])
+        flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![2])
+        flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![3])
+        flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![4])
+        flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![5])
+        flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![6])
+        flattenedPokemon.FORMS_LIST!!.add(pokemon.FORMS_LIST!![7])
 
         var typesListIterator = 0
         val pokemonListTypes = pokemon.TYPES_LIST!!
         while(typesListIterator != pokemonListTypes.size) {
-            // Format of list is formId, typeId, typeName
+            // Format of TYPES_LIST is formId, typeId, typeName
             // We only need typeName for detailed views
             flattenedPokemon.TYPES_LIST!!.add(pokemonListTypes[typesListIterator+2])
             typesListIterator += 3
@@ -335,7 +344,7 @@ class PokemonGoStatsRepository(
         var weatherListIterator = 0
         val pokemonListWeather = pokemon.WEATHER_LIST!!
         while(weatherListIterator != pokemonListWeather.size) {
-            // format of list is typeId, weatherName
+            // format of WEATHER_LIST is typeId, weatherName
             // We only need weatherName for detailed views
             flattenedPokemon.WEATHER_LIST!!.add(pokemonListWeather[weatherListIterator+1])
             weatherListIterator += 2

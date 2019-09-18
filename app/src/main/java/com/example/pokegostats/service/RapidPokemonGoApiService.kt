@@ -12,9 +12,6 @@ interface RapidPokemonGoApiService {
     @GET("/pokemon_types.json")
     suspend fun getRapidPokemonGoTypes() : Response<List<RapidPokemonGoTypes>>
 
-    @GET("/weather_boosts.json")
-    suspend fun getRapidPokemonGoWeatherBoosts() : Response<RapidPokemonGoWeatherBoosts>
-
     @GET("/pokemon_max_cp.json")
     suspend fun getRapidPokemonGoMaxCp() : Response<List<RapidPokemonGoMaxCp>>
 
@@ -39,11 +36,15 @@ interface RapidPokemonGoApiService {
     @GET("/possible_ditto_pokemon.json")
     suspend fun getRapidPokemonGoPossibleDittoTypes() : Response<HashMap<String, RapidPokemonGoPossibleDittoTypes>>
 
+    @GET("/pokemon_encounter_data.json")
+    suspend fun getRapidPokemonGoEncounterData() : Response<List<RapidPokemonGoEncounterData>>
+
     @GET("/fast_moves.json")
     suspend fun getRapidPokemonGoFastMoves() : Response<List<RapidPokemonGoFastMoves>>
 
     @GET("/charged_moves.json")
     suspend fun getRapidPokemonGoChargedMoves() : Response<List<RapidPokemonGoChargedMoves>>
 
-    // TODO: Implement other Endpoints
+    @GET("/weather_boosts.json")
+    suspend fun getRapidPokemonGoWeatherBoosts() : Response<HashMap<String, List<String>>>
 }

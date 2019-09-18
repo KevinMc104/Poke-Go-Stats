@@ -145,5 +145,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemon_released_pokemon"/>
 
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_attack_probability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_possible_ditto"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_base_capture_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_attack_probability"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_base_flee_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_base_capture_rate"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_dodge_probability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_base_flee_rate"/>
+
+        <com.example.pokegostats.view.custom.PokemonDetailedRowView
+            android:id="@+id/pokemon_action_frequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_dodge_probability"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

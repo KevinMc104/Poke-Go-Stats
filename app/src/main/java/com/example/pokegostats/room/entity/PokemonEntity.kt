@@ -76,7 +76,13 @@ data class PokemonFormEntity(
     @PrimaryKey
     @ColumnInfo(name = "form_id") val id: Long,
     @ColumnInfo(name = "pokemon_uid") val pokemonUid: Int,
-    @ColumnInfo(name = "form_name") val formName: String
+    @ColumnInfo(name = "form_name") val formName: String,
+    @ColumnInfo(name = "attack_probability") val attackProbability: Double?,
+    @ColumnInfo(name = "base_capture_rate") val baseCaptureRate: Double?,
+    @ColumnInfo(name = "base_flee_rate") val BaseFleeRate: Double?,
+    @ColumnInfo(name = "dodge_probability") val DodgeProbability: Double?,
+    @ColumnInfo(name = "min_pokemon_action_frequency") val MinPokemonActionFrequency: Double?,
+    @ColumnInfo(name = "max_pokemon_action_frequency") val MaxPokemonActionFrequency: Double?
 )
 
 // One to Many relationship. One Form can have multiple Types
@@ -119,12 +125,14 @@ data class PokemonWeatherBoostsEntity(
  * PokemonDao.getAllPokemonFormsTypesWeatherBoosts()
  *
  * Initial format of List fields before Map Transformation in PokemonGoStatsRepository
- * FORMS_LIST = formId, formName
+ * FORMS_LIST = formId, formName, attack_probability, base_capture_rate, base_flee_rate,
+ * dodge_probability, min_pokemon_action_frequency, max_pokemon_action_frequency
  * TYPES_LIST = formId, typeId, typeName
  * WEATHER_LIST = typeId, weatherName
  *
  * Flattened Lists Formats
- * FORMS_LIST = formId, formName
+ * FORMS_LIST = formId, formName, attack_probability, base_capture_rate, base_flee_rate,
+ * dodge_probability, min_pokemon_action_frequency, max_pokemon_action_frequency
  * TYPES_LIST = typeId, typeName
  * WEATHER_LIST = weatherName
  */

@@ -15,7 +15,10 @@ interface PokemonDao {
 
     @Query("SELECT *, " +
             "(SELECT " +
-                "GROUP_CONCAT(pokemon_forms.form_id || ',' || pokemon_forms.form_name) " +
+                "GROUP_CONCAT(pokemon_forms.form_id || ',' || pokemon_forms.form_name || ',' || " +
+                    "pokemon_forms.attack_probability || ',' || pokemon_forms.base_capture_rate || ',' || " +
+                    "pokemon_forms.base_flee_rate || ',' || pokemon_forms.dodge_probability || ',' || " +
+                    "pokemon_forms.max_pokemon_action_frequency || ',' || pokemon_forms.min_pokemon_action_frequency) " +
                 "FROM pokemon_forms " +
                     "WHERE pokemon_table.pokemon_id = pokemon_forms.pokemon_uid) AS FORMS_LIST, " +
             "(SELECT " +
@@ -40,7 +43,10 @@ interface PokemonDao {
 
     @Query("SELECT *, " +
             "(SELECT " +
-                "GROUP_CONCAT(pokemon_forms.form_id || ',' || pokemon_forms.form_name) " +
+                "GROUP_CONCAT(pokemon_forms.form_id || ',' || pokemon_forms.form_name || ',' || " +
+                    "pokemon_forms.attack_probability || ',' || pokemon_forms.base_capture_rate || ',' || " +
+                    "pokemon_forms.base_flee_rate || ',' || pokemon_forms.dodge_probability || ',' || " +
+                    "pokemon_forms.min_pokemon_action_frequency || ',' || pokemon_forms.max_pokemon_action_frequency) " +
                 "FROM pokemon_forms " +
                     "WHERE pokemon_table.pokemon_id = pokemon_forms.pokemon_uid " +
                     "AND pokemon_forms.form_id = :pokemonFormId) AS FORMS_LIST, " +
@@ -109,6 +115,20 @@ interface PokemonDao {
 
     @Query("UPDATE pokemon_table SET possible_ditto = :possibleDitto WHERE pokemon_id = :pokemonId")
     suspend fun updatePossibleDittoTypes(possibleDitto: Int, pokemonId: Int)
+
+    @Query("UPDATE pokemon_forms " +
+            "SET attack_probability = :attackProbability, " +
+                "base_capture_rate = :baseCaptureRate, " +
+                "base_flee_rate = :baseFleeRate, " +
+                "dodge_probability = :dodgeProbability, " +
+                "max_pokemon_action_frequency = :maxPokemonActionFrequency, " +
+                "min_pokemon_action_frequency = :minPokemonActionFrequency " +
+            "WHERE pokemon_uid = :pokemonId " +
+                "AND form_name = :formName")
+    suspend fun updatePokemonEncounterData(attackProbability: Double, baseCaptureRate: Double,
+                                           baseFleeRate: Double, dodgeProbability: Double,
+                                           maxPokemonActionFrequency: Double, minPokemonActionFrequency: Double,
+                                           formName: String, pokemonId: Int)
 
     @Delete
     suspend fun delete(pokemon: PokemonEntity)

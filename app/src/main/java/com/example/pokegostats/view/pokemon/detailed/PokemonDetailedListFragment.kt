@@ -139,6 +139,25 @@ class PokemonDetailedListFragment : Fragment() {
                 } else {
                     pokemon_possible_ditto.setup("Can be Ditto", "False", null, false)
                 }
+                val attackProb = pokemon.FORMS_LIST!![1] + "%"
+                pokemon_attack_probability.setup("Attack Chance", attackProb, null, false)
+
+                val baseCaptureRate = pokemon.FORMS_LIST!![2] + "%"
+                pokemon_base_capture_rate.setup("Base Capture Rate", baseCaptureRate, null, false)
+
+                val baseFleeRate = pokemon.FORMS_LIST!![3] + "%"
+                pokemon_base_flee_rate.setup("Base Flee Chance", baseFleeRate, null, false)
+
+                val dodgeProbability = pokemon.FORMS_LIST!![4] + "%"
+                pokemon_dodge_probability.setup("Dodge Chance", dodgeProbability, null, false)
+
+                val minPokemonActionFrequency = pokemon.FORMS_LIST!![5]
+                val maxPokemonActionFrequency = pokemon.FORMS_LIST!![6]
+                if(maxPokemonActionFrequency == "0.0") {
+                    pokemon_action_frequency.setup("Action Frequency", "Doesn't Attack", null, false)
+                } else {
+                    pokemon_action_frequency.setup("Action Frequency", "$minPokemonActionFrequency - $maxPokemonActionFrequency Seconds", null, false)
+                }
             }
         })
     }
