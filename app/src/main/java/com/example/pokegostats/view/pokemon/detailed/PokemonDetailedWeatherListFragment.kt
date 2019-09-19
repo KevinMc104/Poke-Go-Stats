@@ -26,7 +26,7 @@ class PokemonDetailedWeatherListFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
     private lateinit var adapter: PokemonDetailedWeatherListAdapter
-    private lateinit var pokemonDetailedViewModel: PokemonDetailedViewModel
+    private lateinit var viewModel: PokemonDetailedWeatherListFragmentViewModel
     private val helper: PokemonHelper = PokemonHelper.instance
 
     /**
@@ -52,6 +52,11 @@ class PokemonDetailedWeatherListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
+
+        // Creates the View Model
+        val factory = PokemonDetailedWeatherListFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        viewModel = ViewModelProvider(this, factory).get(PokemonDetailedWeatherListFragmentViewModel::class.java)
+
         return inflater.inflate(R.layout.pokemon_detailed_weather_fragment, container, false)
     }
 
@@ -66,20 +71,17 @@ class PokemonDetailedWeatherListFragment : Fragment() {
         // Creates vertical Layout Manager
         rv_pokemon_weather_list.layoutManager = LinearLayoutManager(activity)
 
-        // Creates the View Model
-        val factory = PokemonDetailedViewModel.Companion.Factory(requireActivity().application, service)
-        pokemonDetailedViewModel = ViewModelProvider(this, factory).get(PokemonDetailedViewModel::class.java)
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                pokemonDetailedViewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getInt(helper.POKEMON_FORM_ID))
+                viewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getInt(helper.POKEMON_FORM_ID))
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-        pokemonDetailedViewModel.pokemonDetailed.observe(this, Observer { pokemon ->
+        viewModel.pokemonDetailed.observe(this, Observer { pokemon ->
             pokemon?.let { adapter.setWeatherBoosts(pokemon.WEATHER_LIST!!)}
         })
     }

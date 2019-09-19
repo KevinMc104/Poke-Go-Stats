@@ -9,7 +9,7 @@ import com.example.pokegostats.service.PokemonGoApiService
 import kotlinx.coroutines.launch
 
 // Class extends AndroidViewModel and requires application as a parameter
-class PokemonDetailedViewModel(application: Application, val service: PokemonGoApiService) : AndroidViewModel(application) {
+class PokemonDetailedWeatherListFragmentViewModel(application: Application, val service: PokemonGoApiService) : AndroidViewModel(application) {
 
     // The ViewModel maintains a reference to the repository to get data
     private val repository: PokemonGoStatsRepository
@@ -30,7 +30,7 @@ class PokemonDetailedViewModel(application: Application, val service: PokemonGoA
             private val mApplication: Application, private val service: PokemonGoApiService
         ) : ViewModelProvider.NewInstanceFactory() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return PokemonDetailedViewModel(mApplication, service) as T
+                return PokemonDetailedWeatherListFragmentViewModel(mApplication, service) as T
             }
         }
     }

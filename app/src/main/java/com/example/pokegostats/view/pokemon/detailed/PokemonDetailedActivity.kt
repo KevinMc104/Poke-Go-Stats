@@ -3,6 +3,7 @@ package com.example.pokegostats.view.pokemon.detailed
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.pokegostats.R
 import com.example.pokegostats.service.PokemonHelper
@@ -13,10 +14,15 @@ class PokemonDetailedActivity : AppCompatActivity() {
 
     private lateinit var adapter: PokemonDetailedPagerAdapter
     private val helper: PokemonHelper = PokemonHelper.instance
+    private lateinit var viewModel: PokemonDetailedActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pokemon_detailed_activity)
+
+        // Creates the View Model
+        val factory = PokemonDetailedActivityViewModel.Companion.Factory(this.application)
+        viewModel = ViewModelProvider(this, factory).get(PokemonDetailedActivityViewModel::class.java)
 
         val vpPager = findViewById<ViewPager>(R.id.view_pager_detailed)
         adapter = PokemonDetailedPagerAdapter(supportFragmentManager)

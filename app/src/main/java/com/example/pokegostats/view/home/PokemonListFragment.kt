@@ -25,7 +25,7 @@ class PokemonListFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
     private lateinit var adapter: PokemonListAdapter
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var viewModel: PokemonListFragmentViewModel
 
     /**
      * TODO: Inject this in the repository instead of fragment
@@ -51,6 +51,11 @@ class PokemonListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
+
+        // Creates the View Model
+        val factory = PokemonListFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        viewModel = ViewModelProvider(this, factory).get(PokemonListFragmentViewModel::class.java)
+
         return inflater.inflate(R.layout.pokemon_list_fragment, container, false)
     }
 
@@ -80,22 +85,18 @@ class PokemonListFragment : Fragment() {
 
         // Creates vertical Layout Manager
         rv_pokemon_list.layoutManager = LinearLayoutManager(activity)
-
-        // Creates the View Model
-        val factory = MainViewModel.Companion.Factory(requireActivity().application, service)
-        mainViewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                mainViewModel.populatePokemonTable()
-                mainViewModel.updateDetailedPokemonData()
+                viewModel.populatePokemonTable()
+                viewModel.updateDetailedPokemonData()
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-        mainViewModel.allPokemonFormsTypesWeatherBoosts.observe(this, Observer { pokemon ->
+        viewModel.allPokemonFormsTypesWeatherBoosts.observe(this, Observer { pokemon ->
             pokemon?.let {
                 adapter.setPokemonFormsTypesWeatherBoosts(pokemon)
             }

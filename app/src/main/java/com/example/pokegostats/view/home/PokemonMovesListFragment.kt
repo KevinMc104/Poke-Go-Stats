@@ -25,7 +25,7 @@ class PokemonMovesListFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
     private lateinit var adapter: PokemonMovesListAdapter
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var viewModel: PokemonMovesListFragmentViewModel
 
     /**
      * TODO: Inject this in the repository instead of fragment
@@ -52,6 +52,11 @@ class PokemonMovesListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
+
+        // Creates the View Model
+        val factory = PokemonMovesListFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        viewModel = ViewModelProvider(this, factory).get(PokemonMovesListFragmentViewModel::class.java)
+
         return inflater.inflate(R.layout.pokemon_moves_fragment, container, false)
     }
 
@@ -82,23 +87,20 @@ class PokemonMovesListFragment : Fragment() {
         // Creates vertical Layout Manager
         rv_pokemon_moves_list.layoutManager = LinearLayoutManager(activity)
 
-        // Creates the View Model
-        val factory = MainViewModel.Companion.Factory(requireActivity().application, service)
-        mainViewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
-        mainViewModel.allPokemonMoves.observe(this, Observer { move ->
-            // Update the cached copy of the words in the adapter.
-            move?.let { adapter.setPokemonMoves(it) }
-        })
-
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                mainViewModel.populatePokemonMovesTable()
+                viewModel.populatePokemonMovesTable()
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
+
+        viewModel.allPokemonMoves.observe(this, Observer { move ->
+            // Update the cached copy of the words in the adapter.
+            move?.let { adapter.setPokemonMoves(it) }
+        })
     }
 }

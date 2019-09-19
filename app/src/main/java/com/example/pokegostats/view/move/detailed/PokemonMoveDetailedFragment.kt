@@ -23,7 +23,7 @@ import javax.inject.Inject
 class PokemonMoveDetailedFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
-    private lateinit var pokemonMoveDetailedViewModel: PokemonMoveDetailedViewModel
+    private lateinit var viewModel: PokemonMoveDetailedFragmentViewModel
     private val helper: PokemonHelper = PokemonHelper.instance
 
     /**
@@ -49,26 +49,27 @@ class PokemonMoveDetailedFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
+
+        // Creates the View Model
+        val factory = PokemonMoveDetailedFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        viewModel = ViewModelProvider(this, factory).get(PokemonMoveDetailedFragmentViewModel::class.java)
+
         return inflater.inflate(R.layout.pokemon_moves_detailed_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Creates the View Model
-        val factory = PokemonMoveDetailedViewModel.Companion.Factory(requireActivity().application, service)
-        pokemonMoveDetailedViewModel = ViewModelProvider(this, factory).get(PokemonMoveDetailedViewModel::class.java)
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                pokemonMoveDetailedViewModel.getMove(arguments!!.getString(helper.POKEMON_MOVE_NAME).toString())
+                viewModel.getMove(arguments!!.getString(helper.POKEMON_MOVE_NAME).toString())
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-        pokemonMoveDetailedViewModel.pokemonMoveDetailed.observe(this, Observer { move ->
+        viewModel.pokemonMoveDetailed.observe(this, Observer { move ->
             move?.let {
                 move_name.setup("Move", it.name, null, false)
                 move_power.setup("Power", it.power.toString(), null, false)

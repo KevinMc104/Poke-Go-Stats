@@ -23,7 +23,7 @@ import javax.inject.Inject
 class PokemonDetailedListFragment : Fragment() {
 
     // Reference to the RecyclerView adapter
-    private lateinit var pokemonDetailedViewModel: PokemonDetailedViewModel
+    private lateinit var viewModel: PokemonDetailedListFragmentViewModel
     private val helper: PokemonHelper = PokemonHelper.instance
 
     /**
@@ -49,26 +49,28 @@ class PokemonDetailedListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?): View {
+
+        // Creates the View Model
+        val factory = PokemonDetailedListFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        viewModel = ViewModelProvider(this, factory).get(PokemonDetailedListFragmentViewModel::class.java)
+
         return inflater.inflate(R.layout.pokemon_detailed_stats_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Creates the View Model
-        val factory = PokemonDetailedViewModel.Companion.Factory(requireActivity().application, service)
-        pokemonDetailedViewModel = ViewModelProvider(this, factory).get(PokemonDetailedViewModel::class.java)
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                pokemonDetailedViewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getInt(helper.POKEMON_FORM_ID))
+                viewModel.getPokemon(arguments!!.getInt(helper.POKEMON_ID), arguments!!.getInt(helper.POKEMON_FORM_ID))
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
             }
         }
-        pokemonDetailedViewModel.pokemonDetailed.observe(this, Observer { pokemon ->
+        viewModel.pokemonDetailed.observe(this, Observer { pokemon ->
             pokemon?.let {
                 pokemon_id_row.setup("ID", pokemon.pokemon_id.toString(), null, false)
                 pokemon_name_row.setup("Name", pokemon.pokemon_name.toString(), null, false)
