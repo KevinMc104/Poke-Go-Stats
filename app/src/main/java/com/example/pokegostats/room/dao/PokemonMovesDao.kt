@@ -15,7 +15,7 @@ interface PokemonMovesDao {
     @Update
     suspend fun update(vararg pokemon: PokemonMovesEntity)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg pokemon: PokemonMovesEntity)
 
     @Delete
