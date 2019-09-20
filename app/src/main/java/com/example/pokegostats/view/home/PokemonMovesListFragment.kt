@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
-import com.example.pokegostats.service.PokemonGoApiService
+import com.example.pokegostats.room.PokemonGoStatsRepository
 import com.example.pokegostats.view.home.adapter.PokemonMovesListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
@@ -26,12 +26,7 @@ class PokemonMovesListFragment : Fragment() {
     // Reference to the RecyclerView adapter
     private lateinit var adapter: PokemonMovesListAdapter
     private lateinit var viewModel: PokemonMovesListFragmentViewModel
-
-    /**
-     * TODO: Inject this in the repository instead of fragment
-     */
-    @Inject
-    protected lateinit var service: PokemonGoApiService
+    @Inject lateinit var repository: PokemonGoStatsRepository
 
     companion object {
         fun newInstance() = PokemonMovesListFragment()
@@ -54,7 +49,7 @@ class PokemonMovesListFragment : Fragment() {
         savedInstanceState: Bundle?): View {
 
         // Creates the View Model
-        val factory = PokemonMovesListFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        val factory = PokemonMovesListFragmentViewModel.Companion.Factory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this, factory).get(PokemonMovesListFragmentViewModel::class.java)
 
         return inflater.inflate(R.layout.pokemon_moves_fragment, container, false)

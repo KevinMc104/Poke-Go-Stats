@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
-import com.example.pokegostats.service.PokemonGoApiService
+import com.example.pokegostats.room.PokemonGoStatsRepository
 import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.pokemon.detailed.adapter.PokemonDetailedWeatherListAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -28,11 +28,7 @@ class PokemonDetailedWeatherListFragment : Fragment() {
     private lateinit var adapter: PokemonDetailedWeatherListAdapter
     private lateinit var viewModel: PokemonDetailedWeatherListFragmentViewModel
     private val helper: PokemonHelper = PokemonHelper.instance
-
-    /**
-     * TODO: Inject this in the repository instead of fragment
-     */
-    @Inject protected lateinit var service: PokemonGoApiService
+    @Inject lateinit var repository: PokemonGoStatsRepository
 
     companion object {
         fun newInstance(pokemonId: Int, formId: Int): PokemonDetailedWeatherListFragment = PokemonDetailedWeatherListFragment().apply {
@@ -54,7 +50,7 @@ class PokemonDetailedWeatherListFragment : Fragment() {
         savedInstanceState: Bundle?): View {
 
         // Creates the View Model
-        val factory = PokemonDetailedWeatherListFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        val factory = PokemonDetailedWeatherListFragmentViewModel.Companion.Factory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this, factory).get(PokemonDetailedWeatherListFragmentViewModel::class.java)
 
         return inflater.inflate(R.layout.pokemon_detailed_weather_fragment, container, false)

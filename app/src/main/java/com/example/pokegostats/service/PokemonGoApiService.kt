@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PokemonGoApiService @Inject constructor(private val apiService: RapidPokemonGoApiService) {
+class PokemonGoApiService(private val apiService: RapidPokemonGoApiService) {
     suspend fun getRapidPokemonGoStats(): List<RapidPokemonGoStats> {
         val response: Response<List<RapidPokemonGoStats>> = apiService.getRapidPokemonGoStats()
         handleResponse(response.isSuccessful, response.code(), response.body().toString(), response.message(), "getRapidPokemonGoStats")

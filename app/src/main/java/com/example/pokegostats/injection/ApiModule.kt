@@ -1,6 +1,7 @@
 package com.example.pokegostats.injection
 
 import android.app.Application
+import com.example.pokegostats.service.PokemonGoApiService
 import com.example.pokegostats.service.RapidPokemonGoApiService
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -17,7 +18,6 @@ import javax.inject.Singleton
 
 @Module
 class ApiModule {
-
     private val RAPID_POKEMON_GO_API_URL = "https://pokemon-go1.p.rapidapi.com"
 
     @Provides
@@ -60,5 +60,11 @@ class ApiModule {
         return retrofit.baseUrl(RAPID_POKEMON_GO_API_URL)
             .build()
             .create(RapidPokemonGoApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providePokemonGoApiService(rapidPokemonGoApiService: RapidPokemonGoApiService) : PokemonGoApiService {
+        return PokemonGoApiService(rapidPokemonGoApiService)
     }
 }

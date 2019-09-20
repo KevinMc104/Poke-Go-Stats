@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
-import com.example.pokegostats.service.PokemonGoApiService
+import com.example.pokegostats.room.PokemonGoStatsRepository
 import com.example.pokegostats.view.home.adapter.PokemonListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
@@ -26,21 +26,17 @@ class PokemonListFragment : Fragment() {
     // Reference to the RecyclerView adapter
     private lateinit var adapter: PokemonListAdapter
     private lateinit var viewModel: PokemonListFragmentViewModel
-
-    /**
-     * TODO: Inject this in the repository instead of fragment
-     */
-    @Inject protected lateinit var service: PokemonGoApiService
+    @Inject lateinit var repository: PokemonGoStatsRepository
 
     companion object {
         fun newInstance() = PokemonListFragment()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        // TODO: Implement Search Menu with search functionality on RecyclerView
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        // TODO: Implement Search Menu with search functionality on RecyclerView
 //        setHasOptionsMenu(true)
-    }
+//    }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -53,7 +49,7 @@ class PokemonListFragment : Fragment() {
         savedInstanceState: Bundle?): View {
 
         // Creates the View Model
-        val factory = PokemonListFragmentViewModel.Companion.Factory(requireActivity().application, service)
+        val factory = PokemonListFragmentViewModel.Companion.Factory(requireActivity().application, repository)
         viewModel = ViewModelProvider(this, factory).get(PokemonListFragmentViewModel::class.java)
 
         return inflater.inflate(R.layout.pokemon_list_fragment, container, false)

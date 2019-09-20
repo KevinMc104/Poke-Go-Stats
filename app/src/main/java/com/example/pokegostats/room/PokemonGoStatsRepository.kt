@@ -7,14 +7,13 @@ import com.example.pokegostats.room.dao.PokemonDao
 import com.example.pokegostats.room.dao.PokemonMovesDao
 import com.example.pokegostats.room.entity.*
 import com.example.pokegostats.service.PokemonGoApiService
+import javax.inject.Inject
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
 // instead of the whole database, because you only need access to the DAO
-class PokemonGoStatsRepository(
-    private val pokemonDao: PokemonDao,
-    private val pokemonMovesDao: PokemonMovesDao,
-    var service: PokemonGoApiService
-) {
+class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
+                                                   val pokemonMovesDao: PokemonMovesDao,
+                                                   val service: PokemonGoApiService) {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     val allPokemonMoves: LiveData<List<PokemonMovesEntity>> = pokemonMovesDao.getAllMoves()

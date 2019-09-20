@@ -3,33 +3,22 @@ package com.example.pokegostats.view.move.detailed
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.pokegostats.room.PokemonGoStatsRepository
-import com.example.pokegostats.room.PokemonGoStatsRoomDatabase
 import com.example.pokegostats.room.entity.PokemonMovesEntity
-import com.example.pokegostats.service.PokemonGoApiService
 import kotlinx.coroutines.launch
 
-class PokemonMoveDetailedFragmentViewModel(application: Application, val service: PokemonGoApiService) : AndroidViewModel(application) {
-
-    // The ViewModel maintains a reference to the repository to get data
-    private val repository: PokemonGoStatsRepository
+class PokemonMoveDetailedFragmentViewModel(application: Application, private val repository: PokemonGoStatsRepository)
+    : AndroidViewModel(application) {
     var pokemonMoveDetailed: MutableLiveData<PokemonMovesEntity> = MutableLiveData()
-
-    init {
-        val pokemonDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonDao()
-        val pokemonMovesDao = PokemonGoStatsRoomDatabase.getDatabase(application, viewModelScope).pokemonMovesDao()
-        repository = PokemonGoStatsRepository(pokemonDao, pokemonMovesDao, service)
-    }
 
     suspend fun getMove(moveName: String) = viewModelScope.launch {
         pokemonMoveDetailed.postValue(repository.getMove(moveName))
     }
 
     companion object {
-        class Factory(
-            private val mApplication: Application, private val service: PokemonGoApiService
-        ) : ViewModelProvider.NewInstanceFactory() {
+        class Factory(private val mApplication: Application, private val repository: PokemonGoStatsRepository)
+            : ViewModelProvider.NewInstanceFactory() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return PokemonMoveDetailedFragmentViewModel(mApplication, service) as T
+                return PokemonMoveDetailedFragmentViewModel(mApplication, repository) as T
             }
         }
     }
