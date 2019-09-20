@@ -3,16 +3,21 @@ package com.example.pokegostats.room
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.pokegostats.model.*
+import com.example.pokegostats.room.dao.DateCacheDao
 import com.example.pokegostats.room.dao.PokemonDao
 import com.example.pokegostats.room.dao.PokemonMovesDao
 import com.example.pokegostats.room.entity.*
 import com.example.pokegostats.service.PokemonGoApiService
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
+
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
 // instead of the whole database, because you only need access to the DAO
 class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
                                                    val pokemonMovesDao: PokemonMovesDao,
+                                                   val dateCacheDao: DateCacheDao,
                                                    val service: PokemonGoApiService) {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
@@ -27,14 +32,48 @@ class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
         return pokemonMovesDao.getMove(moveName)
     }
 
-    suspend fun insertPokemon() {
-        // TODO: Add logic to not call out to the API every time app is opened
+    private suspend fun dataIsOld(): Boolean {
+        var currDateOlder = true
+        // Check to see if entity is populated before getting date
+        if(dateCacheDao.checkDateTable() > 0) {
+            // There should only ever be one entry in this date table
+            val storedDateList = dateCacheDao.getDateData()
+            val storedDate = storedDateList[0].dateTime
 
-        // Add Pokemon
-        insertPokemonStats()
+            // NOTE: Use Java Time when project is updated to newer API's
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.HOUR_OF_DAY, -24)
+            val oneDayAgo = calendar.time
 
-        // Add Types and Weather Boosts
-        insertPokemonTypesAndWeatherBoosts()
+            // Check if the Current Stored Date is older than 24 hours
+            currDateOlder = storedDate!! < oneDayAgo
+        }
+        return currDateOlder
+    }
+    suspend fun insertAllData() {
+        // Delete data and insert if older than 1 day or if date table is empty
+        if(dataIsOld()) {
+            // Wipe Old Data
+            pokemonDao.deleteAll()
+            pokemonMovesDao.deleteAll()
+            dateCacheDao.deleteAll()
+
+            // Insert a new timestamp
+            dateCacheDao.insertAllDateCacheEntries(DateCacheEntity(null, Calendar.getInstance().time))
+
+            // Add Pokemon
+            insertPokemonStats()
+
+            // Add Types and Weather Boosts
+            insertPokemonTypesAndWeatherBoosts()
+
+            // Insert Detailed Stats
+            updateDetailedPokemonData()
+
+            // Insert Moves
+            insertMoves()
+        }
+        // Do not call out to RapidAPI to insert if the data is newer than 1 day
     }
 
     private suspend fun insertPokemonStats() {
@@ -102,7 +141,7 @@ class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
         pokemonDao.insertAllWeatherBoosts(*weatherBoostsList.toTypedArray())
     }
 
-    suspend fun updateDetailedPokemonData() {
+    private suspend fun updateDetailedPokemonData() {
         // Update with MaxCp
         updateMaxCp()
 
@@ -218,7 +257,7 @@ class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
         }
     }
 
-    suspend fun insertMoves() {
+    private suspend fun insertMoves() {
         var list = getFastMoves()
         list = getChargedMoves(list)
 

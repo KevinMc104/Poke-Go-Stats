@@ -21,4 +21,9 @@
         <item name="android:textSize">@dimen/app_text_size_body_2_material</item>
     </style>
 
+    <style name="AppTheme.TextAppearance.AppCompat.Body3" parent="AppTheme.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/source_serif_pro_semibold</item>
+        <item name="android:textSize">@dimen/app_text_size_body_3_material</item>
+    </style>
+
 </resources>

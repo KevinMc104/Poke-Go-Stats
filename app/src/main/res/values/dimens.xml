@@ -5,6 +5,7 @@
 
     <dimen name="app_text_size_body_1_material">16sp</dimen>
     <dimen name="app_text_size_body_2_material">32sp</dimen>
+    <dimen name="app_text_size_body_3_material">14sp</dimen>
     <dimen name="app_whitespace_size_medium_material">12dp</dimen>
     <dimen name="app_whitespace_size_large_material">16dp</dimen>
 </resources>

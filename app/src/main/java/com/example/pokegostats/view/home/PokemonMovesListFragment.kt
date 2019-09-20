@@ -82,17 +82,6 @@ class PokemonMovesListFragment : Fragment() {
         // Creates vertical Layout Manager
         rv_pokemon_moves_list.layoutManager = LinearLayoutManager(activity)
 
-        GlobalScope.launch (Dispatchers.Main) {
-            // call out to Repository to get stats
-            try {
-                viewModel.populatePokemonMovesTable()
-            } catch (e: IOException) {
-                Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
-            } catch (e: Exception) {
-                Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
-            }
-        }
-
         viewModel.allPokemonMoves.observe(this, Observer { move ->
             // Update the cached copy of the words in the adapter.
             move?.let { adapter.setPokemonMoves(it) }

@@ -13,10 +13,6 @@ class PokemonMovesListFragmentViewModel(application: Application, val repository
     : AndroidViewModel(application) {
     val allPokemonMoves = repository.allPokemonMoves
 
-    fun populatePokemonMovesTable() = viewModelScope.launch {
-        repository.insertMoves()
-    }
-
     companion object {
         class Factory(private val mApplication: Application, private val repository: PokemonGoStatsRepository)
             : ViewModelProvider.NewInstanceFactory() {

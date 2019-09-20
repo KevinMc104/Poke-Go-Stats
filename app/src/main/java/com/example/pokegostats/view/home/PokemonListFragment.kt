@@ -84,8 +84,7 @@ class PokemonListFragment : Fragment() {
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                viewModel.populatePokemonTable()
-                viewModel.updateDetailedPokemonData()
+                viewModel.populateAllTables()
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {
