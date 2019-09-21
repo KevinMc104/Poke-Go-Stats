@@ -67,11 +67,11 @@ class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
             // Add Types and Weather Boosts
             insertPokemonTypesAndWeatherBoosts()
 
-            // Insert Detailed Stats
-            updateDetailedPokemonData()
-
             // Insert Moves
             insertMoves()
+
+            // Insert Detailed Stats
+            updateDetailedPokemonData()
         }
         // Do not call out to RapidAPI to insert if the data is newer than 1 day
     }

@@ -22,19 +22,17 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 
 ## TODO
 * Add Error Interceptor in HTTP3 Client for Retrofit
-* Change it so data is inserted into the database once on Open
-* Inject Service into Repository directly
 * Implement Search feature for Pokemon and Moves
     * Sort by Max CP, Name, Type, Max CP+Type
     * Searchable Pokemon Names/Moves
 * Import images of Pokemon, Moves, and Weather conditions as drawables
 * Tweak colors/styles to make the look/feel for UI better
-* Fix issues with app crashing when rotated or closed/restarted (Need to implement things like onResume/onPause etc.)
 * Add detailed documentation of how the app works and present on Twitch live
     * Include screenshots of code and of the running app in written documentation
     * Add live video recording to YouTube to be shared
 * ~~Implement all the endpoints from [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints and organize/insert into Android Room for use in Repository for ViewModel classes~~
 * ~~View Models for each group of Activities/Fragments~~
+* ~~Inject Service into Repository directly~~
 * ~~Tab Layout for the following~~
     * ~~All Pokemon View~~
     * ~~Detailed Pokemon View~~
@@ -44,10 +42,12 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * ~~Retrofit Service classes to call to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1) and gather data~~
 * ~~Use GSON Converter to convert JSON to data classes to easily use with inserts into Android Room Database Tables(Entities)~~
 * ~~Populate Android Room Databases with [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1) data~~
+* ~~Change it so data is inserted into the database once on Open~~
 * ~~Live Data Objects to gather Android Room Data~~
+* ~~Fix issues with app crashing when rotated or closed/restarted (Need to implement things like onResume/onPause etc.)~~
 
 ## Extra Goals
 * Will likely need to get this data from a different API
     * Best Attack and Defense Move Combos for each Pokemon
     * Add Pokemon Evolutions
-* Add Timed Death on Database via column in database for data
+* ~~Add Timed Death on Database via column in database for data~~

@@ -54,10 +54,11 @@ class PokemonMoveDetailedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val moveName = arguments!!.getString(helper.POKEMON_MOVE_NAME).toString()
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                viewModel.getMove(arguments!!.getString(helper.POKEMON_MOVE_NAME).toString())
+                viewModel.getMove(moveName)
             } catch (e: IOException) {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
             } catch (e: Exception) {

@@ -34,7 +34,8 @@ abstract class PokemonGoStatsRoomDatabase : RoomDatabase() {
                     PokemonGoStatsRoomDatabase::class.java,
 
                     "pokemon_database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 return instance
             }
