@@ -9,6 +9,7 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * [Android Room](https://developer.android.com/topic/libraries/architecture/room) - A wrapper on SQLite database handling/cache for API Data
 * [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel) - To handle database changes and persist code for views
 * [Live Data](https://developer.android.com/topic/libraries/architecture/livedata) - To monitor changes to the database and assist in populating it to the views
+* [Material Design Icons](https://github.com/konifar/android-material-design-icon-generator-plugin) - Grants access to a large database of icons from [Material.io](https://material.io/resources/icons/?style=baseline) to use in your Android Studio Project
 * Kotlin
 
 ## How it works
