@@ -9,7 +9,7 @@
     </style>
 
     <!-- Added Fonts -->
-    <style name="AppTheme.TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"></style>
+    <style name="AppTheme.TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat" />
 
     <style name="AppTheme.TextAppearance.AppCompat.Body1" parent="AppTheme.TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/source_serif_pro_semibold</item>

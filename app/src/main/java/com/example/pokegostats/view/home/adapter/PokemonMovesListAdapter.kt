@@ -3,22 +3,28 @@ package com.example.pokegostats.view.home.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokegostats.room.entity.PokemonMovesEntity
 import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.custom.PokemonMovesRowView
 import com.example.pokegostats.view.move.detailed.PokemonMoveDetailedActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
-class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMovesListAdapter.PokemonMovesViewHolder>() {
+class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMovesListAdapter.PokemonMovesViewHolder>(),
+    Filterable {
     private val context: Context = context
     private val helper: PokemonHelper = PokemonHelper.instance
 
     // Cached copy of Pokemon Moves
-    private var pokemonMoves = emptyList<PokemonMovesEntity>()
+    private var moves = emptyList<PokemonMovesEntity>()
+    private var movesFiltered = emptyList<PokemonMovesEntity>()
 
     // Gets the number of pokemon in the list
     override fun getItemCount(): Int {
-        return pokemonMoves.size
+        return movesFiltered.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonMovesViewHolder {
@@ -27,20 +33,59 @@ class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMo
 
     // Binds each move in the ArrayList to PokemonMovesRowView
     override fun onBindViewHolder(holder: PokemonMovesViewHolder, position: Int) {
-        holder.rowView.setup(pokemonMoves[position])
+        holder.rowView.setup(movesFiltered[position])
         holder.rowView.setOnClickListener {
             val intent = Intent(context, PokemonMoveDetailedActivity::class.java)
-            intent.putExtra(helper.POKEMON_MOVE_NAME, pokemonMoves[position].name)
+            intent.putExtra(helper.POKEMON_MOVE_NAME, movesFiltered[position].name)
             context.startActivity(intent)
         }
     }
 
-    internal fun setPokemonMoves(pokemonMoves: List<PokemonMovesEntity>) {
-        this.pokemonMoves = pokemonMoves
+    internal fun setPokemonMoves(moves: List<PokemonMovesEntity>) {
+        this.moves = moves
+        this.movesFiltered = moves
         notifyDataSetChanged()
     }
 
     inner class PokemonMovesViewHolder (view: PokemonMovesRowView) : RecyclerView.ViewHolder(view) {
         val rowView = view
+    }
+
+    /**
+     * Filters on Move Name and Move Type
+     */
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val userInputString = charSequence.toString()
+                if (userInputString.isEmpty()) {
+                    movesFiltered = moves
+                } else {
+                    val filteredList = ArrayList<PokemonMovesEntity>()
+
+                    // Check each row to see if query matches Pokemon Name or Type
+                    for (row in moves) {
+                        val type = row.typeName.toLowerCase(Locale.getDefault())
+                        val moveName = row.name.toLowerCase(Locale.getDefault())
+                        val strCheck = userInputString.toLowerCase(Locale.getDefault())
+                        if (moveName.contains(strCheck) || type.contains(strCheck)) {
+                            filteredList.add(row)
+                        }
+                    }
+                    movesFiltered = filteredList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = movesFiltered
+                return filterResults
+            }
+
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+                movesFiltered = filterResults.values as ArrayList<PokemonMovesEntity>
+
+                // refresh the list with filtered data
+                notifyDataSetChanged()
+            }
+        }
     }
 }

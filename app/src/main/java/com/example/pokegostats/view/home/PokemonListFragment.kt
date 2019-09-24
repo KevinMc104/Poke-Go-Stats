@@ -2,9 +2,8 @@ package com.example.pokegostats.view.home
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +20,7 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
-class PokemonListFragment : Fragment() {
+class PokemonListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     // Reference to the RecyclerView adapter
     private lateinit var adapter: PokemonListAdapter
@@ -32,11 +31,10 @@ class PokemonListFragment : Fragment() {
         fun newInstance() = PokemonListFragment()
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        // TODO: Implement Search Menu with search functionality on RecyclerView
-//        setHasOptionsMenu(true)
-//    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -55,22 +53,23 @@ class PokemonListFragment : Fragment() {
         return inflater.inflate(R.layout.pokemon_list_fragment, container, false)
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater!!.inflate(R.menu.main_menu, menu)
-//        val searchItem: MenuItem = menu!!.findItem(R.id.action_search)
-//        searchItem.expandActionView()
-//        val searchView = searchItem.actionView as SearchView
-//
-//    }
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater!!.inflate(R.menu.main_menu, menu)
+        val searchItem: MenuItem = menu!!.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+    }
 
-//    override fun onQueryTextChange(query: String) {
-//
-//    }
-//
-//    override fun onQueryTextSubmit(query: String) {
-//
-//    }
+    override fun onQueryTextChange(query: String): Boolean {
+        adapter.filter.filter(query)
+        return false
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        adapter.filter.filter(query)
+        return false
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

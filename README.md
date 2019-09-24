@@ -21,10 +21,13 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * Publish finished product to Google Play Store
 
 ## TODO
-* Add Error Interceptor in HTTP3 Client for Retrofit
-* Implement Search feature for Pokemon and Moves
-    * Sort by Max CP, Name, Type, Max CP+Type
-    * Searchable Pokemon Names/Moves
+* Implement Search/Sort feature for Pokemon and Moves
+    * Sort by Max CP, Max CP+Type, Pokemon Name, Pokemon Types, Move Name, Move Types, Move Power
+    * ~~Searchable Pokemon Name, Pokemon Types~~
+    * ~~Searchable Move Name, Move Types~~
+* Add scrollable headers to Pokemon/Move Lists
+    * Pokemon Name, Max CP, Pokemon Type
+    * Move Name, Power, Move Type
 * Import images of Pokemon, Moves, and Weather conditions as drawables
 * Tweak colors/styles to make the look/feel for UI better
 * Add detailed documentation of how the app works and present on Twitch live
@@ -50,4 +53,5 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * Will likely need to get this data from a different API
     * Best Attack and Defense Move Combos for each Pokemon
     * Add Pokemon Evolutions
+* Add Database migration when updates roll around for app
 * ~~Add Timed Death on Database via column in database for data~~
