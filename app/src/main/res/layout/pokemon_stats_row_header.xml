@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/app_whitespace_size_large_material"
+    android:layout_marginEnd="@dimen/app_whitespace_size_large_material">
+
+    <TextView
+        android:id="@+id/tv_menu_pokemon_name_header"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="3"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:text="@string/pokemon_form_header"
+        tools:text="Pokemon(Form)" />
+
+    <TextView
+        android:id="@+id/tv_menu_max_cp_header"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_whitespace_size_medium_material"
+        android:layout_marginBottom="@dimen/app_whitespace_size_medium_material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="3"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:text="@string/max_cp_header"
+        tools:text="Max CP" />
+
+    <TextView
+        android:id="@+id/tv_menu_type_header"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="3"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:text="@string/types_header"
+        tools:text="Type"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".66" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

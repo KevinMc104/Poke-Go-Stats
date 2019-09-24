@@ -8,15 +8,16 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokegostats.room.entity.PokemonMovesEntity
 import com.example.pokegostats.service.PokemonHelper
+import com.example.pokegostats.view.custom.PokemonMovesRowHeaderView
 import com.example.pokegostats.view.custom.PokemonMovesRowView
 import com.example.pokegostats.view.move.detailed.PokemonMoveDetailedActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMovesListAdapter.PokemonMovesViewHolder>(),
-    Filterable {
-    private val context: Context = context
+class PokemonMovesListAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
     private val helper: PokemonHelper = PokemonHelper.instance
+    private val TYPE_HEADER: Int = 0
+    private val TYPE_ITEM: Int = 1
 
     // Cached copy of Pokemon Moves
     private var moves = emptyList<PokemonMovesEntity>()
@@ -24,21 +25,42 @@ class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMo
 
     // Gets the number of pokemon in the list
     override fun getItemCount(): Int {
-        return movesFiltered.size
+        return movesFiltered.size + 1
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonMovesViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if(viewType == TYPE_HEADER) {
+            return PokemonMovesHeaderViewHolder(PokemonMovesRowHeaderView(parent.context))
+        }
         return PokemonMovesViewHolder(PokemonMovesRowView(parent.context))
     }
 
     // Binds each move in the ArrayList to PokemonMovesRowView
-    override fun onBindViewHolder(holder: PokemonMovesViewHolder, position: Int) {
-        holder.rowView.setup(movesFiltered[position])
-        holder.rowView.setOnClickListener {
-            val intent = Intent(context, PokemonMoveDetailedActivity::class.java)
-            intent.putExtra(helper.POKEMON_MOVE_NAME, movesFiltered[position].name)
-            context.startActivity(intent)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(holder is PokemonMovesViewHolder) {
+            val currItem = getItem(position)
+            holder.rowView.setup(currItem)
+            holder.rowView.setOnClickListener {
+                val intent = Intent(context, PokemonMoveDetailedActivity::class.java)
+                intent.putExtra(helper.POKEMON_MOVE_NAME, currItem.name)
+                context.startActivity(intent)
+            }
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (isPositionHeader(position)) {
+            return TYPE_HEADER
+        }
+        return TYPE_ITEM
+    }
+
+    private fun isPositionHeader(position: Int): Boolean {
+        return position == 0
+    }
+
+    private fun getItem(position: Int): PokemonMovesEntity {
+        return movesFiltered[position - 1]
     }
 
     internal fun setPokemonMoves(moves: List<PokemonMovesEntity>) {
@@ -50,6 +72,8 @@ class PokemonMovesListAdapter(context: Context) : RecyclerView.Adapter<PokemonMo
     inner class PokemonMovesViewHolder (view: PokemonMovesRowView) : RecyclerView.ViewHolder(view) {
         val rowView = view
     }
+
+    inner class PokemonMovesHeaderViewHolder(view: PokemonMovesRowHeaderView) : RecyclerView.ViewHolder(view)
 
     /**
      * Filters on Move Name and Move Type

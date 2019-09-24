@@ -8,14 +8,16 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokegostats.room.entity.PokemonFormsTypesWeatherBoosts
 import com.example.pokegostats.service.PokemonHelper
+import com.example.pokegostats.view.custom.PokemonStatsRowHeaderView
 import com.example.pokegostats.view.custom.PokemonStatsRowView
 import com.example.pokegostats.view.pokemon.detailed.PokemonDetailedActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PokemonListAdapter(context: Context) : RecyclerView.Adapter<PokemonListAdapter.PokemonListViewHolder>(), Filterable {
-    private val context: Context = context
+class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
     private val helper: PokemonHelper = PokemonHelper.instance
+    private val TYPE_HEADER: Int = 0
+    private val TYPE_ITEM: Int = 1
 
     // Cached copy of Pokemon and Pokemon Types
     private var pokemon = emptyList<PokemonFormsTypesWeatherBoosts>()
@@ -23,24 +25,45 @@ class PokemonListAdapter(context: Context) : RecyclerView.Adapter<PokemonListAda
 
     // Gets the number of pokemon in the list
     override fun getItemCount(): Int {
-        return pokemonFiltered.size
+        return pokemonFiltered.size + 1
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if(viewType == TYPE_HEADER) {
+            return PokemonHeaderViewHolder(PokemonStatsRowHeaderView(parent.context))
+        }
         return PokemonListViewHolder(PokemonStatsRowView(parent.context))
     }
 
     // Binds each pokemon in the ArrayList to PokemonStatsRowView
-    override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) {
-        holder.rowView.setup(pokemonFiltered[position])
-        val pokemonId = pokemonFiltered[position].pokemon_id
-        val formId = pokemonFiltered[position].FORMS_LIST!![0]
-        holder.rowView.setOnClickListener {
-            val intent = Intent(context, PokemonDetailedActivity::class.java)
-            intent.putExtra(helper.POKEMON_ID, pokemonId.toString())
-            intent.putExtra(helper.POKEMON_FORM_ID, formId)
-            context.startActivity(intent)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(holder is PokemonListViewHolder) {
+            val currItem = getItem(position)
+            holder.rowView.setup(currItem)
+            val pokemonId = currItem.pokemon_id
+            val formId = currItem.FORMS_LIST!![0]
+            holder.rowView.setOnClickListener {
+                val intent = Intent(context, PokemonDetailedActivity::class.java)
+                intent.putExtra(helper.POKEMON_ID, pokemonId.toString())
+                intent.putExtra(helper.POKEMON_FORM_ID, formId)
+                context.startActivity(intent)
+            }
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (isPositionHeader(position)) {
+            return TYPE_HEADER
+        }
+        return TYPE_ITEM
+    }
+
+    private fun isPositionHeader(position: Int): Boolean {
+        return position == 0
+    }
+
+    private fun getItem(position: Int): PokemonFormsTypesWeatherBoosts {
+        return pokemonFiltered[position - 1]
     }
 
     internal fun setPokemonFormsTypesWeatherBoosts(pokemonFormsTypesWeatherBoosts: List<PokemonFormsTypesWeatherBoosts>) {
@@ -52,6 +75,8 @@ class PokemonListAdapter(context: Context) : RecyclerView.Adapter<PokemonListAda
     inner class PokemonListViewHolder(view: PokemonStatsRowView) : RecyclerView.ViewHolder(view) {
         val rowView = view
     }
+
+    inner class PokemonHeaderViewHolder(view: PokemonStatsRowHeaderView) : RecyclerView.ViewHolder(view)
 
     /**
      * Filters on Pokemon Name and Pokemon Type

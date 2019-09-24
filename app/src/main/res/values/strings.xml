@@ -10,4 +10,12 @@
 
     <string name="pokemon_id">Pokemon Id</string>
     <string name="pokemon_form_name">Pokemon Form Name</string>
+
+    <string name="pokemon_form_header"><u>Pokemon(Form)</u></string>
+    <string name="max_cp_header"><u>Max CP</u></string>
+    <string name="types_header"><u>Types</u></string>
+
+    <string name="move_name_header"><u>Move Name</u></string>
+    <string name="move_power_header"><u>Power</u></string>
+    <string name="move_type_header"><u>Type</u></string>
 </resources>
