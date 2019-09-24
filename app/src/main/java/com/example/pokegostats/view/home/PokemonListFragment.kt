@@ -55,10 +55,45 @@ class PokemonListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.main_menu, menu)
+        inflater!!.inflate(R.menu.pokemon_menu, menu)
         val searchItem: MenuItem = menu!!.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //A String for the message to be displayed in a Toast
+        var msg = ""
+        //Switch and case on the MenuItem object's id
+        when (item.itemId) {
+            R.id.sort_default -> {
+                msg = "Default Sorting"
+                adapter.sortDefault()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.sort_poke_name_asc -> {
+                msg = "sorting by Pokemon Name Ascending..."
+                adapter.sortPokeNameAscending()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.sort_poke_name_desc -> {
+                msg = "sorting by Pokemon Name Descending..."
+                adapter.sortPokeNameDescending()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.sort_max_cp_max_min -> {
+                msg = "sorting by Max CP Max->Min..."
+                adapter.sortMaxCpMaxMin()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.sort_max_cp_min_max -> {
+                msg = "sorting by Max CP Min->Max..."
+                adapter.sortMaxCpMinMax()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+        }
+        adapter.notifyDataSetChanged()
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onQueryTextChange(query: String): Boolean {

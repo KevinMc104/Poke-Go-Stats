@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <item android:id="@+id/item_sort"
+        android:title="@string/sort"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        app:showAsAction="ifRoom">
+
+        <menu>
+            <item android:id="@+id/sort_default"
+                android:title="@string/sort_by_default"/>
+            <item android:id="@+id/sort_poke_name_asc"
+                android:title="@string/sort_by_poke_name_asc"/>
+            <item android:id="@+id/sort_poke_name_desc"
+                android:title="@string/sort_by_poke_name_desc"/>
+            <item android:id="@+id/sort_max_cp_max_min"
+                android:title="@string/sort_by_max_cp_max_min"/>
+            <item android:id="@+id/sort_max_cp_min_max"
+                android:title="@string/sort_by_max_cp_min_max"/>
+        </menu>
+    </item>
+</menu>

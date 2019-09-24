@@ -23,17 +23,18 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 
 ## TODO
 * Implement Search/Sort feature for Pokemon and Moves
-    * Sort by Max CP, Max CP+Type, Pokemon Name, Pokemon Types, Move Name, Move Types, Move Power
+    * Sort by Max CP+Type, Pokemon Types, Move Types
+    * ~~Sort by Max CP, Pokemon Name, Move Name, Move Power~~
     * ~~Searchable Pokemon Name, Pokemon Types~~
     * ~~Searchable Move Name, Move Types~~
-* Add scrollable headers to Pokemon/Move Lists
-    * Pokemon Name, Max CP, Pokemon Type
-    * Move Name, Power, Move Type
 * Import images of Pokemon, Moves, and Weather conditions as drawables
 * Tweak colors/styles to make the look/feel for UI better
 * Add detailed documentation of how the app works and present on Twitch live
     * Include screenshots of code and of the running app in written documentation
     * Add live video recording to YouTube to be shared
+* ~~Add headers to Pokemon/Move Lists~~
+    * ~~Pokemon Name, Max CP, Pokemon Type~~
+    * ~~Move Name, Power, Move Type~~
 * ~~Implement all the endpoints from [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints and organize/insert into Android Room for use in Repository for ViewModel classes~~
 * ~~View Models for each group of Activities/Fragments~~
 * ~~Inject Service into Repository directly~~

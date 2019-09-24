@@ -14,10 +14,6 @@ import com.example.pokegostats.view.home.adapter.PokemonMovesListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.pokemon_moves_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.io.IOException
 import javax.inject.Inject
 
 class PokemonMovesListFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -55,10 +51,40 @@ class PokemonMovesListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.main_menu, menu)
+        inflater!!.inflate(R.menu.move_menu, menu)
         val searchItem: MenuItem = menu!!.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //A String for the message to be displayed in a Toast
+        var msg = ""
+        //Switch and case on the MenuItem object's id
+        when (item.itemId) {
+            R.id.sort_default -> {
+                msg = "Default Sorting"
+                adapter.sortDefault()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.sort_move_name_desc -> {
+                msg = "sorting by Move Name Descending..."
+                adapter.sortMoveNameDescending()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.sort_power_max_min -> {
+                msg = "sorting by Power Max->Min..."
+                adapter.sortPowerMaxMin()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.sort_power_min_max -> {
+                msg = "sorting by Power Min->Max..."
+                adapter.sortPowerMinMax()
+                Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+        }
+        adapter.notifyDataSetChanged()
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onQueryTextChange(query: String): Boolean {

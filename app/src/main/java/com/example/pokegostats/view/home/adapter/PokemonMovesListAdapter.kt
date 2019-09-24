@@ -64,9 +64,29 @@ class PokemonMovesListAdapter(private val context: Context): RecyclerView.Adapte
     }
 
     internal fun setPokemonMoves(moves: List<PokemonMovesEntity>) {
-        this.moves = moves
-        this.movesFiltered = moves
+        this.moves = moves.sortedWith(compareBy(PokemonMovesEntity::name)).toMutableList()
+        this.movesFiltered = moves.sortedWith(compareBy(PokemonMovesEntity::name)).toMutableList()
         notifyDataSetChanged()
+    }
+
+    fun sortDefault() {
+        moves = moves.sortedWith(compareBy(PokemonMovesEntity::name)).toMutableList()
+        movesFiltered = movesFiltered.sortedWith(compareBy(PokemonMovesEntity::name)).toMutableList()
+    }
+
+    fun sortMoveNameDescending() {
+        moves = moves.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER){it.name}).toMutableList()
+        movesFiltered = movesFiltered.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER){it.name}).toMutableList()
+    }
+
+    fun sortPowerMaxMin() {
+        moves = moves.sortedWith(compareByDescending{it.power}).toMutableList()
+        movesFiltered = movesFiltered.sortedWith(compareByDescending{it.power}).toMutableList()
+    }
+
+    fun sortPowerMinMax() {
+        moves = moves.sortedWith(compareBy(PokemonMovesEntity::power)).toMutableList()
+        movesFiltered = movesFiltered.sortedWith(compareBy(PokemonMovesEntity::power)).toMutableList()
     }
 
     inner class PokemonMovesViewHolder (view: PokemonMovesRowView) : RecyclerView.ViewHolder(view) {

@@ -18,4 +18,16 @@
     <string name="move_name_header"><u>Move Name</u></string>
     <string name="move_power_header"><u>Power</u></string>
     <string name="move_type_header"><u>Type</u></string>
+
+    <string name="sort">Sort</string>
+    <string name="sort_by_default">Sort by Default</string>
+    <string name="sort_by_poke_name_asc">Sort by Name(Asc)</string>
+    <string name="sort_by_poke_name_desc">Sort by Name(Desc)</string>
+    <string name="sort_by_max_cp_max_min">Sort by Max CP(Max->Min)</string>
+    <string name="sort_by_max_cp_min_max">Sort by Max CP(Min->Max)</string>
+
+    <string name="sort_by_move_name_asc">Sort by Name(Asc)</string>
+    <string name="sort_by_move_name_desc">Sort by Name(Desc)</string>
+    <string name="sort_by_power_max_min">Sort by Power(Max->Min)</string>
+    <string name="sort_by_power_min_max">Sort by Power(Min->Max)</string>
 </resources>

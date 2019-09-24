@@ -66,10 +66,35 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
         return pokemonFiltered[position - 1]
     }
 
-    internal fun setPokemonFormsTypesWeatherBoosts(pokemonFormsTypesWeatherBoosts: List<PokemonFormsTypesWeatherBoosts>) {
-        this.pokemon = pokemonFormsTypesWeatherBoosts
-        this.pokemonFiltered = pokemonFormsTypesWeatherBoosts
+    internal fun setPokemonFormsTypesWeatherBoosts(pokemon: List<PokemonFormsTypesWeatherBoosts>) {
+        this.pokemon = pokemon
+        this.pokemonFiltered = pokemon
         notifyDataSetChanged()
+    }
+
+    fun sortDefault() {
+        pokemon = pokemon.sortedWith(compareBy(PokemonFormsTypesWeatherBoosts::pokemon_id)).toMutableList()
+        pokemonFiltered = pokemonFiltered.sortedWith(compareBy(PokemonFormsTypesWeatherBoosts::pokemon_id)).toMutableList()
+    }
+
+    fun sortPokeNameAscending() {
+        pokemon = pokemon.sortedWith(compareBy(PokemonFormsTypesWeatherBoosts::pokemon_name)).toMutableList()
+        pokemonFiltered = pokemonFiltered.sortedWith(compareBy(PokemonFormsTypesWeatherBoosts::pokemon_name)).toMutableList()
+    }
+
+    fun sortPokeNameDescending() {
+        pokemon = pokemon.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER){it.pokemon_name.toString()}).toMutableList()
+        pokemonFiltered = pokemonFiltered.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER){it.pokemon_name.toString()}).toMutableList()
+    }
+
+    fun sortMaxCpMaxMin() {
+        pokemon = pokemon.sortedWith(compareByDescending{it.max_cp}).toMutableList()
+        pokemonFiltered = pokemonFiltered.sortedWith(compareByDescending{it.max_cp}).toMutableList()
+    }
+
+    fun sortMaxCpMinMax() {
+        pokemon = pokemon.sortedWith(compareBy(PokemonFormsTypesWeatherBoosts::max_cp)).toMutableList()
+        pokemonFiltered = pokemonFiltered.sortedWith(compareBy(PokemonFormsTypesWeatherBoosts::max_cp)).toMutableList()
     }
 
     inner class PokemonListViewHolder(view: PokemonStatsRowView) : RecyclerView.ViewHolder(view) {
