@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokegostats.R
 import com.example.pokegostats.room.entity.PokemonFormsTypesWeatherBoosts
 import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.custom.PokemonStatsRowHeaderView
@@ -19,9 +20,28 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
     private val TYPE_HEADER: Int = 0
     private val TYPE_ITEM: Int = 1
 
+    private var normalFilter: Boolean = false
+    private var fireFilter: Boolean = false
+    private var waterFilter: Boolean = false
+    private var electricFilter: Boolean = false
+    private var grassFilter: Boolean = false
+    private var iceFilter: Boolean = false
+    private var fightingFilter: Boolean = false
+    private var poisonFilter: Boolean = false
+    private var groundFilter: Boolean = false
+    private var flyingFilter: Boolean = false
+    private var psychicFilter: Boolean = false
+    private var bugFilter: Boolean = false
+    private var rockFilter: Boolean = false
+    private var ghostFilter: Boolean = false
+    private var dragonFilter: Boolean = false
+    private var darkFilter: Boolean = false
+    private var steelFilter: Boolean = false
+    private var fairyFilter: Boolean = false
+
     // Cached copy of Pokemon and Pokemon Types
-    private var pokemon = emptyList<PokemonFormsTypesWeatherBoosts>()
-    private var pokemonFiltered = emptyList<PokemonFormsTypesWeatherBoosts>()
+    private var pokemon: MutableList<PokemonFormsTypesWeatherBoosts> = mutableListOf()
+    private var pokemonFiltered: MutableList<PokemonFormsTypesWeatherBoosts> = mutableListOf()
 
     // Gets the number of pokemon in the list
     override fun getItemCount(): Int {
@@ -67,8 +87,8 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
     }
 
     internal fun setPokemonFormsTypesWeatherBoosts(pokemon: List<PokemonFormsTypesWeatherBoosts>) {
-        this.pokemon = pokemon
-        this.pokemonFiltered = pokemon
+        this.pokemon = pokemon.toMutableList()
+        this.pokemonFiltered = pokemon.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -97,6 +117,111 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
         pokemonFiltered = pokemonFiltered.sortedWith(compareBy(PokemonFormsTypesWeatherBoosts::max_cp)).toMutableList()
     }
 
+    fun filterByType(filter: String, filterFlag: Boolean) {
+        val filteredList = ArrayList<PokemonFormsTypesWeatherBoosts>()
+        setFilterFlag(filter, filterFlag)
+        val activeFilters = getActiveFilters()
+        when {
+            activeFilters.isNullOrEmpty() -> {
+                pokemonFiltered = pokemon
+                notifyDataSetChanged()
+            }
+            activeFilters.size == 1 -> {
+                for(item in pokemon) {
+                    if(hasType(item.TYPES_LIST!!, activeFilters[0])) filteredList.add(item)
+                }
+                pokemonFiltered = filteredList
+                notifyDataSetChanged()
+            }
+            else -> {
+                for(item in pokemon) {
+                    // Ignore any pokemon that don't have 2 types
+                    if(item.TYPES_LIST!!.size == 4) {
+                        if(checkBothTypes(activeFilters, item.TYPES_LIST!![1], item.TYPES_LIST!![3])) {
+                            filteredList.add(item)
+                        }
+                    }
+                }
+                pokemonFiltered = filteredList
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun checkBothTypes(filters: List<String>, type1: String, type2: String): Boolean {
+        var returnCheck = false
+        var firstCheck = false
+        var secondCheck = false
+        for(filter in filters) {
+            if(type1 == filter) {
+                firstCheck = true
+            }
+            if(type2 == filter) {
+                secondCheck = true
+            }
+        }
+        if(firstCheck && secondCheck) {
+            returnCheck = true
+        }
+        return returnCheck
+    }
+
+    private fun hasType(list: List<String>, filter: String): Boolean {
+        for(item in list) {
+            if(item == filter) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun setFilterFlag(type: String, isActive: Boolean) {
+        when(type) {
+            context.getString(R.string.normal) -> normalFilter = isActive
+            context.getString(R.string.fire) -> fireFilter = isActive
+            context.getString(R.string.water) -> waterFilter = isActive
+            context.getString(R.string.electric) -> electricFilter = isActive
+            context.getString(R.string.grass) -> grassFilter = isActive
+            context.getString(R.string.ice) -> iceFilter = isActive
+            context.getString(R.string.fighting) -> fightingFilter = isActive
+            context.getString(R.string.poison) -> poisonFilter = isActive
+            context.getString(R.string.ground) -> groundFilter = isActive
+            context.getString(R.string.flying) -> flyingFilter = isActive
+            context.getString(R.string.psychic) -> psychicFilter = isActive
+            context.getString(R.string.bug) -> bugFilter = isActive
+            context.getString(R.string.rock) -> rockFilter = isActive
+            context.getString(R.string.ghost) -> ghostFilter = isActive
+            context.getString(R.string.dragon) -> dragonFilter = isActive
+            context.getString(R.string.dark) -> darkFilter = isActive
+            context.getString(R.string.steel) -> steelFilter = isActive
+            context.getString(R.string.fairy) -> fairyFilter = isActive
+        }
+    }
+
+    private fun getActiveFilters(): List<String> {
+        val list = ArrayList<String>()
+        if(normalFilter) list.add(context.getString(R.string.normal))
+        if(fireFilter) list.add(context.getString(R.string.fire))
+        if(waterFilter) list.add(context.getString(R.string.water))
+        if(electricFilter) list.add(context.getString(R.string.electric))
+        if(grassFilter) list.add(context.getString(R.string.grass))
+        if(iceFilter) list.add(context.getString(R.string.ice))
+        if(fightingFilter) list.add(context.getString(R.string.fighting))
+        if(poisonFilter) list.add(context.getString(R.string.poison))
+        if(groundFilter) list.add(context.getString(R.string.ground))
+        if(flyingFilter) list.add(context.getString(R.string.flying))
+        if(psychicFilter) list.add(context.getString(R.string.psychic))
+        if(bugFilter) list.add(context.getString(R.string.bug))
+        if(rockFilter) list.add(context.getString(R.string.rock))
+        if(ghostFilter) list.add(context.getString(R.string.ghost))
+        if(dragonFilter) list.add(context.getString(R.string.dragon))
+        if(darkFilter) list.add(context.getString(R.string.dark))
+        if(steelFilter) list.add(context.getString(R.string.steel))
+        if(fairyFilter) list.add(context.getString(R.string.fairy))
+
+        return list
+    }
+
     inner class PokemonListViewHolder(view: PokemonStatsRowView) : RecyclerView.ViewHolder(view) {
         val rowView = view
     }
@@ -104,7 +229,7 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
     inner class PokemonHeaderViewHolder(view: PokemonStatsRowHeaderView) : RecyclerView.ViewHolder(view)
 
     /**
-     * Filters on Pokemon Name and Pokemon Type
+     * Search Filters on Pokemon Name and Pokemon Type
      */
     override fun getFilter(): Filter {
         return object : Filter() {

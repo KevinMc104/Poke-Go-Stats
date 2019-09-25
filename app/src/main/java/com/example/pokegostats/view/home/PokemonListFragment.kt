@@ -72,24 +72,222 @@ class PokemonListFragment : Fragment(), SearchView.OnQueryTextListener {
                 Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
             }
             R.id.sort_poke_name_asc -> {
-                msg = "sorting by Pokemon Name Ascending..."
+                msg = "Sorting by Pokemon Name Ascending..."
                 adapter.sortPokeNameAscending()
                 Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
             }
             R.id.sort_poke_name_desc -> {
-                msg = "sorting by Pokemon Name Descending..."
+                msg = "Sorting by Pokemon Name Descending..."
                 adapter.sortPokeNameDescending()
                 Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
             }
             R.id.sort_max_cp_max_min -> {
-                msg = "sorting by Max CP Max->Min..."
+                msg = "Sorting by Max CP Max->Min..."
                 adapter.sortMaxCpMaxMin()
                 Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
             }
             R.id.sort_max_cp_min_max -> {
-                msg = "sorting by Max CP Min->Max..."
+                msg = "Sorting by Max CP Min->Max..."
                 adapter.sortMaxCpMinMax()
                 Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+            }
+            R.id.pokemon_normal_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.normal), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Normal Type..."
+                    adapter.filterByType(getString(R.string.normal), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_fire_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.fire), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Fire Type..."
+                    adapter.filterByType(getString(R.string.fire), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_water_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.water), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Water Type..."
+                    adapter.filterByType(getString(R.string.water), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_electric_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.electric), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Electric Type..."
+                    adapter.filterByType(getString(R.string.electric), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_grass_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.grass), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Grass Type..."
+                    adapter.filterByType(getString(R.string.grass), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_ice_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.ice), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Ice Type..."
+                    adapter.filterByType(getString(R.string.ice), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_fighting_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.fighting), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Fighting Type..."
+                    adapter.filterByType(getString(R.string.fighting), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_poison_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.poison), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Poison Type..."
+                    adapter.filterByType(getString(R.string.poison), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_ground_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.ground), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Ground Type..."
+                    adapter.filterByType(getString(R.string.ground), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_flying_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.flying), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Flying Type..."
+                    adapter.filterByType(getString(R.string.flying), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_psychic_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.psychic), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Psychic Type..."
+                    adapter.filterByType(getString(R.string.psychic), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_bug_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.bug), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Bug Type..."
+                    adapter.filterByType(getString(R.string.bug), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_rock_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.rock), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Rock Type..."
+                    adapter.filterByType(getString(R.string.rock), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_ghost_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.ghost), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Ghost Type..."
+                    adapter.filterByType(getString(R.string.ghost), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_dragon_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.dragon), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Dragon Type..."
+                    adapter.filterByType(getString(R.string.dragon), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_dark_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.dark), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Dark Type..."
+                    adapter.filterByType(getString(R.string.dark), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_steel_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.steel), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Steel Type..."
+                    adapter.filterByType(getString(R.string.steel), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
+            }
+            R.id.pokemon_fairy_filter -> {
+                if(item.isChecked) {
+                    item.isChecked = false
+                    adapter.filterByType(getString(R.string.fairy), false)
+                } else {
+                    item.isChecked = true
+                    msg = "Filtering by Fairy Type..."
+                    adapter.filterByType(getString(R.string.fairy), true)
+                    Snackbar.make(activity!!.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show()
+                }
             }
         }
         adapter.notifyDataSetChanged()

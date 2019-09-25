@@ -24,4 +24,66 @@
                 android:title="@string/sort_by_max_cp_min_max"/>
         </menu>
     </item>
+    <item android:id="@+id/pokemon_type_filter"
+        android:title="@string/sort"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        app:showAsAction="ifRoom">
+
+        <group android:checkableBehavior="all">
+            <item android:id="@+id/pokemon_normal_filter"
+                android:title="@string/normal_filter">
+            </item>
+            <item android:id="@+id/pokemon_fire_filter"
+                android:title="@string/fire_filter">
+            </item>
+            <item android:id="@+id/pokemon_water_filter"
+                android:title="@string/water_filter">
+            </item>
+            <item android:id="@+id/pokemon_electric_filter"
+                android:title="@string/electric_filter">
+            </item>
+            <item android:id="@+id/pokemon_grass_filter"
+                android:title="@string/grass_filter">
+            </item>
+            <item android:id="@+id/pokemon_ice_filter"
+                android:title="@string/ice_filter">
+            </item>
+            <item android:id="@+id/pokemon_fighting_filter"
+                android:title="@string/fighting_filter">
+            </item>
+            <item android:id="@+id/pokemon_poison_filter"
+                android:title="@string/poison_filter">
+            </item>
+            <item android:id="@+id/pokemon_ground_filter"
+                android:title="@string/ground_filter">
+            </item>
+            <item android:id="@+id/pokemon_flying_filter"
+                android:title="@string/flying_filter">
+            </item>
+            <item android:id="@+id/pokemon_psychic_filter"
+                android:title="@string/psychic_filter">
+            </item>
+            <item android:id="@+id/pokemon_bug_filter"
+                android:title="@string/bug_filter">
+            </item>
+            <item android:id="@+id/pokemon_rock_filter"
+                android:title="@string/rock_filter">
+            </item>
+            <item android:id="@+id/pokemon_ghost_filter"
+                android:title="@string/ghost_filter">
+            </item>
+            <item android:id="@+id/pokemon_dragon_filter"
+                android:title="@string/dragon_filter">
+            </item>
+            <item android:id="@+id/pokemon_dark_filter"
+                android:title="@string/dark_filter">
+            </item>
+            <item android:id="@+id/pokemon_steel_filter"
+                android:title="@string/steel_filter">
+            </item>
+            <item android:id="@+id/pokemon_fairy_filter"
+                android:title="@string/fairy_filter">
+            </item>
+        </group>
+    </item>
 </menu>

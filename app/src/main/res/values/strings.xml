@@ -1,24 +1,46 @@
 <resources>
     <string name="app_name">Poke Go Stats</string>
 
+    <!--Types-->
+    <string name="reset">Reset</string>
+    <string name="normal">Normal</string>
+    <string name="fire">Fire</string>
+    <string name="water">Water</string>
+    <string name="electric">Electric</string>
+    <string name="grass">Grass</string>
+    <string name="ice">Ice</string>
+    <string name="fighting">Fighting</string>
+    <string name="poison">Poison</string>
+    <string name="ground">Ground</string>
+    <string name="flying">Flying</string>
+    <string name="psychic">Psychic</string>
+    <string name="bug">Bug</string>
+    <string name="rock">Rock</string>
+    <string name="ghost">Ghost</string>
+    <string name="dragon">Dragon</string>
+    <string name="dark">Dark</string>
+    <string name="steel">Steel</string>
+    <string name="fairy">Fairy</string>
+
+    <!--Tab Menu Strings-->
     <string name="pokemon">Pokemon</string>
     <string name="moves">Moves</string>
     <string name="stats">Stats</string>
     <string name="weather">Weather</string>
 
-    <string name="action_search">Search</string>
-
-    <string name="pokemon_id">Pokemon Id</string>
-    <string name="pokemon_form_name">Pokemon Form Name</string>
-
+    <!--Header Strings-->
     <string name="pokemon_form_header"><u>Pokemon(Form)</u></string>
     <string name="max_cp_header"><u>Max CP</u></string>
     <string name="types_header"><u>Types</u></string>
-
     <string name="move_name_header"><u>Move Name</u></string>
     <string name="move_power_header"><u>Power</u></string>
     <string name="move_type_header"><u>Type</u></string>
 
+    <!--Option Menu Strings-->
+    <!--Title-->
+    <string name="action_search">Search</string>
+
+    <!--Pokemon Menu List Items-->
     <string name="sort">Sort</string>
     <string name="sort_by_default">Sort by Default</string>
     <string name="sort_by_poke_name_asc">Sort by Name(Asc)</string>
@@ -26,8 +48,30 @@
     <string name="sort_by_max_cp_max_min">Sort by Max CP(Max->Min)</string>
     <string name="sort_by_max_cp_min_max">Sort by Max CP(Min->Max)</string>
 
+    <!--Move Menu List Items-->
     <string name="sort_by_move_name_asc">Sort by Name(Asc)</string>
     <string name="sort_by_move_name_desc">Sort by Name(Desc)</string>
     <string name="sort_by_power_max_min">Sort by Power(Max->Min)</string>
     <string name="sort_by_power_min_max">Sort by Power(Min->Max)</string>
+
+    <!--Pokemon/Move Type Menu List Items-->
+    <string name="default_filter">Default</string>
+    <string name="normal_filter">Normal</string>
+    <string name="fire_filter">Fire</string>
+    <string name="water_filter">Water</string>
+    <string name="electric_filter">Electric</string>
+    <string name="grass_filter">Grass</string>
+    <string name="ice_filter">Ice</string>
+    <string name="fighting_filter">Fighting</string>
+    <string name="poison_filter">Poison</string>
+    <string name="ground_filter">Ground</string>
+    <string name="flying_filter">Flying</string>
+    <string name="psychic_filter">Psychic</string>
+    <string name="bug_filter">Bug</string>
+    <string name="rock_filter">Rock</string>
+    <string name="ghost_filter">Ghost</string>
+    <string name="dragon_filter">Dragon</string>
+    <string name="dark_filter">Dark</string>
+    <string name="steel_filter">Steel</string>
+    <string name="fairy_filter">Fairy</string>
 </resources>

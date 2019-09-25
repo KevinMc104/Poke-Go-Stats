@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pokegostats.R
 import com.example.pokegostats.room.entity.PokemonMovesEntity
 import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.custom.PokemonMovesRowHeaderView
@@ -20,8 +21,8 @@ class PokemonMovesListAdapter(private val context: Context): RecyclerView.Adapte
     private val TYPE_ITEM: Int = 1
 
     // Cached copy of Pokemon Moves
-    private var moves = emptyList<PokemonMovesEntity>()
-    private var movesFiltered = emptyList<PokemonMovesEntity>()
+    private var moves: MutableList<PokemonMovesEntity> = mutableListOf()
+    private var movesFiltered: MutableList<PokemonMovesEntity> = mutableListOf()
 
     // Gets the number of pokemon in the list
     override fun getItemCount(): Int {
@@ -89,6 +90,20 @@ class PokemonMovesListAdapter(private val context: Context): RecyclerView.Adapte
         movesFiltered = movesFiltered.sortedWith(compareBy(PokemonMovesEntity::power)).toMutableList()
     }
 
+    fun filterByType(filter: String) {
+        if(filter == context.getString(R.string.reset)) {
+            movesFiltered = moves
+            notifyDataSetChanged()
+        } else {
+            val filteredList = ArrayList<PokemonMovesEntity>()
+            for(item in moves) {
+                if(item.typeName == filter) filteredList.add(item)
+            }
+            movesFiltered = filteredList
+            notifyDataSetChanged()
+        }
+    }
+
     inner class PokemonMovesViewHolder (view: PokemonMovesRowView) : RecyclerView.ViewHolder(view) {
         val rowView = view
     }
@@ -96,7 +111,7 @@ class PokemonMovesListAdapter(private val context: Context): RecyclerView.Adapte
     inner class PokemonMovesHeaderViewHolder(view: PokemonMovesRowHeaderView) : RecyclerView.ViewHolder(view)
 
     /**
-     * Filters on Move Name and Move Type
+     * Search Filters on Move Name and Move Type
      */
     override fun getFilter(): Filter {
         return object : Filter() {
