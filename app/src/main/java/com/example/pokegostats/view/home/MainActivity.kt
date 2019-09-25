@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.example.pokegostats.R
+import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.home.adapter.PokemonPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
+    private val helper: PokemonHelper = PokemonHelper.instance
     private lateinit var adapter: PokemonPagerAdapter
     private lateinit var viewModel: MainViewModel
 
@@ -24,6 +26,15 @@ class MainActivity : AppCompatActivity() {
 
         val vpPager = findViewById<ViewPager>(R.id.view_pager_main)
         adapter = PokemonPagerAdapter(supportFragmentManager)
+        var retryCalls = false
+        if (intent.extras != null) {
+            if (intent.extras!!.containsKey(helper.RETRY_CALLS)) {
+                retryCalls = intent.extras!!.getBoolean(helper.RETRY_CALLS)
+            }
+        }
+        if(retryCalls) {
+            adapter.setRetryCalls(retryCalls)
+        }
         vpPager.adapter = adapter
 
         val tabs = findViewById<View>(R.id.tab_layout_main) as TabLayout

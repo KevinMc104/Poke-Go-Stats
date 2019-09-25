@@ -10,6 +10,8 @@ class PokemonHelper {
     val POKEMON_ID: String = "Pokemon ID"
     val POKEMON_FORM_ID: String = "Pokemon Form ID"
     val POKEMON_MOVE_NAME: String = "Pokemon Move Name"
+    val ERROR_MESSAGE: String = "Error Message"
+    val RETRY_CALLS: String = "Retry Calls"
 
     companion object {
         val instance = PokemonHelper()

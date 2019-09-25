@@ -50,16 +50,13 @@ class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
         }
         return currDateOlder
     }
-    suspend fun insertAllData() {
+    suspend fun insertAllData(retryCalls: Boolean) {
         // Delete data and insert if older than 1 day or if date table is empty
-        if(dataIsOld()) {
+        if(dataIsOld() || retryCalls) {
             // Wipe Old Data
             pokemonDao.deleteAll()
             pokemonMovesDao.deleteAll()
             dateCacheDao.deleteAll()
-
-            // Insert a new timestamp
-            dateCacheDao.insertAllDateCacheEntries(DateCacheEntity(null, Calendar.getInstance().time))
 
             // Add Pokemon
             insertPokemonStats()
@@ -72,6 +69,9 @@ class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
 
             // Insert Detailed Stats
             updateDetailedPokemonData()
+
+            // Insert a new timestamp
+            dateCacheDao.insertAllDateCacheEntries(DateCacheEntity(null, Calendar.getInstance().time))
         }
         // Do not call out to RapidAPI to insert if the data is newer than 1 day
     }

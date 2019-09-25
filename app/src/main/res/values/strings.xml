@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Poke Go Stats</string>
 
+    <!--View Texts-->
+    <string name="retry_button">Retry</string>
+    <string name="error_message_user">You can retry the server calls by clicking the Retry button</string>
+
     <!--Types-->
     <string name="reset">Reset</string>
     <string name="normal">Normal</string>

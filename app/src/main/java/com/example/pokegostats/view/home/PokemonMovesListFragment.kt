@@ -59,7 +59,7 @@ class PokemonMovesListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //A String for the message to be displayed in a Toast
-        var msg = ""
+        var msg: String
         //Switch and case on the MenuItem object's id
         when (item.itemId) {
             R.id.sort_default -> {

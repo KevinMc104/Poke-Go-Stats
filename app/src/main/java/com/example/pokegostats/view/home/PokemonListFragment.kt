@@ -1,6 +1,7 @@
 package com.example.pokegostats.view.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -10,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokegostats.R
 import com.example.pokegostats.room.PokemonGoStatsRepository
+import com.example.pokegostats.service.PokemonHelper
+import com.example.pokegostats.view.error.ErrorActivity
 import com.example.pokegostats.view.home.adapter.PokemonListAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.AndroidSupportInjection
@@ -26,9 +29,14 @@ class PokemonListFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var adapter: PokemonListAdapter
     private lateinit var viewModel: PokemonListFragmentViewModel
     @Inject lateinit var repository: PokemonGoStatsRepository
+    private val helper: PokemonHelper = PokemonHelper.instance
 
     companion object {
-        fun newInstance() = PokemonListFragment()
+        fun newInstance(retryCalls: Boolean): PokemonListFragment = PokemonListFragment().apply {
+            val args = Bundle()
+            args.putBoolean(helper.RETRY_CALLS, retryCalls)
+            arguments = args
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +71,7 @@ class PokemonListFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //A String for the message to be displayed in a Toast
-        var msg = ""
+        val msg: String
         //Switch and case on the MenuItem object's id
         when (item.itemId) {
             R.id.sort_default -> {
@@ -316,11 +324,15 @@ class PokemonListFragment : Fragment(), SearchView.OnQueryTextListener {
         GlobalScope.launch (Dispatchers.Main) {
             // call out to Repository to get stats
             try {
-                viewModel.populateAllTables()
+                viewModel.populateAllTables(arguments!!.getBoolean(helper.RETRY_CALLS))
             } catch (e: IOException) {
-                Snackbar.make(activity!!.findViewById(android.R.id.content), "network failure :(", Snackbar.LENGTH_LONG).show()
+                val intent = Intent(context!!, ErrorActivity::class.java)
+                intent.putExtra(helper.ERROR_MESSAGE, "Network failure :(")
+                context!!.startActivity(intent)
             } catch (e: Exception) {
-                Snackbar.make(activity!!.findViewById(android.R.id.content), e.message.toString(), Snackbar.LENGTH_LONG).show()
+                val intent = Intent(context!!, ErrorActivity::class.java)
+                intent.putExtra(helper.ERROR_MESSAGE, e.message.toString())
+                context!!.startActivity(intent)
             }
         }
         viewModel.allPokemonFormsTypesWeatherBoosts.observe(this, Observer { pokemon ->

@@ -8,7 +8,7 @@
                 android:angle="270" />
             <stroke
                 android:width="3dp"
-                android:color="@color/Poison" />
+                android:color="@color/Fire" />
             <corners
                 android:radius="3dp" />
             <padding
@@ -22,12 +22,12 @@
     <item android:state_focused="true" >
         <shape>
             <gradient
-                android:endColor="@color/Fire"
-                android:startColor="@color/Water"
+                android:startColor="@color/darker_green"
+                android:endColor="@color/light_green"
                 android:angle="270" />
             <stroke
                 android:width="3dp"
-                android:color="@color/Grass" />
+                android:color="@color/Water" />
             <corners
                 android:radius="3dp" />
             <padding
@@ -41,12 +41,12 @@
     <item>
         <shape>
             <gradient
-                android:endColor="@color/Ghost"
-                android:startColor="@color/Psychic"
+                android:startColor="@color/darker_green"
+                android:endColor="@color/light_green"
                 android:angle="270" />
             <stroke
                 android:width="3dp"
-                android:color="@color/Flying" />
+                android:color="@color/Water" />
             <corners
                 android:radius="3dp" />
             <padding

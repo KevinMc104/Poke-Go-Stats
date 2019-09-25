@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/error_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pokemonGoAppBackground"
+    tools:context="com.example.pokegostats.view.home.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_error_message"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="5"
+        android:shadowDy="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_user_message"
+        tools:text="Error Message" />
+
+    <TextView
+        android:id="@+id/tv_user_message"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="5"
+        android:shadowDy="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/error_message_user"
+        tools:text="Error Message User" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_message"
+        android:text="@string/retry_button"
+        android:background="@drawable/round_button"
+        tools:text="Retry"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import com.example.pokegostats.view.home.PokemonListFragment
 import com.example.pokegostats.view.home.PokemonMovesListFragment
 
 class PokemonPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    private var retryCalls = false
 
     override fun getCount(): Int = 2
 
@@ -21,9 +22,13 @@ class PokemonPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         when (position) {
-            0 -> return PokemonListFragment.newInstance()
+            0 -> return PokemonListFragment.newInstance(retryCalls)
             1 -> return PokemonMovesListFragment.newInstance()
         }
         return null!!
+    }
+
+    fun setRetryCalls(retryCalls: Boolean) {
+        this.retryCalls = retryCalls
     }
 }

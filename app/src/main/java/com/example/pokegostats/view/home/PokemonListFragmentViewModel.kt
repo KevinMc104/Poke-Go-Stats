@@ -11,8 +11,8 @@ class PokemonListFragmentViewModel(application: Application, private val reposit
     : AndroidViewModel(application) {
     val allPokemonFormsTypesWeatherBoosts = repository.allPokemonFormsTypesWeatherBoosts
 
-    suspend fun populateAllTables() {
-        repository.insertAllData()
+    suspend fun populateAllTables(retryCalls: Boolean) {
+        repository.insertAllData(retryCalls)
     }
 
     companion object {

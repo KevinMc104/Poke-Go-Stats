@@ -124,16 +124,16 @@ class PokemonGoApiService(private val apiService: RapidPokemonGoApiService) {
         if(isSuccessful) {
             Log.i(endpointMessage, body)
         } else {
-            handleErrors(code, message)
+            handleErrors(code, message, endpointMessage)
         }
     }
 
-    private fun handleErrors(code: Int, message: String) {
+    private fun handleErrors(code: Int, message: String, endpointMessage: String) {
         when(code) {
-            401 -> throw UnauthenticatedException("Error Code 401: +$message")
-            403 -> throw UnauthorizedException("Error Code 403: +$message")
-            404 -> throw NotFoundException("Error Code 404: +$message")
-            500 -> throw ServerErrorException("Server is down - Code: 500 - +$message")
+            401 -> throw UnauthenticatedException("Error Code 401: $message - for $endpointMessage endpoint")
+            403 -> throw UnauthorizedException("Error Code 403: $message - for $endpointMessage endpoint")
+            404 -> throw NotFoundException("Error Code 404: $message - for $endpointMessage endpoint")
+            500 -> throw ServerErrorException("Server is down - Code: 500 - $message")
         }
     }
 }
