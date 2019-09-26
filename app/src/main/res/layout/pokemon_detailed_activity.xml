@@ -9,9 +9,10 @@
     tools:context=".view.pokemon.detailed.PokemonDetailedActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/pokemon_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/pokemon_bulbasaur"
+        android:src="@drawable/pokemon_1_bulbasaur"
         android:scaleType="centerInside"
         android:adjustViewBounds="true"
         app:layout_constraintDimensionRatio="H,1:1"

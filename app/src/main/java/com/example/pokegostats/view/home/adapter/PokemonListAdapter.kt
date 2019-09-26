@@ -62,10 +62,12 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
             holder.rowView.setup(currItem)
             val pokemonId = currItem.pokemon_id
             val formId = currItem.FORMS_LIST!![0]
+            val formName = currItem.FORMS_LIST!![1]
             holder.rowView.setOnClickListener {
                 val intent = Intent(context, PokemonDetailedActivity::class.java)
                 intent.putExtra(helper.POKEMON_ID, pokemonId.toString())
                 intent.putExtra(helper.POKEMON_FORM_ID, formId)
+                intent.putExtra(helper.POKEMON_FORM_NAME, formName)
                 context.startActivity(intent)
             }
         }

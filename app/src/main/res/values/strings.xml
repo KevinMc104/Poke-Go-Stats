@@ -78,4 +78,47 @@
     <string name="dark_filter">Dark</string>
     <string name="steel_filter">Steel</string>
     <string name="fairy_filter">Fairy</string>
+
+    <!--Pokemon Names-->
+    <string name="pokemon_1_bulbasaur">1</string>
+    <string name="pokemon_2_ivysaur">2</string>
+    <string name="pokemon_3_venusaur">3</string>
+    <string name="pokemon_4_charmander">4</string>
+    <string name="pokemon_5_charmeleon">5</string>
+    <string name="pokemon_6_charizard">6</string>
+    <string name="pokemon_7_squirtle">7</string>
+    <string name="pokemon_8_wartortle">8</string>
+    <string name="pokemon_9_blastoise">9</string>
+    <string name="pokemon_10_caterpie">10</string>
+    <string name="pokemon_11_metapod">11</string>
+    <string name="pokemon_12_butterfree">12</string>
+    <string name="pokemon_13_weedle">13</string>
+    <string name="pokemon_14_kakuna">14</string>
+    <string name="pokemon_15_beedrill">15</string>
+    <string name="pokemon_16_pidgey">16</string>
+    <string name="pokemon_17_pidgeotto">17</string>
+    <string name="pokemon_18_pidgeot">18</string>
+    <string name="pokemon_19_rattata">19</string>
+    <string name="pokemon_19_rattata_alola">19,Alola</string>
+    <string name="pokemon_20_raticate">20</string>
+    <string name="pokemon_20_raticate_alola">20,Alola</string>
+    <string name="pokemon_21_spearow">21</string>
+    <string name="pokemon_22_fearow">22</string>
+    <string name="pokemon_23_ekans">23</string>
+    <string name="pokemon_24_arbok">24</string>
+    <string name="pokemon_25_pikachu">25</string>
+    <string name="pokemon_26_raichu">26</string>
+    <string name="pokemon_26_raichu_alola">26,Alola</string>
+    <string name="pokemon_27_sandshrew">27</string>
+    <string name="pokemon_27_sandshrew_alola">27,Alola</string>
+    <string name="pokemon_28_sandslash">28</string>
+    <string name="pokemon_28_sandslash_alola">28,Alola</string>
+    <string name="pokemon_29_nidoran">29</string>
+    <string name="pokemon_30_nidorina">30</string>
+    <string name="pokemon_31_nidoqueen">31</string>
+    <string name="pokemon_32_nidoran">32</string>
+    <string name="pokemon_33_nidorino">33</string>
+    <string name="pokemon_34_nidoking">34</string>
+
+    <string name="pokemon_172_pichu">172</string>
 </resources>

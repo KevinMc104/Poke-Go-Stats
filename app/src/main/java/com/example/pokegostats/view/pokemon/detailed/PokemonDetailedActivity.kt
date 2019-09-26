@@ -9,6 +9,7 @@ import com.example.pokegostats.R
 import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.pokemon.detailed.adapter.PokemonDetailedPagerAdapter
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.pokemon_detailed_activity.*
 
 class PokemonDetailedActivity : AppCompatActivity() {
 
@@ -26,10 +27,12 @@ class PokemonDetailedActivity : AppCompatActivity() {
 
         val vpPager = findViewById<ViewPager>(R.id.view_pager_detailed)
         adapter = PokemonDetailedPagerAdapter(supportFragmentManager)
-        val pokemonId = intent.extras!!.getString(helper.POKEMON_ID)!!.toInt()
+        val pokemonId = intent.extras!!.getString(helper.POKEMON_ID)!!
         val formId = intent.extras!!.getString(helper.POKEMON_FORM_ID)!!.toInt()
+        val formName = intent.extras!!.getString(helper.POKEMON_FORM_NAME)!!
+        helper.setPokemonImage(this, pokemon_image, pokemonId, formName)
         adapter.setPokemonFormId(formId)
-        adapter.setPokemonId(pokemonId)
+        adapter.setPokemonId(pokemonId.toInt())
         vpPager.adapter = adapter
 
         val tabs = findViewById<View>(R.id.tab_layout_detailed) as TabLayout
