@@ -1,6 +1,7 @@
 package com.example.pokegostats.view.pokemon.detailed
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -25,17 +26,37 @@ class PokemonDetailedActivity : AppCompatActivity() {
         val factory = PokemonDetailedActivityViewModel.Companion.Factory(this.application)
         viewModel = ViewModelProvider(this, factory).get(PokemonDetailedActivityViewModel::class.java)
 
-        val vpPager = findViewById<ViewPager>(R.id.view_pager_detailed)
-        adapter = PokemonDetailedPagerAdapter(supportFragmentManager)
         val pokemonId = intent.extras!!.getString(helper.POKEMON_ID)!!
+        val pokemonName = intent.extras!!.getString(helper.POKEMON_NAME)!!
         val formId = intent.extras!!.getString(helper.POKEMON_FORM_ID)!!.toInt()
         val formName = intent.extras!!.getString(helper.POKEMON_FORM_NAME)!!
-        helper.setPokemonImage(this, pokemon_image, pokemonId, formName)
+        setPokemonImage(pokemonId, pokemonName, formName)
+
+        val vpPager = findViewById<ViewPager>(R.id.view_pager_detailed)
+        adapter = PokemonDetailedPagerAdapter(supportFragmentManager)
         adapter.setPokemonFormId(formId)
         adapter.setPokemonId(pokemonId.toInt())
         vpPager.adapter = adapter
 
         val tabs = findViewById<View>(R.id.tab_layout_detailed) as TabLayout
         tabs.setupWithViewPager(vpPager)
+    }
+
+    private fun setPokemonImage(pokemonId: String, pokemonName: String, formName: String) {
+        val identifier = if(formName == "alola") {
+            "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+        } else {
+            "pokemon_" + pokemonId + "_" + pokemonName
+        }
+        // Explanation for ID retrieval found here: http://daniel-codes.blogspot.com/2009/12/dynamically-retrieving-resources-in.html
+        try {
+            val res = R.drawable::class.java
+            val field = res.getField(identifier)
+            val drawableId = field.getInt(null)
+            pokemon_image.setImageResource(drawableId)
+        } catch (e: Exception) {
+            Log.i("DrawableWarning", "Image for $identifier doesn't exist")
+            pokemon_image.setImageResource(R.color.pokemonGoAppBackground)
+        }
     }
 }
