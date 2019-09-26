@@ -12,7 +12,7 @@
         android:id="@+id/tab_layout_main"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/light_green_bottom_rounded"
+        android:background="@drawable/tab_light_green_bottom_rounded"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

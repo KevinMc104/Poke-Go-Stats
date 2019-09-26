@@ -22,24 +22,24 @@ class PokemonHelper {
             view.text = type
         } else {
             view.background = ContextCompat.getDrawable(context, when(type) {
-                context.getString(R.string.normal) -> R.drawable.grass_type_drawable
-                context.getString(R.string.fire) -> R.drawable.fire_type_drawable
-                context.getString(R.string.water) -> R.drawable.water_type_drawable
-                context.getString(R.string.electric) -> R.drawable.electric_type_drawable
-                context.getString(R.string.grass) -> R.drawable.grass_type_drawable
-                context.getString(R.string.ice) -> R.drawable.ice_type_drawable
-                context.getString(R.string.fighting) -> R.drawable.fighting_type_drawable
-                context.getString(R.string.poison) -> R.drawable.poison_type_drawable
-                context.getString(R.string.ground) -> R.drawable.ground_type_drawable
-                context.getString(R.string.flying) -> R.drawable.flying_type_drawable
-                context.getString(R.string.psychic) -> R.drawable.psychic_type_drawable
-                context.getString(R.string.bug) -> R.drawable.bug_type_drawable
-                context.getString(R.string.rock) -> R.drawable.rock_type_drawable
-                context.getString(R.string.ghost) -> R.drawable.ghost_type_drawable
-                context.getString(R.string.dragon) -> R.drawable.dragon_type_drawable
-                context.getString(R.string.dark) -> R.drawable.dark_type_drawable
-                context.getString(R.string.steel) -> R.drawable.steel_type_drawable
-                context.getString(R.string.fairy) -> R.drawable.fairy_type_drawable
+                context.getString(R.string.normal) -> R.drawable.type_grass_drawable
+                context.getString(R.string.fire) -> R.drawable.type_fire_drawable
+                context.getString(R.string.water) -> R.drawable.type_water_drawable
+                context.getString(R.string.electric) -> R.drawable.type_electric_drawable
+                context.getString(R.string.grass) -> R.drawable.type_grass_drawable
+                context.getString(R.string.ice) -> R.drawable.type_ice_drawable
+                context.getString(R.string.fighting) -> R.drawable.type_fighting_drawable
+                context.getString(R.string.poison) -> R.drawable.type_poison_drawable
+                context.getString(R.string.ground) -> R.drawable.type_ground_drawable
+                context.getString(R.string.flying) -> R.drawable.type_flying_drawable
+                context.getString(R.string.psychic) -> R.drawable.type_psychic_drawable
+                context.getString(R.string.bug) -> R.drawable.type_bug_drawable
+                context.getString(R.string.rock) -> R.drawable.type_rock_drawable
+                context.getString(R.string.ghost) -> R.drawable.type_ghost_drawable
+                context.getString(R.string.dragon) -> R.drawable.type_dragon_drawable
+                context.getString(R.string.dark) -> R.drawable.type_dark_drawable
+                context.getString(R.string.steel) -> R.drawable.type_steel_drawable
+                context.getString(R.string.fairy) -> R.drawable.type_fairy_drawable
                 else -> Color.BLACK
             })
             view.text = type

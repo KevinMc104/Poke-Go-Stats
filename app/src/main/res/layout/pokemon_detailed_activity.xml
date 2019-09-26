@@ -8,14 +8,32 @@
     android:background="@color/pokemonGoAppBackground"
     tools:context=".view.pokemon.detailed.PokemonDetailedActivity">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/pokemon_bulbasaur"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".30" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_detailed"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/light_green_bottom_rounded"
+        android:background="@drawable/tab_light_green_bottom_rounded"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline"
         app:tabIndicator="@drawable/tab_indicator"
         app:tabIndicatorColor="@color/darker_green"
         app:tabIndicatorHeight="40dp"

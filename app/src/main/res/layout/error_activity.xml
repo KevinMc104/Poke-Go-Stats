@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_message"
         android:text="@string/retry_button"
-        android:background="@drawable/round_button"
+        android:background="@drawable/button_round"
         tools:text="Retry"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
