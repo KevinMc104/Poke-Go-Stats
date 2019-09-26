@@ -16,14 +16,23 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * JSON Data of all the endpoints and Pseudo Data Models [here](https://pastebin.com/UXTUaGDX)
 * SQL Test Code [here](https://pastebin.com/j9iQZfRN)
 * Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11ra9U2rWBj0/Poke-Go-Stats?node-id=0%3A1)
+* Pokemon image file names must be all lowercase and in the format of **``pokemon_{pokemonID}_{pokemonName}_{pokemonForm}``** to be added to this app
+    * {pokemonId} & {pokemonName} are required
+    * {pokemonForm} is optional - currently only supports Alola forms
+    * Ie. "pokemon_1_bulbasaur" or "pokemon_1_rattata_alola"
 
 ## Goals
 * Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints data to consume, cache, organize, and display for the end user
 * Publish finished product to Google Play Store
 
 ## TODO
-* Import images of Pokemon, Moves, and Weather conditions as drawables
+* Import images of Pokemon, Moves, and Weather conditions as webp files from [here](https://pokemon.gameinfo.io/)
+    * Currently 1/4 way through all Pokemon Images
+    * Moves Images
+    * Weather Images
 * Tweak colors/styles to make the look/feel for UI better
+    * Change Detailed Page to show Pokemon Name instead of "Poke Go Stats"
+* Do code review and clean up anything that needs to be fixed
 * Add detailed documentation of how the app works and present on Twitch live
     * Include screenshots of code and of the running app in written documentation
     * Add live video recording to YouTube to be shared
@@ -53,7 +62,7 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * ~~Fix issues with app crashing when rotated or closed/restarted (Need to implement things like onResume/onPause etc.)~~
 
 ## Extra Goals
-* Will likely need to get this data from a different API
+* Will likely need to get this data from a different API as Rapid API does not have this information
     * Best Attack and Defense Move Combos for each Pokemon
     * Add Pokemon Evolutions
 * Add Database migration when updates roll around for app
