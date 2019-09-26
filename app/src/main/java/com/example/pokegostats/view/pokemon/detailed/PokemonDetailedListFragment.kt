@@ -71,12 +71,6 @@ class PokemonDetailedListFragment : Fragment() {
                 pokemon_id_row.setup("ID", pokemon.pokemon_id.toString(), null, false)
                 pokemon_name_row.setup("Name", pokemon.pokemon_name.toString(), null, false)
                 pokemon_form_row.setup("Form", pokemon.FORMS_LIST!![0], null, false)
-                val types = pokemon.TYPES_LIST!!
-                if(types.size == 2) {
-                    pokemon_types_row.setup("Types", types[0], types[1], true)
-                } else {
-                    pokemon_types_row.setup("Type", types[0], null, true)
-                }
                 pokemon_base_attack_row.setup("Base Attack Damage", it.base_attack.toString(), null, false)
                 pokemon_base_defense_row.setup("Base Defense", pokemon.base_defense.toString(), null, false)
                 pokemon_base_stamina_row.setup("Base Stamina", pokemon.base_stamina.toString(), null, false)

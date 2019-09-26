@@ -16,8 +16,38 @@
         android:adjustViewBounds="true"
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_detailed_type1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="3"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Type1"/>
+
+    <TextView
+        android:id="@+id/tv_detailed_type2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="3"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        app:layout_constraintStart_toEndOf="@+id/tv_detailed_type1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Type2"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

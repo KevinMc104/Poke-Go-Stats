@@ -34,18 +34,11 @@
             app:layout_constraintTop_toBottomOf="@+id/pokemon_name_row"/>
 
         <com.example.pokegostats.view.custom.PokemonDetailedRowView
-            android:id="@+id/pokemon_types_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pokemon_form_row"/>
-
-        <com.example.pokegostats.view.custom.PokemonDetailedRowView
             android:id="@+id/pokemon_base_attack_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pokemon_types_row"/>
+            app:layout_constraintTop_toBottomOf="@+id/pokemon_form_row"/>
 
         <com.example.pokegostats.view.custom.PokemonDetailedRowView
             android:id="@+id/pokemon_base_defense_row"

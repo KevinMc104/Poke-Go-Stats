@@ -60,16 +60,22 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
         if(holder is PokemonListViewHolder) {
             val currItem = getItem(position)
             holder.rowView.setup(currItem)
-            val pokemonId = currItem.pokemon_id
-            val pokemonName = currItem.pokemon_name!!.toLowerCase(Locale.getDefault())
-            val formId = currItem.FORMS_LIST!![0]
-            val formName = currItem.FORMS_LIST!![1]
             holder.rowView.setOnClickListener {
+                val pokemonId = currItem.pokemon_id
+                val pokemonName = currItem.pokemon_name!!.toLowerCase(Locale.getDefault())
+                val formId = currItem.FORMS_LIST!![0]
+                val formName = currItem.FORMS_LIST!![1].toLowerCase(Locale.getDefault())
                 val intent = Intent(context, PokemonDetailedActivity::class.java)
                 intent.putExtra(helper.POKEMON_ID, pokemonId.toString())
                 intent.putExtra(helper.POKEMON_NAME, pokemonName)
                 intent.putExtra(helper.POKEMON_FORM_ID, formId)
                 intent.putExtra(helper.POKEMON_FORM_NAME, formName)
+                if (currItem.TYPES_LIST!!.size == 2) {
+                    intent.putExtra(helper.POKEMON_TYPE1, currItem.TYPES_LIST!![1])
+                } else if (currItem.TYPES_LIST!!.size == 4) {
+                    intent.putExtra(helper.POKEMON_TYPE1, currItem.TYPES_LIST!![1])
+                    intent.putExtra(helper.POKEMON_TYPE2, currItem.TYPES_LIST!![3])
+                }
                 context.startActivity(intent)
             }
         }

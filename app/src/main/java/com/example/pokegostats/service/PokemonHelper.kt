@@ -11,6 +11,8 @@ class PokemonHelper {
     val POKEMON_NAME: String = "Pokemon NAME"
     val POKEMON_FORM_ID: String = "Pokemon Form ID"
     val POKEMON_FORM_NAME: String = "Pokemon Form Name"
+    val POKEMON_TYPE1: String = "Pokemon Type 1"
+    val POKEMON_TYPE2: String = "Pokemon Type 2"
     val POKEMON_MOVE_NAME: String = "Pokemon Move Name"
     val ERROR_MESSAGE: String = "Error Message"
     val RETRY_CALLS: String = "Retry Calls"

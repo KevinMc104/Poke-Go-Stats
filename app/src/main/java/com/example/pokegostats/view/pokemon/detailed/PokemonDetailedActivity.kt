@@ -26,11 +26,23 @@ class PokemonDetailedActivity : AppCompatActivity() {
         val factory = PokemonDetailedActivityViewModel.Companion.Factory(this.application)
         viewModel = ViewModelProvider(this, factory).get(PokemonDetailedActivityViewModel::class.java)
 
+        // Set Pokemon Image
         val pokemonId = intent.extras!!.getString(helper.POKEMON_ID)!!
         val pokemonName = intent.extras!!.getString(helper.POKEMON_NAME)!!
         val formId = intent.extras!!.getString(helper.POKEMON_FORM_ID)!!.toInt()
         val formName = intent.extras!!.getString(helper.POKEMON_FORM_NAME)!!
         setPokemonImage(pokemonId, pokemonName, formName)
+
+        // Set Types
+        val type1 = intent.extras!!.getString(helper.POKEMON_TYPE1)!!
+        val type2: String
+        if (intent.extras!!.containsKey(helper.POKEMON_TYPE2)) {
+            type2 = intent.extras!!.getString(helper.POKEMON_TYPE2)!!
+            helper.setPokemonTypeLook(this, tv_detailed_type1, type1)
+            helper.setPokemonTypeLook(this, tv_detailed_type2, type2)
+        } else {
+            helper.setPokemonTypeLook(this, tv_detailed_type2, type1)
+        }
 
         val vpPager = findViewById<ViewPager>(R.id.view_pager_detailed)
         adapter = PokemonDetailedPagerAdapter(supportFragmentManager)
