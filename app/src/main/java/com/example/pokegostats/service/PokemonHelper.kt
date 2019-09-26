@@ -96,8 +96,45 @@ class PokemonHelper {
             context.getString(R.string.pokemon_32_nidoran) -> R.drawable.pokemon_32_nidoran
             context.getString(R.string.pokemon_33_nidorino) -> R.drawable.pokemon_33_nidorino
             context.getString(R.string.pokemon_34_nidoking) -> R.drawable.pokemon_34_nidoking
+            context.getString(R.string.pokemon_35_clefairy) -> R.drawable.pokemon_35_clefairy
+            context.getString(R.string.pokemon_36_clefable) -> R.drawable.pokemon_36_clefable
+            context.getString(R.string.pokemon_37_vulpix) -> R.drawable.pokemon_37_vulpix
+            context.getString(R.string.pokemon_37_vulpix_alola) -> R.drawable.pokemon_37_vulpix_alola
+            context.getString(R.string.pokemon_38_ninetales) -> R.drawable.pokemon_38_ninetales
+            context.getString(R.string.pokemon_38_ninetales_alola) -> R.drawable.pokemon_38_ninetales_alola
+            context.getString(R.string.pokemon_39_jigglypuff) -> R.drawable.pokemon_39_jigglypuff
+            context.getString(R.string.pokemon_40_wigglytuff) -> R.drawable.pokemon_40_wigglytuff
+            context.getString(R.string.pokemon_41_zubat) -> R.drawable.pokemon_41_zubat
+            context.getString(R.string.pokemon_42_golbat) -> R.drawable.pokemon_42_golbat
+            context.getString(R.string.pokemon_43_oddish) -> R.drawable.pokemon_43_oddish
+            context.getString(R.string.pokemon_44_gloom) -> R.drawable.pokemon_44_gloom
+            context.getString(R.string.pokemon_45_vileplume) -> R.drawable.pokemon_45_vileplume
+            context.getString(R.string.pokemon_46_paras) -> R.drawable.pokemon_46_paras
+            context.getString(R.string.pokemon_47_parasect) -> R.drawable.pokemon_47_parasect
+            context.getString(R.string.pokemon_48_venonat) -> R.drawable.pokemon_48_venonat
+            context.getString(R.string.pokemon_49_venomoth) -> R.drawable.pokemon_49_venomoth
+            context.getString(R.string.pokemon_50_diglett) -> R.drawable.pokemon_50_diglett
+            context.getString(R.string.pokemon_50_diglett_alola) -> R.drawable.pokemon_50_diglett_alola
+            context.getString(R.string.pokemon_51_dugtrio) -> R.drawable.pokemon_51_dugtrio
+            context.getString(R.string.pokemon_51_dugtrio_alola) -> R.drawable.pokemon_51_dugtrio_alola
+            context.getString(R.string.pokemon_52_meowth) -> R.drawable.pokemon_52_meowth
+            context.getString(R.string.pokemon_52_meowth_alola) -> R.drawable.pokemon_52_meowth_alola
+            context.getString(R.string.pokemon_53_persian) -> R.drawable.pokemon_53_persian
+            context.getString(R.string.pokemon_53_persian_alola) -> R.drawable.pokemon_53_persian_alola
+            context.getString(R.string.pokemon_54_psyduck) -> R.drawable.pokemon_54_psyduck
+            context.getString(R.string.pokemon_55_golduck) -> R.drawable.pokemon_55_golduck
+            context.getString(R.string.pokemon_56_mankey) -> R.drawable.pokemon_56_mankey
+            context.getString(R.string.pokemon_57_primeape) -> R.drawable.pokemon_57_primeape
+            context.getString(R.string.pokemon_58_growlithe) -> R.drawable.pokemon_58_growlithe
+            context.getString(R.string.pokemon_59_arcanine) -> R.drawable.pokemon_59_arcanine
+            context.getString(R.string.pokemon_60_poliwag) -> R.drawable.pokemon_60_poliwag
 
+            context.getString(R.string.pokemon_169_crobat) -> R.drawable.pokemon_169_crobat
             context.getString(R.string.pokemon_172_pichu) -> R.drawable.pokemon_172_pichu
+            context.getString(R.string.pokemon_173_cleffa) -> R.drawable.pokemon_173_cleffa
+            context.getString(R.string.pokemon_174_igglybuff) -> R.drawable.pokemon_174_igglybuff
+
+            context.getString(R.string.pokemon_182_bellossom) -> R.drawable.pokemon_182_bellossom
             else -> R.color.pokemonGoAppBackground
         })
     }
