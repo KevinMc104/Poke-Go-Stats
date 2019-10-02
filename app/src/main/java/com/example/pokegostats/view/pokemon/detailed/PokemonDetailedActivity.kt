@@ -55,10 +55,15 @@ class PokemonDetailedActivity : AppCompatActivity() {
     }
 
     private fun setPokemonImage(pokemonId: String, pokemonName: String, formName: String) {
+        // Checking specific forms because the database doesn't have pics for all forms
         var identifier = when(formName) {
             "alola" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
             // Mew Two Armored Form is labeled as 'a' from RapidAPI
             "a" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Castform forms
+            "rainy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "sunny" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "snowy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
             else -> "pokemon_" + pokemonId + "_" + pokemonName
         }
         // Files can't have any special characters besides "_"
