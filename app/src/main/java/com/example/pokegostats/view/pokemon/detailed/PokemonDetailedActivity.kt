@@ -55,16 +55,18 @@ class PokemonDetailedActivity : AppCompatActivity() {
     }
 
     private fun setPokemonImage(pokemonId: String, pokemonName: String, formName: String) {
-        var identifier = if(formName == "alola") {
-            "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
-        } else {
-            "pokemon_" + pokemonId + "_" + pokemonName
+        var identifier = when(formName) {
+            "alola" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Mew Two Armored Form is labeled as 'a' from RapidAPI
+            "a" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            else -> "pokemon_" + pokemonId + "_" + pokemonName
         }
         // Files can't have any special characters besides "_"
         // Remove any non alphanumeric characters from the search
         val re = Regex("[^A-Za-z0-9_]")
         identifier = re.replace(identifier, "")
         // Explanation for ID retrieval found here: http://daniel-codes.blogspot.com/2009/12/dynamically-retrieving-resources-in.html
+        // getIdentifier is the slower way to do this
         try {
             val res = R.drawable::class.java
             val field = res.getField(identifier)
