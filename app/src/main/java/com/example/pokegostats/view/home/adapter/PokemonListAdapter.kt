@@ -250,14 +250,16 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
                 } else {
                     val filteredList = ArrayList<PokemonFormsTypesWeatherBoosts>()
 
-                    // Check each row to see if query matches Pokemon Name or Type
+                    // Check each row to see if query matches Pokemon Name, Form Name, or Type
                     for (row in pokemon) {
                         val types = row.TYPES_LIST
+                        val formName = row.FORMS_LIST!![1].toLowerCase(Locale.getDefault())
                         val pokeName = row.pokemon_name!!.toLowerCase(Locale.getDefault())
                         val strCheck = userInputString.toLowerCase(Locale.getDefault())
                         if (types!!.size == 2) {
                             val type1 = types[1].toLowerCase(Locale.getDefault())
                             if (pokeName.contains(strCheck)
+                                || formName.contains(strCheck)
                                 || type1.contains(strCheck)) {
                                 filteredList.add(row)
                             }
@@ -265,6 +267,7 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
                             val type1 = types[1].toLowerCase(Locale.getDefault())
                             val type2 = types[3].toLowerCase(Locale.getDefault())
                             if (pokeName.contains(strCheck)
+                                || formName.contains(strCheck)
                                 || type1.contains(strCheck)
                                 || type2.contains(strCheck)) {
                                 filteredList.add(row)

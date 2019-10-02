@@ -18,7 +18,7 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11ra9U2rWBj0/Poke-Go-Stats?node-id=0%3A1)
 * Pokemon image file names must be all lowercase and in the format of **``pokemon_{pokemonID}_{pokemonName}_{pokemonForm}``** to be added to this app
     * {pokemonId} & {pokemonName} are required
-    * {pokemonForm} is optional - currently only supports Alola forms
+    * {pokemonForm} is optional(leave blank is normal form)
     * Ie. "pokemon_1_bulbasaur" or "pokemon_1_rattata_alola"
 
 ## Goals

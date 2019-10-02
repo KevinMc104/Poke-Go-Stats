@@ -55,17 +55,7 @@ class PokemonDetailedActivity : AppCompatActivity() {
     }
 
     private fun setPokemonImage(pokemonId: String, pokemonName: String, formName: String) {
-        // Checking specific forms because the database doesn't have pics for all forms
-        var identifier = when(formName) {
-            "alola" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
-            // Mew Two Armored Form is labeled as 'a' from RapidAPI
-            "a" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
-            // Castform forms
-            "rainy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
-            "sunny" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
-            "snowy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
-            else -> "pokemon_" + pokemonId + "_" + pokemonName
-        }
+        var identifier = "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
         // Files can't have any special characters besides "_"
         // Remove any non alphanumeric characters from the search
         val re = Regex("[^A-Za-z0-9_]")
@@ -78,6 +68,7 @@ class PokemonDetailedActivity : AppCompatActivity() {
             val drawableId = field.getInt(null)
             pokemon_image.setImageResource(drawableId)
         } catch (e: Exception) {
+            // If image doesn't exist, log it and put the background color as the image
             Log.i("DrawableWarning", "Image for $identifier doesn't exist")
             pokemon_image.setImageResource(R.color.pokemonGoAppBackground)
         }
