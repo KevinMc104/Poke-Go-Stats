@@ -17,6 +17,6 @@ interface DateCacheDao {
     @Insert
     suspend fun insertAllDateCacheEntries(vararg dates: DateCacheEntity)
 
-    @Query("DELETE FROM pokemon_moves_table")
+    @Query("DELETE FROM date_cache_table")
     suspend fun deleteAll()
 }
