@@ -55,7 +55,61 @@ class PokemonDetailedActivity : AppCompatActivity() {
     }
 
     private fun setPokemonImage(pokemonId: String, pokemonName: String, formName: String) {
-        var identifier = "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+        // Checking specific forms because the database doesn't have pics for all forms
+        // Can remove these checks when all form images are added
+        var identifier = when(formName) {
+            "alola" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Mew Two Armored Form is labeled as 'a' from RapidAPI
+            "a" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Castform Forms
+            "rainy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "sunny" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "snowy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Cherrim Forms
+            "overcast" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Deoxys Forms
+            "attack" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "defense" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "speed" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Burmy and Wormadam Forms
+            "plant" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "sandy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "trash" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Shellos and Gastrodon Forms
+            "west_sea" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "east_sea" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Rotom Forms
+            "fan" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "frost" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "heat" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "mow" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "wash" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Giratina forms
+            "altered" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "origin" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Shaymin Forms
+            "land" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "sky" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            // Arceus Forms
+            "bug" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "dark" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "dragon" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "electric" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "fairy" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "fighting" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "fire" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "flying" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "ghost" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "grass" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "ground" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "ice" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "poison" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "psychic" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "rock" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "steel" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            "water" -> "pokemon_" + pokemonId + "_" + pokemonName + "_" + formName
+            else -> "pokemon_" + pokemonId + "_" + pokemonName
+        }
         // Files can't have any special characters besides "_"
         // Remove any non alphanumeric characters from the search
         val re = Regex("[^A-Za-z0-9_]")
@@ -68,7 +122,6 @@ class PokemonDetailedActivity : AppCompatActivity() {
             val drawableId = field.getInt(null)
             pokemon_image.setImageResource(drawableId)
         } catch (e: Exception) {
-            // If image doesn't exist, log it and put the background color as the image
             Log.i("DrawableWarning", "Image for $identifier doesn't exist")
             pokemon_image.setImageResource(R.color.pokemonGoAppBackground)
         }
