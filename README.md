@@ -26,12 +26,12 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * Publish finished product to Google Play Store
 
 ## TODO
-* Tweak colors/styles to make the look/feel for UI better
-    * Change Detailed Page to show Pokemon Name instead of "Poke Go Stats"
 * Do code review and clean up anything that needs to be fixed
 * Add detailed documentation of how the app works and present on Twitch live
     * Include screenshots of code and of the running app in written documentation
     * Add live video recording to YouTube to be shared
+* ~~Tweak colors/styles to make the look/feel for UI better~~
+    * ~~Change Detailed Page to show Pokemon Name instead of "Poke Go Stats"~~
 * ~~Import images of Pokemon, Moves, and Weather conditions as webp files from [here](https://pokemon.gameinfo.io/)~~
     * ~~Weather Images~~
 * ~~Add Error Page for if API goes down~~
