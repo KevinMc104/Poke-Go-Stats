@@ -24,9 +24,11 @@ class PokemonHelper {
     fun setPokemonTypeLook(context: Context, view: TextView, type: String) {
         if(type.isBlank()) {
             view.text = type
+            view.background = ContextCompat.getDrawable(context, R.color.white)
         } else {
+            view.text = type
             view.background = ContextCompat.getDrawable(context, when(type) {
-                context.getString(R.string.normal) -> R.drawable.type_grass_drawable
+                context.getString(R.string.normal) -> R.drawable.type_normal_drawable
                 context.getString(R.string.fire) -> R.drawable.type_fire_drawable
                 context.getString(R.string.water) -> R.drawable.type_water_drawable
                 context.getString(R.string.electric) -> R.drawable.type_electric_drawable
@@ -44,10 +46,8 @@ class PokemonHelper {
                 context.getString(R.string.dark) -> R.drawable.type_dark_drawable
                 context.getString(R.string.steel) -> R.drawable.type_steel_drawable
                 context.getString(R.string.fairy) -> R.drawable.type_fairy_drawable
-                else -> Color.BLACK
+                else -> R.color.white
             })
-            // Spaces added to text for style purposes
-            view.text = " $type "
         }
     }
 }
