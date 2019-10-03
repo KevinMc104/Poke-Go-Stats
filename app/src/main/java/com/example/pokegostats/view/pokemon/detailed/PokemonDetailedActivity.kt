@@ -118,12 +118,10 @@ class PokemonDetailedActivity : AppCompatActivity() {
         // getIdentifier is the slower way to do this
         try {
             val res = R.drawable::class.java
-            val field = res.getField(identifier)
-            val drawableId = field.getInt(null)
+            val drawableId = res.getField(identifier).getInt(null)
             pokemon_image.setImageResource(drawableId)
         } catch (e: Exception) {
             Log.i("DrawableWarning", "Image for $identifier doesn't exist")
-            pokemon_image.setImageResource(R.color.pokemonGoAppBackground)
         }
     }
 }

@@ -143,7 +143,7 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
                 pokemonFiltered = filteredList
                 notifyDataSetChanged()
             }
-            else -> {
+            activeFilters.size == 2 -> {
                 for(item in pokemon) {
                     // Ignore any pokemon that don't have 2 types
                     if(item.TYPES_LIST!!.size == 4) {
@@ -152,6 +152,11 @@ class PokemonListAdapter(private val context: Context): RecyclerView.Adapter<Rec
                         }
                     }
                 }
+                pokemonFiltered = filteredList
+                notifyDataSetChanged()
+            }
+            // No Pokemon has more than 2 types
+            else -> {
                 pokemonFiltered = filteredList
                 notifyDataSetChanged()
             }

@@ -67,17 +67,17 @@ class PokemonMoveDetailedFragment : Fragment() {
         }
         viewModel.pokemonMoveDetailed.observe(this, Observer { move ->
             move?.let {
-                move_name.setup("Move", it.name, null, false)
-                move_power.setup("Power", it.power.toString(), null, false)
-                move_type.setup("Type", it.typeName, null, true)
+                move_name.setup("Move", it.name, false)
+                move_power.setup("Power", it.power.toString(), false)
+                move_type.setup("Type", it.typeName, true)
                 if(it.criticalChance == 0.0) {
-                    move_crit_chance.setup("Crit Chance", "0%", null, false)
+                    move_crit_chance.setup("Crit Chance", "0%", false)
                 } else {
-                    move_crit_chance.setup("Crit Chance", it.criticalChance.toString() + "%", null, false)
+                    move_crit_chance.setup("Crit Chance", it.criticalChance.toString() + "%", false)
                 }
-                move_duration.setup("Duration", it.duration.toString(), null, false)
-                move_stamina_loss_scaler.setup("Stamina Loss Scaler", it.staminaLossScaler, null, false)
-                move_energy_delta.setup("Energy Delta", it.energyDelta.toString(), null, false)
+                move_duration.setup("Duration", it.duration.toString(), false)
+                move_stamina_loss_scaler.setup("Stamina Loss Scaler", it.staminaLossScaler, false)
+                move_energy_delta.setup("Energy Delta", it.energyDelta.toString(), false)
             }
         })
     }

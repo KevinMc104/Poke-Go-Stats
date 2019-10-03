@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/app_whitespace_size_large_material"
+    android:layout_marginEnd="@dimen/app_whitespace_size_large_material"
+    android:background="@drawable/row_rounded_corner_drawable">
+
+    <TextView
+        android:id="@+id/tv_move_stat_name"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Stat Name" />
+
+    <TextView
+        android:id="@+id/tv_move_stat_value"
+        style="@style/AppTheme.TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:layout_margin="@dimen/app_whitespace_size_large_material"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Stat Value" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

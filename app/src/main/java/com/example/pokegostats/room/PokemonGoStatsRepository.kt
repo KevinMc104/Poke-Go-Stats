@@ -50,6 +50,7 @@ class PokemonGoStatsRepository @Inject constructor(val pokemonDao: PokemonDao,
         }
         return currDateOlder
     }
+
     suspend fun insertAllData(retryCalls: Boolean) {
         // Delete data and insert if older than 1 day or if date table is empty
         if(dataIsOld() || retryCalls) {
