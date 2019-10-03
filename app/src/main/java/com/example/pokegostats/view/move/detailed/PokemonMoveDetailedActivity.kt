@@ -21,6 +21,9 @@ class PokemonMoveDetailedActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory).get(PokemonMoveDetailedActivityViewModel::class.java)
 
         val moveName = intent.extras!!.getString(helper.POKEMON_MOVE_NAME).toString()
+        // Set Title of Action Bar
+        title = moveName
+
         tv_big_move_name.text = moveName
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

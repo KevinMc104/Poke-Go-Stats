@@ -11,6 +11,7 @@ import com.example.pokegostats.service.PokemonHelper
 import com.example.pokegostats.view.pokemon.detailed.adapter.PokemonDetailedPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.pokemon_detailed_activity.*
+import java.util.*
 
 class PokemonDetailedActivity : AppCompatActivity() {
 
@@ -26,11 +27,15 @@ class PokemonDetailedActivity : AppCompatActivity() {
         val factory = PokemonDetailedActivityViewModel.Companion.Factory(this.application)
         viewModel = ViewModelProvider(this, factory).get(PokemonDetailedActivityViewModel::class.java)
 
+        // Set Title of Action Bar
+        var pokemonName = intent.extras!!.getString(helper.POKEMON_NAME)!!
+        title = pokemonName
+
         // Set Pokemon Image
         val pokemonId = intent.extras!!.getString(helper.POKEMON_ID)!!
-        val pokemonName = intent.extras!!.getString(helper.POKEMON_NAME)!!
         val formId = intent.extras!!.getString(helper.POKEMON_FORM_ID)!!.toInt()
         val formName = intent.extras!!.getString(helper.POKEMON_FORM_NAME)!!
+        pokemonName = pokemonName.toLowerCase(Locale.getDefault())
         setPokemonImage(pokemonId, pokemonName, formName)
 
         // Set Types
