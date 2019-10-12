@@ -2,6 +2,11 @@
 ## Poke Go Stats
 A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapidapi.com/brianiswu/api/pokemon-go1) and organizes the given data to display to the user
 
+## Goals
+* ✔ Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints data to consume, cache, organize, and display for the end user
+* Publish finished product to Google Play Store
+* Present project live on Twitch and save video to YouTube/LinkedIn
+
 ## Built With
 * [Dagger2](https://dagger.dev/) - For helping to connect Activities to Services and Dependency Injections with annotations
 * [Gradle](https://gradle.org/) - Dependency management
@@ -12,7 +17,7 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 * [Material Design Icons](https://github.com/konifar/android-material-design-icon-generator-plugin) - Grants access to a large database of icons from [Material.io](https://material.io/resources/icons/?style=baseline) to use in your Android Studio Project
 * Kotlin
 
-## How it works
+# How it works
 * JSON Data of all the endpoints and Pseudo Data Models [here](https://pastebin.com/UXTUaGDX)
 * SQL Test Code [here](https://pastebin.com/j9iQZfRN)
 * Design layout thought up on Figma [here](https://www.figma.com/file/YqNCemCw1D11ra9U2rWBj0/Poke-Go-Stats?node-id=0%3A1)
@@ -21,13 +26,25 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
     * {pokemonForm} is optional(leave blank is normal form)
     * Ie. "pokemon_1_bulbasaur" or "pokemon_1_rattata_alola"
 
-## Goals
-* Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints data to consume, cache, organize, and display for the end user
-* Publish finished product to Google Play Store
+# Architectural diagrams
+## Overall Design
+![resources](https://docs.google.com/drawings/d/e/2PACX-1vSEKw264XJhoInCJHUuij7iSSmJ8tyjFzySChDGJnPGOkDQ_-h8Y2UwEptEt68GOYCeucWDJbLmNrgS/pub?w=960&h=720)
+
+## Database Tables
+![resources](https://docs.google.com/drawings/d/e/2PACX-1vRTbpIDnDpIvrZEj814Dh2E94qJx4oKh_xq_Q_68fcrSgaQR0t0kNgbMYJteFKPosmkW6tlTkrNC5dx/pub?w=960&h=601)
+
+## Main Page
+![resources](https://docs.google.com/drawings/d/e/2PACX-1vT9XG23bjdQ4gsNS6Wiplpr2HcgDBg-LMm9pR6noQnxWHamEa8UZM-tdC0s3rnS9G13JP-Gnk6ZA6bu/pub?w=960&h=720)
+
+## Pokemon Detailed Page
+![resources](https://docs.google.com/drawings/d/e/2PACX-1vQ9-SgbvJlN9Cv4uGtU6z4jzVTRqxs7O1TQZM1GyGBFfjhJ0_l4lwBcdp3vcbDK0cCyeI0QcXWrcFe2/pub?w=960&h=720)
+
+## Pokemon Move Detailed Page
+![resources](https://docs.google.com/drawings/d/e/2PACX-1vQNeQQ-6MYdEN-vraHIq6GpRCP6atbf2tvT19VIo99sgGCvFbzR1sTLeFsVNTrrDlv5sv27p9KqdAtb/pub?w=961&h=573)
 
 ## TODO
-* Do code review and clean up anything that needs to be fixed
 * Add detailed documentation of how the app works and present on Twitch live
+    * ~~Add Diagrams~~
     * Include screenshots of code and of the running app in written documentation
     * Add live video recording to YouTube to be shared
 * ~~Tweak colors/styles to make the look/feel for UI better~~
