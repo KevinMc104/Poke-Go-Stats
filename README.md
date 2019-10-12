@@ -29,6 +29,8 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 # Architectural diagrams
 ## Overall Design
 ![resources](https://docs.google.com/drawings/d/e/2PACX-1vSEKw264XJhoInCJHUuij7iSSmJ8tyjFzySChDGJnPGOkDQ_-h8Y2UwEptEt68GOYCeucWDJbLmNrgS/pub?w=960&h=720)
+The Error Activity lives on it's own. When server errors happen in Retrofit calls(Pokemon Go API Service) to the Pokemon Go Rapid API Servers, such as 404, 500, etc. It'll throw an error that is then caught in the error activity and displayed to the user. It'll tell the user the error number with a message saying that there was a problem with data retrieval. There is a button as seen from the screenshot below, that allows them to retry the server calls and try to downloaded the data again through essentially restarting the app through the main activity.
+![Imgur](https://i.imgur.com/YmYbhYE.png)
 
 ## Database Tables
 ![resources](https://docs.google.com/drawings/d/e/2PACX-1vRTbpIDnDpIvrZEj814Dh2E94qJx4oKh_xq_Q_68fcrSgaQR0t0kNgbMYJteFKPosmkW6tlTkrNC5dx/pub?w=960&h=601)
