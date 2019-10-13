@@ -4,7 +4,7 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 
 ## Goals
 * ✔ Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints data to consume, cache, organize, and display for the end user
-* Publish finished product to Google Play Store
+* ✔ Publish finished product to Google Play Store
 * Present project live on Twitch and save video to YouTube/LinkedIn
 
 ## Built With
@@ -110,10 +110,13 @@ This app uses Dagger 2 injection for a lot of object/class building behind the s
 * Gather screenshots of your app
 * Make sure you have pictures of icons ready for your app to upload to the store as well as having things like a title/description/which tags/whether it's a game or app/etc.
 * When your app is ready to be deployed, go to android studio, in the toolbar up top, Build->Generate Signed Bundle/APK
-    * Follow the steps for APK. Have it generate a keystore file and write in the required information
+    * Follow the steps for APK Bundle. Have it generate a keystore file and write in the required information
     * Have 2 passwords and whatever information you need from your company or whoever is running the app
     * The release APK file will be generated and put into the app/release folder by default
-* After you have your APK file ready to be published, go back to the google play console
+* After you have your APK bundle file ready to be published, go back to the google play console to upload for a release
+* Be sure to fill out Store Listing, Content Rating, App content, and pricing/distribution before trying to rollout your application
+* Once that's done, go to App releases and rollout
+* Also it may take a while to actually appear on the play store so don't freak out if you don't see it right away! Check the link [here](https://www.androidpolice.com/2019/09/03/google-play-expands-store-app-review/) for more info
 
 ## TODO
 * Add detailed documentation of how the app works and present on Twitch live
