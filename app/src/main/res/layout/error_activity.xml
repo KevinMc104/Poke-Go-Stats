@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pokemonGoAppBackground"
-    tools:context="com.example.pokegostats.view.home.MainActivity">
+    tools:context="com.analytics.pokegostats.view.home.MainActivity">
 
     <TextView
         android:id="@+id/tv_error_message"

@@ -104,7 +104,16 @@ This app uses Dagger 2 injection for a lot of object/class building behind the s
 * Module Builder
     * Binds data and allows injections into fragments and classes
 
-#
+## How I published it to the Google Play Store
+* First go to this [link](https://play.google.com/apps/publish/signup/) to signup for publishing an app
+* Be ready to pay 25$ for a registration fee after reading the agreement and distribution documents
+* Gather screenshots of your app
+* Make sure you have pictures of icons ready for your app to upload to the store as well as having things like a title/description/which tags/whether it's a game or app/etc.
+* When your app is ready to be deployed, go to android studio, in the toolbar up top, Build->Generate Signed Bundle/APK
+    * Follow the steps for APK. Have it generate a keystore file and write in the required information
+    * Have 2 passwords and whatever information you need from your company or whoever is running the app
+    * The release APK file will be generated and put into the app/release folder by default
+* After you have your APK file ready to be published, go back to the google play console
 
 ## TODO
 * Add detailed documentation of how the app works and present on Twitch live

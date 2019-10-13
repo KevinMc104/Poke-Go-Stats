@@ -1,0 +1,30 @@
+package com.analytics.pokegostats.injection
+
+import com.analytics.pokegostats.PokeGoStats
+import dagger.BindsInstance
+import dagger.Component
+import dagger.android.support.AndroidSupportInjectionModule
+import javax.inject.Singleton
+
+@Component(
+    modules = [
+        AndroidSupportInjectionModule::class,
+        AppModule::class,
+        ApiModule::class,
+        RoomModule::class,
+        ModuleBuilder::class
+    ]
+)
+
+@Singleton
+interface AppComponent {
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        fun application(application: PokeGoStats): Builder
+
+        fun build(): AppComponent
+    }
+
+    fun inject(pokeGoStats: PokeGoStats)
+}
