@@ -143,4 +143,5 @@ This app uses Dagger 2 injection for a lot of object/class building behind the s
 * ~~Add Timed Death on Database via column in database for data~~
 
 This app is completely free and ad free. If you want to support me for this app, a great way to do that is by clicking the link below and donating
+
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://streamelements.com/tip/mechavoy)
