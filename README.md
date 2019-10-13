@@ -104,6 +104,8 @@ This app uses Dagger 2 injection for a lot of object/class building behind the s
 * Module Builder
     * Binds data and allows injections into fragments and classes
 
+#
+
 ## TODO
 * Add detailed documentation of how the app works and present on Twitch live
     * ~~Add Diagrams~~
