@@ -121,7 +121,7 @@ This app uses Dagger 2 injection for a lot of object/class building behind the s
 ## TODO
 * Add detailed documentation of how the app works and present on Twitch live
     * ~~Add Diagrams~~
-    * Include screenshots of code and of the running app in written documentation
+    * ~~Include screenshots of code and of the running app in written documentation~~
     * Add live video recording to YouTube to be shared
 * ~~Tweak colors/styles to make the look/feel for UI better~~
     * ~~Change Detailed Page to show Pokemon Name instead of "Poke Go Stats"~~
