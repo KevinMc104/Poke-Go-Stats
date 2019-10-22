@@ -4,8 +4,8 @@ A simple Android App that consumes off of [Rapid's Pokemon Go API](https://rapid
 
 ## Goals
 * ✔ Create a project that calls out to [RapidAPI](https://rapidapi.com/brianiswu/api/pokemon-go1)'s Pokemon Go Endpoints data to consume, cache, organize, and display for the end user
-* ✔ Publish finished product to Google Play Store
-* Present project live on Twitch and save video to YouTube/LinkedIn
+* ✔ Publish finished product to Google Play Store [here](https://play.google.com/store/apps/details?id=com.analytics.pokegostats)
+* ✔ Present project live on Twitch and save video to YouTube/LinkedIn [here](https://www.youtube.com/watch?v=d3cocnQVgLw)
 
 ## Built With
 * [Dagger2](https://dagger.dev/) - For helping to connect Activities to Services and Dependency Injections with annotations
@@ -119,10 +119,10 @@ This app uses Dagger 2 injection for a lot of object/class building behind the s
 * Also it may take a while to actually appear on the play store so don't freak out if you don't see it right away! Check the link [here](https://www.androidpolice.com/2019/09/03/google-play-expands-store-app-review/) for more info
 
 ## TODO
-* Add detailed documentation of how the app works and present on Twitch live
+* ~~Add detailed documentation of how the app works and present on Twitch live~~
     * ~~Add Diagrams~~
     * ~~Include screenshots of code and of the running app in written documentation~~
-    * Add live video recording to YouTube to be shared
+    * ~~Add live video recording to YouTube to be shared~~
 * ~~Tweak colors/styles to make the look/feel for UI better~~
     * ~~Change Detailed Page to show Pokemon Name instead of "Poke Go Stats"~~
 * ~~Import images of Pokemon, Moves, and Weather conditions as webp files from [here](https://pokemon.gameinfo.io/)~~

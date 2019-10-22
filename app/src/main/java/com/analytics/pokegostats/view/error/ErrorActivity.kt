@@ -11,6 +11,11 @@ import com.analytics.pokegostats.view.home.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.error_activity.*
 
+/**
+ * One way to do error handling better is to get an error interceptor on retrofit
+ * Could not find a standard for error handling so there may be better ways to do this,
+ * but this is at least a way to let users retry calls to the servers and simultaneously capture the error
+ */
 class ErrorActivity : AppCompatActivity() {
 
     private val helper: PokemonHelper = PokemonHelper.instance
@@ -32,6 +37,6 @@ class ErrorActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra(helper.RETRY_CALLS, true)
                 this.startActivity(intent)
-            }
+        }
     }
 }
